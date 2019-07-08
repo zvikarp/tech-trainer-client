@@ -1,0 +1,18 @@
+body {
+    background-color: #FE724D;
+}
+
+.welcome-message {
+    padding: 64px;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.link-to-signin {
+    text-align: center;
+    padding: 24px;
+}
+
+.link-to-signin a {
+    color: #F9E1DC;
+}
