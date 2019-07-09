@@ -29,6 +29,8 @@ h1 {
 }
 
 h2 {
+    margin: 0px;
+    padding: 16px;
     font-size: 24px;
     font-weight: 900px;
 }
@@ -79,4 +81,11 @@ input {
     background-color: #F9E1DC;
     border-radius: 5px;
     border: none;
+}
+
+/* link */
+
+.link {
+    text-decoration: underline;
+    cursor: pointer;
 }

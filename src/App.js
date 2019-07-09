@@ -3,7 +3,7 @@
 // import './App.css';
 
 import React from 'react'
-import { Welcome } from './pages/index.js'
+import { Welcome, Dashboard } from './pages/index.js'
 // import { Button } from './components/index.js'
 // import { Provider } from 'react-redux';
 // import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
@@ -22,8 +22,10 @@ import { Welcome } from './pages/index.js'
 function App() {
   return (
     <div className="App">
-      {/* <Button text="press me"/> */}
-      <Welcome/>
+      <div>
+      <Dashboard />
+      {/* <Welcome/> */}
+      </div>
     </div>
   );
 }
