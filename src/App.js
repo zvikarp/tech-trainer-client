@@ -23,7 +23,7 @@ function App() {
   return (
     <div className="App">
       <div>
-      <Dashboard />
+      <Welcome />
       {/* <Welcome/> */}
       </div>
     </div>

@@ -20,14 +20,14 @@ class Welcome extends Component {
             return (
                 <div>
                     <Signup />
-                    <div class="link-to-signin">already a user? <span className="link" onClick={() => this.chagneForm()}>sign in here</span>.</div>
+                    <div className="link-to-signin">already a user? <span className="link" onClick={() => this.chagneForm()}>sign in here</span>.</div>
                 </div>
             );
             } else {
                 return (
                     <div>
                         <Signin />
-                        <div class="link-to-signin">new to orange chat? <span className="link" onClick={() => this.chagneForm()}>sign up here</span>.</div>
+                        <div className="link-to-signin">new to orange chat? <span className="link" onClick={() => this.chagneForm()}>sign up here</span>.</div>
                     </div>
                 );
             }
