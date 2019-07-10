@@ -13,8 +13,8 @@ class ProfileTile extends Component {
     render() {
         return (
             <div>
-                <div class="avatar">{this.props.avatar}</div>
-                <div class="name">{this.props.name}</div>
+                <div className="avatar">{this.props.avatar}</div>
+                <div className="name">{this.props.name}</div>
             </div>
         );
     }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import authSignup from "../../../services/auth"
+import authSignin from "../../../services/auth/authSignin"
+import authSignup from "../../../services/auth/authSignup"
 import NewUser from "../../../models/NewUser"
 import "../../../utils/styles/global.css";
 import "./Signup.css";
@@ -17,13 +18,19 @@ class Signup extends Component {
     }
 
     async signupNewUser(newUser) {
-        const res = await authSignup(
+        const signupRes = await authSignup(
             newUser.name,
             newUser.nickname,
             newUser.email,
             newUser.password
         );
-        console.log(res);
+        console.log(signupRes);
+        if (!signupRes.success) return;
+        const signinRes = await authSignin(
+            newUser.email,
+            newUser.password
+        );
+        console.log(signinRes);
     }
 
     onChange = e => {
@@ -32,26 +39,7 @@ class Signup extends Component {
 
     onSubmit = e => {
         e.preventDefault();
-        // const newUser = {
-        //     name: this.state.name,
-        //     nickname: this.state.nickname,
-        //     email: this.state.email,
-        //     password: this.state.password,
-        // };
-        // console.log(newUser);
-        // var http = new XMLHttpRequest();
-        // var url = "http://localhost:5000/api/users/register";
-        // var params = newUser;
-        // console.log("putting");
-        // http.open("POST", url, true);
-        // // http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
-        // // http.onreadystatechange = function() {
-        // // if(http.readyState == 4 && http.status == 200) {
-        // //     alert(http.responseText);
-        // // }
-        // // }
-        // http.send(params);
         const newUser = new NewUser(
             this.state.name,
             this.state.nickname,

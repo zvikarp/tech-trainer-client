@@ -1,4 +1,3 @@
-
 const PROXY = "http://localhost:5000";
 
 async function authSignup(name, nickname, email, password) {
@@ -9,7 +8,7 @@ async function authSignup(name, nickname, email, password) {
         password: password
     };
     let res = { success: false, message: "unknowen error" };
-    res = await fetch(PROXY + '/api/users/register', {
+    res = await fetch(PROXY + '/api/auth/register', {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newUserData)

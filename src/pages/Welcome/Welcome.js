@@ -7,7 +7,7 @@ class Welcome extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            signup: true,
+            signup: false,
         };
     }
 

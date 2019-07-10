@@ -1,33 +1,34 @@
-// import React from 'react';
-// import logo from './logo.svg';
-// import './App.css';
+import React, { Component } from 'react';
 
-import React from 'react'
 import { Welcome, Dashboard } from './pages/index.js'
-// import { Button } from './components/index.js'
-// import { Provider } from 'react-redux';
-// import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-// import { GlobalStyle } from './utils/styles/global';
-// const App = () => (
-//   // <Provider store={store}> 
-//           <Router>
-//               <Switch>
-//                   <Route path="/" component={Button} />
-//                   {/* <Route exact path="/" component={OtherComponent} /> */}
-//               </Switch>
-//           </Router>
-//   // </Provider>
-// );
 
-function App() {
-  return (
-    <div className="App">
-      <div>
-      <Welcome />
-      {/* <Welcome/> */}
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      authed: true
+    }
+  }
+
+  renderPage() {
+    if (this.state.authed) {
+      return (
+        <Dashboard onSignout={() => {this.setState({authed:false})}} />
+      );
+    } else {
+      return (
+        <Welcome onSignin={() => {this.setState({authed:true})}} />
+      );
+    }
+  }
+
+  render() {
+    return (
+      <div className="App">
+        {this.renderPage()}
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 export default App;
