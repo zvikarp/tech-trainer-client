@@ -17,7 +17,12 @@ class Signup extends Component {
     }
 
     async signupNewUser(newUser) {
-        const res = await authSignup(newUser);
+        const res = await authSignup(
+            newUser.name,
+            newUser.nickname,
+            newUser.email,
+            newUser.password
+        );
         console.log(res);
     }
 
