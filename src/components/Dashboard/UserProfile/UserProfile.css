@@ -1,0 +1,24 @@
+#user-profile {
+    background-color: #F9E1DC;
+    width: 100%;
+}
+
+.avatar {
+    width:80px;
+    padding: 16px;
+    margin: 0 auto;
+}
+
+.avatar img {
+    border-radius: 50%;
+    width: 80px;
+}
+
+.user-name {
+    text-align: center;
+}
+
+.user-name h3 {
+    margin: 0px;
+    padding-bottom: 16px;
+}

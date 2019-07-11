@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../../../utils/styles/global.css'
+import './ProfileTile.css';
 
 class ProfileTile extends Component {
     // constructor(props) {
@@ -12,9 +13,16 @@ class ProfileTile extends Component {
 
     render() {
         return (
-            <div>
-                <div className="avatar">{this.props.avatar}</div>
-                <div className="name">{this.props.name}</div>
+            <div id="tile">
+                <div className="divider horizontal"></div>
+                <div id="profile-tile">
+                    <div className="avatar-small">
+                        <img src={this.props.avatar} alt="avatar" />
+                    </div>
+                    <div className="content">
+                        <div className="name">{this.props.name}</div>
+                    </div>
+                </div>
             </div>
         );
     }

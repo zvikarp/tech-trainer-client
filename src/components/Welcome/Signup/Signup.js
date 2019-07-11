@@ -31,6 +31,9 @@ class Signup extends Component {
             newUser.password
         );
         console.log(signinRes);
+        if (signinRes.success) {
+            this.props.onSignin();
+          }
     }
 
     onChange = e => {

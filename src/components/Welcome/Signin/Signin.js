@@ -16,6 +16,9 @@ class Signin extends Component {
   async signinUser(email, password) {
     const signinRes = await authSignin(email, password);
     console.log(signinRes);
+    if (signinRes.success) {
+      this.props.onSignin();
+    }
   }
 
   onChange = e => {

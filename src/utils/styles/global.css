@@ -89,3 +89,17 @@ input {
     text-decoration: underline;
     cursor: pointer;
 }
+
+/* divider */
+
+.divider.vertical {
+    width: 1px;
+    height: 100%;
+    background-color: #F9E1DC;
+}
+
+.divider.horizontal {
+    width: 100%;
+    height: 1px;
+    background-color: #F9E1DC;
+}

@@ -5,16 +5,12 @@
     margin: 0 0;
 }
 
-.signup-title {
-    text-align: center;
-    padding: 24px;
-}
-
-.action-section {
-    padding: 24px;
-}
-
 .signup-button {
     display: table;
     margin: 0px auto;
+}
+
+.action-section {
+    position: absolute;
+    bottom: 0;
 }

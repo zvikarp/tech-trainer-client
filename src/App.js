@@ -10,14 +10,20 @@ class App extends Component {
     }
   }
 
+  changeAuthed(state) {
+    this.setState({
+      authed: state
+    })
+  } 
+
   renderPage() {
     if (this.state.authed) {
       return (
-        <Dashboard onSignout={() => {this.setState({authed:false})}} />
+        <Dashboard onSignout={() => this.changeAuthed(false)} />
       );
     } else {
       return (
-        <Welcome onSignin={() => {this.setState({authed:true})}} />
+        <Welcome onSignin={() => this.changeAuthed(true)} />
       );
     }
   }

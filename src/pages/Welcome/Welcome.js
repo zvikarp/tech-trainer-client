@@ -12,30 +12,34 @@ class Welcome extends Component {
     }
 
     chagneForm() {
-        this.setState({signup: !this.state.signup});
+        this.setState({ signup: !this.state.signup });
+    }
+
+    onSignin() {
+        this.props.onSignin(true);
     }
 
     renderForm() {
         if (this.state.signup) {
             return (
                 <div>
-                    <Signup />
+                    <Signup onSignin={() => this.onSignin()} />
                     <div className="link-to-signin">already a user? <span className="link" onClick={() => this.chagneForm()}>sign in here</span>.</div>
                 </div>
             );
-            } else {
-                return (
-                    <div>
-                        <Signin />
-                        <div className="link-to-signin">new to orange chat? <span className="link" onClick={() => this.chagneForm()}>sign up here</span>.</div>
-                    </div>
-                );
-            }
-        }
-        
-        render() {
+        } else {
             return (
-                <div id="welcome">
+                <div>
+                    <Signin onSignin={() => this.onSignin()} />
+                    <div className="link-to-signin">new to orange chat? <span className="link" onClick={() => this.chagneForm()}>sign up here</span>.</div>
+                </div>
+            );
+        }
+    }
+
+    render() {
+        return (
+            <div id="welcome">
                 <h1 className="welcome-message">welcome to orange chat  <span role="img" aria-label="banana">🧡📪</span></h1>
                 {this.renderForm()}
             </div>
