@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-
-import { Welcome, Dashboard } from './pages/index.js'
+import { Provider } from 'react-redux';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Welcome, Dashboard } from './pages/index.js';
+import store from './store';
 
 class App extends Component {
   constructor(props) {
@@ -14,7 +16,7 @@ class App extends Component {
     this.setState({
       authed: state
     })
-  } 
+  }
 
   renderPage() {
     if (this.state.authed) {
@@ -30,9 +32,13 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        {this.renderPage()}
-      </div>
+      <Provider store={store}>
+        <div className="App">
+          <Route exact path="/" Component={Welcome} />
+          <Route exact path="/dashboard" Component={Dashboard} />
+          {/* {this.renderPage()} */}
+        </div>
+      </Provider>
     );
   }
 }
