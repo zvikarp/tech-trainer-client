@@ -1,7 +1,12 @@
-#search-bar {
-    padding: 16px;
-    width: 80%;
+#search {
+    /* width: 80%; */
     margin: 0 auto;
+    height: 9.5%;
+}
+
+#search-bar {
+    margin: auto;
+    padding: 12px;
 }
 
 .search-input {

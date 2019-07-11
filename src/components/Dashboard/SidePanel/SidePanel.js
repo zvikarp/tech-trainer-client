@@ -10,9 +10,6 @@ class SidePanel extends Component {
                 <UserProfile />
                 <SearchBar />
                 <ProfilesList />
-                {/* <div className="action-section">
-                    <button className="secondary">SIGN OUT</button>
-                </div> */}
             </div>
         )
     }

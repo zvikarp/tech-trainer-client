@@ -7,10 +7,6 @@
 
 .message-input {
     background-color: #F9FBFC;
-    margin: 16px 24px;
-    width: 60%;
-}
-
-.message-send {
-    
+    margin: 16px 48px;
+    width: 75%;
 }
