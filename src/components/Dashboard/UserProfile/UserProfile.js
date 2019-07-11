@@ -6,6 +6,7 @@ class UserProfile extends Component {
     render() {        
         return (
             <div id="user-profile">
+                <i className="fas fa-sign-out-alt signount-button"></i>
                 <div className="avatar">
                     <img src={process.env.PUBLIC_URL + '/assets/avatars/avatar1.jpg'} alt="avatar" />
                 </div>

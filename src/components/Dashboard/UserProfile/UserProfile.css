@@ -22,3 +22,10 @@
     margin: 0px;
     padding-bottom: 16px;
 }
+
+.signount-button {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    color: #FE724D;
+}

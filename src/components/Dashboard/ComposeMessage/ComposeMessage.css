@@ -1,0 +1,16 @@
+#compose-message {
+    position: absolute;
+    bottom: 0px;
+    width: 70%;
+    background-color: #F9E1DC;
+}
+
+.message-input {
+    background-color: #F9FBFC;
+    margin: 16px 24px;
+    width: 60%;
+}
+
+.message-send {
+    
+}

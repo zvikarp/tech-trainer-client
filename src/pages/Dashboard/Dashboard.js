@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { SidePanel } from '../../components/Dashboard/index.js'
+import { SidePanel, ChatPanel} from '../../components/Dashboard/index.js'
 import "../../utils/styles/global.css";
 import "./Dashboard.css";
 
@@ -12,6 +12,7 @@ class Dashboard extends Component {
         return (
             <div>
                 <SidePanel />
+                <ChatPanel />
             </div>
         )
     }

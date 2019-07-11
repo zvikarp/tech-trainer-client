@@ -20,7 +20,7 @@ class ProfileTile extends Component {
                         <img src={this.props.avatar} alt="avatar" />
                     </div>
                     <div className="content">
-                        <div className="name">{this.props.name}</div>
+                        <div className="profile-name">{this.props.name}</div>
                     </div>
                 </div>
             </div>

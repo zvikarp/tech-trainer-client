@@ -3,6 +3,7 @@
     width: 30%;
     height: 100vh;
     margin: 0 0;
+    display: inline-block;
 }
 
 .signup-button {
