@@ -7,11 +7,4 @@ import ChatPanel from './ChatPanel/ChatPanel';
 import ComposeMessage from './ComposeMessage/ComposeMessage';
 import ChatHeader from './ChatHeader/ChatHeader';
 
-export { SidePanel };
-export { ProfileTile };
-export { UserProfile };
-export { SearchBar };
-export { ProfilesList };
-export { ChatPanel };
-export { ComposeMessage };
-export { ChatHeader };
+export { SidePanel, ProfileTile, UserProfile, SearchBar, ProfilesList, ChatPanel, ComposeMessage, ChatHeader};

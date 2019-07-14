@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import "../../../utils/styles/global.css";
-import "./Signin.css";
+import "./General.css";
 
-class Signin extends Component {
+class General extends Component {
 
   constructor(props) {
     super(props);
@@ -11,6 +11,7 @@ class Signin extends Component {
       password: "",
     }
   }
+
 
   onChange = e => {
     this.setState({ [e.target.id]: e.target.value });
@@ -23,9 +24,18 @@ class Signin extends Component {
 
   render() {
     return (
-      <div id="signin" >
-        <h2 className="signin-title"> Sign In </h2>
+      <div id="general" >
+        <h2 className="signin-title">General Settings</h2>
         <form noValidate onSubmit={this.onSubmit}>
+          <div className="labeld-input">
+            <label>Name:</label>
+            <input
+              onChange={this.onChange}
+              value={this.state.name}
+              id="name"
+              type="text"
+            />
+          </div>
           <div className="labeld-input">
             <label>Email:</label>
             <input
@@ -35,17 +45,8 @@ class Signin extends Component {
               type="email"
             />
           </div>
-          <div className="labeld-input">
-            <label>Password:</label>
-            <input
-              onChange={this.onChange}
-              value={this.state.password}
-              id="password"
-              type="password"
-            />
-          </div>
           <div className="action-section">
-            <button className="primary signin-button" type="submit">SIGN IN</button>
+            <button className="primary signin-button" type="submit">SAVE CHANGES</button>
           </div>
         </form>
       </div>
@@ -53,4 +54,4 @@ class Signin extends Component {
   }
 }
 
-export default Signin;
+export default General;

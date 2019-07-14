@@ -1,5 +1,4 @@
 import { createStore, applyMiddleware, compose } from "redux";
-import { persistStore, persistReducer } from 'redux-persist';
 import thunk from "redux-thunk";
 import rootReducer from "./reducers";
 
@@ -12,6 +11,5 @@ const store = createStore(
     composeEnhancer(applyMiddleware(...middleware)),
 );
 
-persistStore(store, { whitelist: ['auth'] });
 
 export default store;
