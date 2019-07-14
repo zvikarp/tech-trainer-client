@@ -1,12 +1,9 @@
 import React, { Component } from 'react'
-import { SidePanel, ChatPanel} from '../../components/Dashboard/index.js'
+import { SidePanel, ChatPanel} from '../../components/Chat/index.js'
 import "../../utils/styles/global.css";
-import "./Dashboard.css";
+import "./Chat.css";
 
-class Dashboard extends Component {
-    // constructor(props) {
-    //     super(props);
-    // }
+class Chat extends Component {
 
     render() {
         return (
@@ -17,4 +14,4 @@ class Dashboard extends Component {
         )
     }
 };
-export default Dashboard;
+export default Chat;

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import authSignin from "../../../services/auth/authSignin"
 import "../../../utils/styles/global.css";
 import "./Signin.css";
 
@@ -13,13 +12,13 @@ class Signin extends Component {
     }
   }
 
-  async signinUser(email, password) {
-    const signinRes = await authSignin(email, password);
-    console.log(signinRes);
-    if (signinRes.success) {
-      this.props.onSignin();
-    }
-  }
+  // async signinUser(email, password) {
+  //   const signinRes = await authSignin(email, password);
+  //   console.log(signinRes);
+  //   if (signinRes.success) {
+  //     this.props.onSignin();
+  //   }
+  // }
 
   onChange = e => {
     this.setState({ [e.target.id]: e.target.value });
@@ -27,7 +26,8 @@ class Signin extends Component {
 
   onSubmit = e => {
     e.preventDefault();
-    this.signinUser(this.state.email, this.state.password);
+    this.props.onSignin({email: this.state.email, password: this.state.password})
+    // this.signinUser(this.state.email, this.state.password);
   };
 
   render() {

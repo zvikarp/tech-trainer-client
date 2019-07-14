@@ -1,7 +1,4 @@
 import React, { Component } from 'react'
-import authSignin from "../../../services/auth/authSignin"
-import authSignup from "../../../services/auth/authSignup"
-import NewUser from "../../../models/NewUser"
 import "../../../utils/styles/global.css";
 import "./Signup.css";
 
@@ -17,24 +14,24 @@ class Signup extends Component {
         }
     }
 
-    async signupNewUser(newUser) {
-        const signupRes = await authSignup(
-            newUser.name,
-            newUser.nickname,
-            newUser.email,
-            newUser.password
-        );
-        console.log(signupRes);
-        if (!signupRes.success) return;
-        const signinRes = await authSignin(
-            newUser.email,
-            newUser.password
-        );
-        console.log(signinRes);
-        if (signinRes.success) {
-            this.props.onSignin();
-          }
-    }
+    // async signupNewUser(newUser) {
+    //     const signupRes = await authSignup(
+    //         newUser.name,
+    //         newUser.nickname,
+    //         newUser.email,
+    //         newUser.password
+    //     );
+    //     console.log(signupRes);
+    //     if (!signupRes.success) return;
+    //     const signinRes = await authSignin(
+    //         newUser.email,
+    //         newUser.password
+    //     );
+    //     console.log(signinRes);
+    //     if (signinRes.success) {
+    //         this.props.onSignin();
+    //       }
+    // }
 
     onChange = e => {
         this.setState({ [e.target.id]: e.target.value });
@@ -43,13 +40,19 @@ class Signup extends Component {
     onSubmit = e => {
         e.preventDefault();
 
-        const newUser = new NewUser(
-            this.state.name,
-            this.state.nickname,
-            this.state.email,
-            this.state.password
-        );
-        this.signupNewUser(newUser);
+        const newUser = {
+            name: this.state.name,
+            nickname: this.state.nickname,
+            email: this.state.email,
+            password: this.state.password
+        };
+
+        console.log(newUser);
+        
+
+        this.props.onSignup(newUser);
+        
+        // this.signupNewUser(newUser);
         
         
     };
