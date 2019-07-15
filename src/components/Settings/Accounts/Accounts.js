@@ -38,20 +38,22 @@ class Accounts extends Component {
 
 
     onAccountChange = e => {
-        console.log(e.target.id);
-
-        this.setState({ [e.target.id]: e.target.value });
+        var accountsFieldsTemp = this.state.accountsFields;
+        accountsFieldsTemp[e.target.id] = e.target.value;
+        this.setState({ accountsFields: accountsFieldsTemp });
     };
 
     onChange = e => {
-        this.setState({ [e.target.id]: e.target.value });
+        var accountsFieldsTemp = this.state.accountsFields;
+        accountsFieldsTemp[e.target.id] = e.target.value;
+        this.setState({ accountsFields: accountsFieldsTemp });
     };
 
     onSubmit = e => {
         e.preventDefault();
         // this.props.onSignin({ email: this.state.email, password: this.state.password })
         axios
-        .post("/api/user/accounts/update", {'accounts': {'SDFSDFSDFS': 'zvik'}}, {
+        .post("/api/user/accounts/update", {'accounts': this.state.accountsFields}, {
             headers: {
                 'Content-Type': 'application/json',
             }})
