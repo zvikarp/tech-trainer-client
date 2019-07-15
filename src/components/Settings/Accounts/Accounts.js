@@ -13,14 +13,26 @@ class Accounts extends Component {
             accounts: ['github', 'medium'],
             email: "",
             password: "",
+            token: localStorage.jwtToken
         }
         this.getAccountsTypes();
     }
 
     getAccountsTypes() {
         axios
-            .get("/api/accounts/get")
+            .get("/api/accounts/get", {headers: {'token': this.state.token}})
+            
             .then(res => {
+                var recivedAccounts = res.data;
+                console.log(recivedAccounts);
+                var accounts = [];
+                Object.keys(recivedAccounts.websites).forEach(key => {
+                    accounts.push(recivedAccounts.websites[key].name);
+                });
+                Object.keys(recivedAccounts.otherFields).forEach(key => {
+                    accounts.push(recivedAccounts.otherFields[key]);
+                });
+                this.setState({accounts: accounts})
             });
     }
 
@@ -37,7 +49,17 @@ class Accounts extends Component {
 
     onSubmit = e => {
         e.preventDefault();
-        this.props.onSignin({ email: this.state.email, password: this.state.password })
+        // this.props.onSignin({ email: this.state.email, password: this.state.password })
+        axios
+        .post("/api/user/accounts/update", {'accounts': {'SDFSDFSDFS': 'zvik'}}, {
+            headers: {
+                'Content-Type': 'application/json',
+            }})
+        
+        .then(res => {
+            console.log(res);
+            
+        });
     };
 
     renderAccountField(account) {

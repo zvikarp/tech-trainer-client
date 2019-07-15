@@ -9,37 +9,6 @@ import {
 } from "./types";
 
 
-// async function authSignup(name, nickname, email, password) {
-//   const newUserData = {
-//       name: name,
-//       nickname: nickname,
-//       email: email,
-//       password: password
-//   };
-//   let res = { success: false, message: "unknowen error" };
-//   res = await fetch(PROXY + '/api/auth/register', {
-//       method: 'post',
-//       headers: { 'Content-Type': 'application/json' },
-//       body: JSON.stringify(newUserData)
-//   }).then(response => response.json()).then(data => {
-//       if (data._id) {
-//           res.success = true;
-//           res.message = "successfuly created new account";
-//           console.log(res.message + " with id: " + data._id);
-//           return res;
-//       }
-//       else {
-//           res.message = "errors creating account: " + JSON.stringify(data);
-//           return res;
-//       }
-//   }).catch(error => {
-//       res.success = false;
-//       console.log(res.message + ": " + error);
-//       return res;
-//   });
-//   return res;
-// }
-
 // Register User
 export const signupNewUser = (userData, history) => dispatch => {
   axios
@@ -47,7 +16,7 @@ export const signupNewUser = (userData, history) => dispatch => {
     .then(res => {
       console.log(res);
       signinUser(userData, history);
-    }) // re-direct to login on successful register
+    })
     .catch(err => {
       console.log(err.response.data);
       dispatch({
@@ -62,16 +31,12 @@ export const signinUser = (userData, history) => dispatch => {
   axios
     .post("/api/auth/login", userData)
     .then(res => {
-      // Save to localStorage
-      // Set token to localStorage
       const { token } = res.data;
       localStorage.setItem("jwtToken", token);
-      // Set token to Auth header
       setAuthToken(token);
-      // Decode token to get user data
       const decoded = jwt_decode(token);
-      // Set current user
       dispatch(setCurrentUser(decoded));
+      console.log(token);
       history.push("/")
     })
     .catch(err =>
@@ -85,7 +50,6 @@ export const signinUser = (userData, history) => dispatch => {
 // Set logged in user
 export const setCurrentUser = decoded => {
   console.log(decoded);
-  
   return {
     type: SET_CURRENT_USER,
     payload: decoded
