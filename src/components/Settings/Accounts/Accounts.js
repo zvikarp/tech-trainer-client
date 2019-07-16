@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {ToastsStore} from 'react-toasts';
 import axios from "axios";
 
 import "../../../utils/styles/global.css";
@@ -71,8 +72,13 @@ class Accounts extends Component {
             })
 
             .then(res => {
-                console.log(res);
+                if (res.data.success)
+                    ToastsStore.info("✔️ Your changes have been saved.");
+                else
+                ToastsStore.info("⚠️ Error Saving Your changes.");
 
+            }).catch(err => {
+                ToastsStore.info("⚠️ Error Saving Your changes.");
             });
     };
 

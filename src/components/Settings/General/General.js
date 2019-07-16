@@ -1,18 +1,17 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
+import {ToastsStore} from 'react-toasts';
 import "../../../utils/styles/global.css";
 import "./General.css";
 
 class General extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
       email: "",
       password: "",
-      points: 0,
-    }
+      points: 0
+    };
   }
-
 
   onChange = e => {
     this.setState({ [e.target.id]: e.target.value });
@@ -20,12 +19,20 @@ class General extends Component {
 
   onSubmit = e => {
     e.preventDefault();
-    this.props.onSignin({email: this.state.email, password: this.state.password})
+    // this.props.onSignin({email: this.state.email, password: this.state.password})
+    // if (res.data.success)
+    ToastsStore.info("✔️ Your changes have been saved.");
+    // else
+    // ToastsStore.info("⚠️ Error Saving Your changes.");
+
+    // }).catch(err => {
+    //     ToastsStore.info("⚠️ Error Saving Your changes.");
+    // });
   };
 
   render() {
     return (
-      <div id="general" >
+      <div id="general">
         <h2 className="signin-title">General Settings</h2>
         <form noValidate onSubmit={this.onSubmit}>
           <div className="labeld-input">
@@ -48,19 +55,16 @@ class General extends Component {
           </div>
           <div className="labeld-input">
             <label>Points:</label>
-            <input
-              value={this.state.points}
-              id="points"
-              type="text"
-              disabled
-            />
+            <input value={this.state.points} id="points" type="text" disabled />
           </div>
           <div className="action-section">
-            <button className="primary signin-button" type="submit">SAVE CHANGES</button>
+            <button className="primary signin-button" type="submit">
+              SAVE CHANGES
+            </button>
           </div>
         </form>
       </div>
-    )
+    );
   }
 }
 

@@ -1,6 +1,7 @@
 import axios from "axios";
 import setAuthToken from "../../utils/auth/setAuthToken";
 import jwt_decode from "jwt-decode";
+import {ToastsStore} from 'react-toasts';
 
 import {
   GET_ERRORS,
@@ -8,13 +9,23 @@ import {
   USER_LOADING
 } from "./types";
 
+function errorToString(err) {
+  var msg = ""
+  Object.keys(err).forEach(key => {
+    msg += err[key];
+    msg += ". ";
+  });
+  if (msg === "")
+    msg = "Unknown Error.";
+  return msg;
+}
+
 
 // Register User
 export const signupNewUser = (userData, history) => dispatch => {
   axios
     .post("/api/auth/register", userData)
     .then(res => {
-      console.log(res);
       signinUser(userData, history);
     })
     .catch(err => {
@@ -22,7 +33,9 @@ export const signupNewUser = (userData, history) => dispatch => {
       dispatch({
         type: GET_ERRORS,
         payload: err.response.data
-      })}
+      });
+      ToastsStore.info("⚠️ Error Signing up: " + errorToString(err.response.data));
+    }
     );
 };
 
@@ -31,20 +44,25 @@ export const signinUser = (userData, history) => dispatch => {
   axios
     .post("/api/auth/login", userData)
     .then(res => {
+      try {
       const { token } = res.data;
       localStorage.setItem("jwtToken", token);
       setAuthToken(token);
       const decoded = jwt_decode(token);
       dispatch(setCurrentUser(decoded));
       console.log(token);
-      history.push("/")
+      history.push("/");
+      } catch {
+        ToastsStore.info("⚠️ Error Signing in: " + errorToString(""));
+      }
     })
-    .catch(err =>
+    .catch(err => {
       dispatch({
         type: GET_ERRORS,
         payload: err.response.data
       })
-    );
+      ToastsStore.info("⚠️ Error Signing in: " + errorToString(err.response.data));
+    });
 };
 
 // Set logged in user
