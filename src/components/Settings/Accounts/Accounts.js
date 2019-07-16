@@ -10,7 +10,7 @@ class Accounts extends Component {
         super(props);
         this.state = {
             accountsFields: {},
-            accounts: ['github', 'medium'],
+            accounts: [],
             email: "",
             password: "",
             token: localStorage.jwtToken

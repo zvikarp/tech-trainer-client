@@ -9,6 +9,7 @@ class General extends Component {
     this.state = {
       email: "",
       password: "",
+      points: 0,
     }
   }
 
@@ -43,6 +44,15 @@ class General extends Component {
               value={this.state.email}
               id="email"
               type="email"
+            />
+          </div>
+          <div className="labeld-input">
+            <label>Points:</label>
+            <input
+              value={this.state.points}
+              id="points"
+              type="text"
+              disabled
             />
           </div>
           <div className="action-section">
