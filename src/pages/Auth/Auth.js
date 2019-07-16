@@ -62,7 +62,7 @@ class Auth extends Component {
     render() {
         return (
             <div id="auth">
-                <i className="fas fa-chevron-left back-button" onClick={() => this.props.history.push('/')}></i>
+                <i className="fas fa-chevron-left icon-button back-button" onClick={() => this.props.history.push('/')}></i>
                 <h1 className="auth-message">connect to orange <span role="img" aria-label="banana">🧡</span></h1>
                 {this.renderForm()}
             </div>

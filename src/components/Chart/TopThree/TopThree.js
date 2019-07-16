@@ -8,7 +8,7 @@ class TopThree extends Component {
     return (
       <div id="top-three">
         <h2 className="top-three-title"> Top three </h2>
-        <div class="top-three-cards">
+        <div className="top-three-cards">
           <Top />
           <Top />
           <Top />

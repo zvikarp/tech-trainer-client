@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { Auth, Chat, Chart, Settings } from './pages/index.js';
+import { Auth, Chat, Chart, Settings, Admin } from './pages/index.js';
 import store from './redux/store';
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/auth/setAuthToken";
@@ -42,6 +42,7 @@ class App extends Component {
             <Route exact path="/auth" component={Auth} />
             <Route exact path="/chat" component={Chat} />
             <Route exact path="/settings" component={Settings} />
+            <Route exact path="/admin" component={Admin} />
           </div>
         </Router>
       </Provider>

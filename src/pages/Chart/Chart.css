@@ -10,16 +10,6 @@
     margin: 0px 16px;
 }
 
-.settings-button {
-    color: #F9E1DC;
-    margin: 0px 16px;
-    padding: 10px;
-    cursor: pointer;
-    /* background-color: #F9E1DC; */
-}
-
-.settings-button:hover {
-    background-color: #feaf99;
-    color: #FFFFFF;
-    border-radius: 5px;
+.chart-icon-button {
+    margin: 0px 16px 0px 0px;
 }
