@@ -2,36 +2,38 @@ import React, { Component } from "react";
 import "../../utils/styles/global.css";
 import "./Chart.css";
 import store from '../../redux/store';
+import { logoutUser } from "../../redux/actions/authActions";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
 class Chart extends Component {
 
   constructor(props) {
-    super(props);    
+    super(props);
     this.state = {
       authed: store.getState().auth.isAuthenticated,
       user: store.getState().auth.user,
     }
   }
 
-  // componentWillReceiveProps(nextProps) {
-  //   // if (nextProps.auth.isAuthenticated) {
-  //   //   }
-  //   this.setState({
-  //     authed: store.getState().auth.isAuthenticated
-  //   });
-  //   }
-    
-    renderAuth() {
+  signout = e => {
+    this.props.logoutUser();
+    window.location.reload();
+  }
+
+  renderAuth() {
     if (this.state.authed) {
       return (
         <div className="chart-top-bar">
           <i className="fas fa-cogs settings-button" onClick={() => this.props.history.push('/settings')}></i>
-          <button className="secondary" onClick={() => this.props.history.push('/auth')}>Sign Out</button>
+          <button className="secondary" onClick={() => this.signout()}>Sign Out</button>
         </div>
       )
     } else {
       return (
-        <button className="secondary chart-signin-button" onClick={() => this.props.history.push('/auth')}>Sign In</button>
+        <div className="chart-top-bar">
+          <button className="secondary chart-signin-button" onClick={() => this.props.history.push('/auth')}>Sign In</button>
+        </div>
       )
     }
   }
@@ -39,7 +41,7 @@ class Chart extends Component {
   welcomeMessage() {
     if (this.state.authed) {
       return (
-        <h2>Hi { this.state.user.name }!</h2>
+        <h2>Hi {this.state.user.name}!</h2>
       );
     }
   }
@@ -56,4 +58,12 @@ class Chart extends Component {
     );
   }
 }
-export default Chart;
+
+Chart.propTypes = {
+  logoutUser: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = state => ({
+});
+
+export default connect(mapStateToProps, { logoutUser })(Chart);

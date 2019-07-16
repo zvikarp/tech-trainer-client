@@ -16,3 +16,16 @@ body {
 .link-to-signin a {
     color: #F9E1DC;
 }
+
+.back-button {
+    color: #f9e1dc;
+    margin: 16px;
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .back-button:hover {
+    background-color: #feaf99;
+    color: #ffffff;
+    border-radius: 5px;
+  }

@@ -16,24 +16,35 @@ class Accounts extends Component {
             token: localStorage.jwtToken
         }
         this.getAccountsTypes();
+        this.getUsersAccounts();
+    }
+
+    getUsersAccounts() {
+        axios.get('/api/user/accounts/get', { headers: { 'token': this.state.token } }).then(res => {
+            var userAccounts = res.data;
+            Object.keys(userAccounts).forEach(key => {
+                this.setState({[key]: userAccounts[key]});
+                console.log(key);
+                if (document.getElementById(key))
+                    document.getElementById(key).value = userAccounts[key];
+
+            });
+        });
     }
 
     getAccountsTypes() {
-        axios
-            .get("/api/accounts/get", {headers: {'token': this.state.token}})
-            
-            .then(res => {
-                var recivedAccounts = res.data;
-                console.log(recivedAccounts);
-                var accounts = [];
-                Object.keys(recivedAccounts.websites).forEach(key => {
-                    accounts.push(recivedAccounts.websites[key].name);
-                });
-                Object.keys(recivedAccounts.otherFields).forEach(key => {
-                    accounts.push(recivedAccounts.otherFields[key]);
-                });
-                this.setState({accounts: accounts})
+        axios.get("/api/accounts/get", { headers: { 'token': this.state.token } }).then(res => {
+            var recivedAccounts = res.data;
+            console.log(recivedAccounts);
+            var accounts = [];
+            Object.keys(recivedAccounts.websites).forEach(key => {
+                accounts.push(recivedAccounts.websites[key].name);
             });
+            Object.keys(recivedAccounts.otherFields).forEach(key => {
+                accounts.push(recivedAccounts.otherFields[key]);
+            });
+            this.setState({ accounts: accounts })
+        });
     }
 
 
@@ -53,15 +64,16 @@ class Accounts extends Component {
         e.preventDefault();
         // this.props.onSignin({ email: this.state.email, password: this.state.password })
         axios
-        .post("/api/user/accounts/update", {'accounts': this.state.accountsFields}, {
-            headers: {
-                'Content-Type': 'application/json',
-            }})
-        
-        .then(res => {
-            console.log(res);
-            
-        });
+            .post("/api/user/accounts/update", { 'accounts': this.state.accountsFields }, {
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
+
+            .then(res => {
+                console.log(res);
+
+            });
     };
 
     renderAccountField(account) {
