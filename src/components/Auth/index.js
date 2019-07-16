@@ -1,4 +1,3 @@
 import Signup from './Signup/Signup';
 import Signin from './Signin/Signin';
-export { Signup };
-export { Signin };
+export { Signup, Signin };

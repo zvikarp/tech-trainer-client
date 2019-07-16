@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import "../../utils/styles/global.css";
-import "./Chart.css";
+import PropTypes from "prop-types";
 import store from '../../redux/store';
 import { logoutUser } from "../../redux/actions/authActions";
-import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { TopThree } from "../../components/Chart"
+import "../../utils/styles/global.css";
+import "./Chart.css";
 
 class Chart extends Component {
 
@@ -54,6 +55,7 @@ class Chart extends Component {
         </div>
         <h1 className="chart-message">welcome to orange</h1>
         {this.welcomeMessage()}
+        <TopThree></TopThree>
       </div>
     );
   }

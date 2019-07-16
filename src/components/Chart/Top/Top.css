@@ -1,0 +1,11 @@
+#top {
+    display: inline-block;
+    background-color: #F9FBFC;
+    width: 20%;
+    margin: 36px 6.6%;
+    border-radius: 10px;
+}
+
+.top-username {
+    text-align: center;
+}
