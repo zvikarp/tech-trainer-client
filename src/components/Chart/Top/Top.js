@@ -4,11 +4,18 @@ import "./Top.css";
 
 class Top extends Component {
   render() {
-    return (
-      <div id="top">
-        <h3 className="top-username"> User Name </h3>
-      </div>
-    )
+    if (this.props.user) {
+      return (
+        <div id="top">
+          <h3 className="top-username"> {this.props.user.name} </h3>
+          <h3 className="top-username"> {this.props.user.points} </h3>
+        </div>
+      );
+    } else {
+      return (
+        <div id="top">none</div>
+      );
+    }
   }
 }
 

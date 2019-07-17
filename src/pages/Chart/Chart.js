@@ -15,9 +15,23 @@ class Chart extends Component {
       authed: store.getState().auth.isAuthenticated,
       user: store.getState().auth.user,
       admin: false,
-      token: localStorage.jwtToken
+      token: localStorage.jwtToken,
+      top3: [],
+      passed: [],
+      under: [],
     };
     this.checkIfAdmin();
+    this.getChart();
+  }
+
+  getChart() {
+    axios.get('/api/chart/get').then(res => {
+      this.setState({
+        top3: res.data.top3,
+        passed: res.data.passed,
+        under: res.data.under
+      });
+    });
   }
 
   checkIfAdmin() {
@@ -26,7 +40,7 @@ class Chart extends Component {
       .then(res => {
         var isAdmin = res.data.admin;
         console.log(isAdmin);
-        
+
         this.setState({
           admin: isAdmin
         });
@@ -39,15 +53,15 @@ class Chart extends Component {
   };
 
   renderAdminButton() {
-    
+
     if (this.state.admin) {
       console.log(this.state.admin);
       return (
         <i
-        className="fas fa-unlock-alt icon-button chart-icon-button"
-        onClick={() => this.props.history.push("/admin")}
+          className="fas fa-unlock-alt icon-button chart-icon-button"
+          onClick={() => this.props.history.push("/admin")}
         />
-        );
+      );
     }
   }
 
@@ -91,7 +105,7 @@ class Chart extends Component {
         <div className="top-section">{this.renderAuth()}</div>
         <h1 className="chart-message">welcome to orange</h1>
         {this.welcomeMessage()}
-        <TopThree />
+        <TopThree top3={this.state.top3} />
       </div>
     );
   }
