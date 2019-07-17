@@ -1,0 +1,10 @@
+#tile {
+    background-color: #F9FBFC;
+    margin: 12px 64px;
+    border-radius: 10px;
+}
+
+.tile-username {
+    display: inline-block;
+    text-align: center;
+}
