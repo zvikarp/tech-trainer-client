@@ -3,7 +3,9 @@
 }
 
 .passed-title {
-  text-align: center;
+    padding: 8px;
+    margin: 4px 64px;
+    color: #F9FBFC
 }
 .passed-cards {
   margin: 0 auto;

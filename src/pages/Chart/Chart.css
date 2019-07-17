@@ -13,3 +13,9 @@
 .chart-icon-button {
     margin: 0px 16px 0px 0px;
 }
+
+.last-updated {
+    padding: 16px;
+    color: #FFFFFF;
+    text-align: center;
+}

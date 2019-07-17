@@ -13,11 +13,11 @@ class TopThree extends Component {
   render() {
     return (
       <div id="top-three">
-        <h2 className="top-three-title"> Top three </h2>
+        <div className="top-three-title"><span role="img" aria-label="banana">🏆</span> Top three </div>
         <div className="top-three-cards">
-          <Top user={this.props.top3[0]} />
-          <Top user={this.props.top3[1]} />
-          <Top user={this.props.top3[2]} />
+          <Top user={this.props.top3[0]} icon="🥇" />
+          <Top user={this.props.top3[1]} icon="🥈"/>
+          <Top user={this.props.top3[2]} icon="🥉"/>
         </div>
       </div>
     );

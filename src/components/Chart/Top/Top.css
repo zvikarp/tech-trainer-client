@@ -6,6 +6,23 @@
     border-radius: 10px;
 }
 
+#top:hover {
+    background-color: #F9E1DC;
+}
+
 .top-username {
+    vertical-align:top;
+}
+
+.top-icon {
+    width: 30%;
     text-align: center;
+    margin: auto;
+    font-size: 36px;
+    vertical-align:top;
+    padding: 28px 0px;
+}
+
+.top-child {
+    display: inline-block;
 }

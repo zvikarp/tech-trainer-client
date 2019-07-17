@@ -13,7 +13,7 @@ class Tile extends Component {
       );
     } else {
       return (
-        <div id="tile">none</div>
+        <div id="tile">Loading...</div>
       );
     }
   }

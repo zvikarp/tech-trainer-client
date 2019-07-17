@@ -3,7 +3,9 @@
 }
 
 .top-three-title {
-  text-align: center;
+  padding: 8px;
+  margin: 4px 64px;
+  color: #F9FBFC
 }
 .top-three-cards {
   margin: 0 auto;

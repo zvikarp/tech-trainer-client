@@ -97,10 +97,11 @@ class Chart extends Component {
     return (
       <div>
         <div className="top-section">{this.renderAuth()}</div>
-        <h1 className="chart-message">welcome to orange</h1>
+        <h1 className="chart-message">welcome to orange <span role="img" aria-label="banana">👋</span></h1>
         <TopThree top3={this.state.top3} />
         <Passed passed={this.state.passed} />
         <Under under={this.state.under} />
+        <div className="last-updated">last updated at: </div>
       </div>
     );
   }
