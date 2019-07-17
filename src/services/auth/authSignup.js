@@ -1,9 +1,8 @@
-const PROXY = "https://board2675.herokuapp.com";
+const PROXY = "http://localhost:5000";
 
-async function authSignup(name, nickname, email, password) {
+async function authSignup(name, email, password) {
     const newUserData = {
         name: name,
-        nickname: nickname,
         email: email,
         password: password
     };

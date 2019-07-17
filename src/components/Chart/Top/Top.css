@@ -26,3 +26,9 @@
 .top-child {
     display: inline-block;
 }
+
+.top-loading {
+    padding: 16px 0px;
+    text-align: center;
+    color: #feaf99;
+}

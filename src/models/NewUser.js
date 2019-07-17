@@ -1,8 +1,7 @@
 export default class NewUser {
 
-    constructor(name, nickname, email, password) {
+    constructor(name, email, password) {
       this.name = name;
-      this.nickname = nickname;
       this.email = email;
       this.password = password;
     }
@@ -10,7 +9,6 @@ export default class NewUser {
     toJson(newUser) {
         return {
             name: newUser.name,
-            nickname: newUser.nickname,
             email: newUser.email,
             password: newUser.password
         }

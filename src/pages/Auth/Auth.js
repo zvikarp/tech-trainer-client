@@ -4,7 +4,6 @@ import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { signupNewUser, signinUser } from "../../redux/actions/authActions";
-// import classnames from "classnames";
 import "../../utils/styles/global.css";
 import "./Auth.css";
 
@@ -20,11 +19,6 @@ class Auth extends Component {
         if (nextProps.auth.isAuthenticated) {
             this.props.history.push("/");
         }
-        // if (nextProps.errors) {
-        //     this.setState({
-        //         errors: nextProps.errors
-        //     });
-        // }
     }
 
     chagneForm() {
@@ -32,12 +26,12 @@ class Auth extends Component {
     }
 
     onSignup(user) {
-        console.log(user);
+        // this.setState({loading: true});
         this.props.signupNewUser(user, this.props.history);
     }
 
     onSignin(user) {
-        console.log(user);
+        // this.setState({loading: true});
         this.props.signinUser(user, this.props.history);
     }
 
@@ -52,7 +46,7 @@ class Auth extends Component {
         } else {
             return (
                 <div>
-                    <Signin onSignin={(user) => this.onSignin(user)} />
+                    <Signin onSignin={(user) => this.onSignin(user)} loading={this.state.loading}/>
                     <div className="link-to-signin">new to orange? <span className="link" onClick={() => this.chagneForm()}>sign up here</span>.</div>
                 </div>
             );

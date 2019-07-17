@@ -18,7 +18,7 @@ class Top extends Component {
       );
     } else {
       return (
-        <div id="top">Loading...</div>
+        <div id="top" className="top-loading">Loading...</div>
       );
     }
   }

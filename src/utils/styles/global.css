@@ -33,6 +33,12 @@ h2 {
   font-weight: 900px;
 }
 
+/* colors */
+
+.white {
+  color: #FFFFFF;
+}
+
 /* button */
 
 button {
@@ -66,6 +72,15 @@ button.secondary {
 button.secondary:hover {
   background-color: #feaf99;
   color: #ffffff;
+}
+
+button.disabled {
+  background-color: #feaf99;
+  color: #ffffff;
+  cursor: not-allowed;
+}
+button.disabled:hover {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
 
 /* icon-button */

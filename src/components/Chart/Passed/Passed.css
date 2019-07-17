@@ -2,11 +2,16 @@
   width: 100%;
 }
 
-.passed-title {
+.passed-text {
     padding: 8px;
     margin: 4px 64px;
-    color: #F9FBFC
+    color: #F9FBFC;
 }
+
+.passed-loading {
+  color: #feaf99;
+}
+
 .passed-cards {
   margin: 0 auto;
 }

@@ -2,11 +2,16 @@
   width: 100%;
 }
 
-.under-title {
+.under-text {
   padding: 8px;
   margin: 4px 64px;
-  color: #F9FBFC
+  color: #F9FBFC;
 }
+
+.under-loading {
+  color: #feaf99;
+}
+
 .under-cards {
   margin: 0 auto;
 }

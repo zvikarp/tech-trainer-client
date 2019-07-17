@@ -1,21 +1,35 @@
 .chart-message {
-    padding: 64px;
-    text-align: center;
-    color: #FFFFFF;
+  padding: 64px;
+  text-align: center;
+  color: #ffffff;
 }
 
-.chart-top-bar {
-    position: absolute;
-    right: 0;
-    margin: 0px 16px;
+.chart-top-bar-right {
+  position: absolute;
+  right: 0;
+  margin: 0px 16px;
+}
+
+.chart-top-bar-left {
+  position: absolute;
+  left: 0;
+  margin: 0px 16px;
 }
 
 .chart-icon-button {
-    margin: 0px 16px 0px 0px;
+  margin: 0px 16px 0px 0px;
 }
 
 .last-updated {
-    padding: 16px;
-    color: #FFFFFF;
-    text-align: center;
+  padding: 16px;
+  color: #ffffff;
+  text-align: center;
+}
+
+.last-updated-loading {
+  color: #feaf99;
+}
+
+.welcome-user {
+  color: #FFFFFF;
 }

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import store from "../../redux/store";
-import axios from 'axios';
+import axios from "axios";
 import { logoutUser } from "../../redux/actions/authActions";
 import { connect } from "react-redux";
 import { TopThree, Passed, Under } from "../../components/Chart";
@@ -18,14 +18,14 @@ class Chart extends Component {
       token: localStorage.jwtToken,
       top3: [],
       passed: [],
-      under: [],
+      under: []
     };
     this.checkIfAdmin();
     this.getChart();
   }
 
   getChart() {
-    axios.get('/api/chart/get').then(res => {
+    axios.get("/api/chart/get").then(res => {
       this.setState({
         top3: res.data.top3,
         passed: res.data.passed,
@@ -53,7 +53,6 @@ class Chart extends Component {
   };
 
   renderAdminButton() {
-
     if (this.state.admin) {
       console.log(this.state.admin);
       return (
@@ -65,10 +64,32 @@ class Chart extends Component {
     }
   }
 
+  welcomeMessage() {
+    if (this.state.authed) {
+      return (
+        <h1 className="chart-message">
+          hi {this.state.user.name} 
+          <span role="img" aria-label="banana">
+            👋
+          </span>
+        </h1>
+      );
+    } else {
+      return (
+        <h1 className="chart-message">
+          welcome to orange 
+          <span role="img" aria-label="banana">
+            👋
+          </span>
+        </h1>
+      );
+    }
+  }
+
   renderAuth() {
     if (this.state.authed) {
       return (
-        <div className="chart-top-bar">
+        <div className="chart-top-bar-right">
           {this.renderAdminButton()}
           <i
             className="fas fa-cogs icon-button chart-icon-button"
@@ -81,7 +102,7 @@ class Chart extends Component {
       );
     } else {
       return (
-        <div className="chart-top-bar">
+        <div className="chart-top-bar-right">
           <button
             className="secondary chart-signin-button"
             onClick={() => this.props.history.push("/auth")}
@@ -97,11 +118,14 @@ class Chart extends Component {
     return (
       <div>
         <div className="top-section">{this.renderAuth()}</div>
-        <h1 className="chart-message">welcome to orange <span role="img" aria-label="banana">👋</span></h1>
+        {this.welcomeMessage()}
         <TopThree top3={this.state.top3} />
         <Passed passed={this.state.passed} />
         <Under under={this.state.under} />
-        <div className="last-updated">last updated at: </div>
+        <div className="last-updated">
+          last updated at:{" "}
+          <span className="last-updated-loading">Loading...</span>
+        </div>
       </div>
     );
   }

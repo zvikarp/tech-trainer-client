@@ -11,10 +11,7 @@ body {
 .link-to-signin {
     text-align: center;
     padding: 24px;
-}
-
-.link-to-signin a {
-    color: #F9E1DC;
+    color: #FFFFFF;
 }
 
 .back-button {

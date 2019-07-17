@@ -1,109 +1,88 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 import "../../../utils/styles/global.css";
+import store from "../../../redux/store";
 import "./Signup.css";
 
 class Signup extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: "",
+      email: "",
+      password: ""
+    };
+  }
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            name: "",
-            nickname: "",
-            email: "",
-            password: "",
-        }
-    }
+  onChange = e => {
+    this.setState({ [e.target.id]: e.target.value });
+  };
 
-    // async signupNewUser(newUser) {
-    //     const signupRes = await authSignup(
-    //         newUser.name,
-    //         newUser.nickname,
-    //         newUser.email,
-    //         newUser.password
-    //     );
-    //     console.log(signupRes);
-    //     if (!signupRes.success) return;
-    //     const signinRes = await authSignin(
-    //         newUser.email,
-    //         newUser.password
-    //     );
-    //     console.log(signinRes);
-    //     if (signinRes.success) {
-    //         this.props.onSignin();
-    //       }
-    // }
+  onSubmit = e => {
+    e.preventDefault();
 
-    onChange = e => {
-        this.setState({ [e.target.id]: e.target.value });
+    const newUser = {
+      name: this.state.name,
+      email: this.state.email,
+      password: this.state.password
     };
 
-    onSubmit = e => {
-        e.preventDefault();
+    console.log(newUser);
 
-        const newUser = {
-            name: this.state.name,
-            nickname: this.state.nickname,
-            email: this.state.email,
-            password: this.state.password
-        };
+    this.props.onSignup(newUser);
+  };
 
-        console.log(newUser);
-        
-
-        this.props.onSignup(newUser);
-        
-        // this.signupNewUser(newUser);
-        
-        
-    };
-
-    render() {
-        return (
-            <div id="signup" >
-                <h2 className="signup-title"> Sign Up </h2>
-                <form noValidate onSubmit={this.onSubmit}>
-                    <div className="labeld-input">
-                        <label>Full Name:</label>
-                        <input
-                            onChange={this.onChange}
-                            value={this.state.name}
-                            id="name"
-                            type="text"
-                        />
-                    </div>
-                    <div className="labeld-input">
-                        <label>Nickname:</label>
-                        <input
-                            onChange={this.onChange}
-                            value={this.state.nickname}
-                            id="nickname"
-                            type="text"
-                        />
-                    </div>
-                    <div className="labeld-input">
-                        <label>Email:</label>
-                        <input
-                            onChange={this.onChange}
-                            value={this.state.email}
-                            id="email"
-                            type="email"
-                        />
-                    </div>
-                    <div className="labeld-input">
-                        <label>Password:</label>
-                        <input
-                            onChange={this.onChange}
-                            value={this.state.password}
-                            id="password"
-                            type="password"
-                        />
-                    </div>
-                    <div className="action-section">
-                        <button className="primary signup-button" type="submit">SIGN UP</button>
-                    </div>
-                </form>
-            </div>
-        )
+  renderSignupButton() {
+    if (store.getState().auth.loading) {
+      return (
+        <button disabled className="signup-button disabled">
+          WORKING ON IT...
+        </button>
+      );
+    } else {
+      return (
+        <button className="primary signup-button" type="submit">
+          SIGN UP
+        </button>
+      );
     }
-};
+  }
+
+  render() {
+    return (
+      <div id="signup">
+        <h2 className="signup-title"> Sign Up </h2>
+        <form noValidate onSubmit={this.onSubmit}>
+          <div className="labeld-input">
+            <label>Name:</label>
+            <input
+              onChange={this.onChange}
+              value={this.state.name}
+              id="name"
+              type="text"
+            />
+          </div>
+          <div className="labeld-input">
+            <label>Email:</label>
+            <input
+              onChange={this.onChange}
+              value={this.state.email}
+              id="email"
+              type="email"
+            />
+          </div>
+          <div className="labeld-input">
+            <label>Password:</label>
+            <input
+              onChange={this.onChange}
+              value={this.state.password}
+              id="password"
+              type="password"
+            />
+          </div>
+          <div className="action-section">{this.renderSignupButton()}</div>
+        </form>
+      </div>
+    );
+  }
+}
 export default Signup;

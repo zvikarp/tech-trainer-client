@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
+import store from "../../../redux/store";
 import "../../../utils/styles/global.css";
 import "./Signin.css";
 
 class Signin extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
       email: "",
       password: "",
-    }
+    };
   }
 
   onChange = e => {
@@ -18,12 +18,31 @@ class Signin extends Component {
 
   onSubmit = e => {
     e.preventDefault();
-    this.props.onSignin({email: this.state.email, password: this.state.password})
+    this.props.onSignin({
+      email: this.state.email,
+      password: this.state.password
+    });
   };
+
+  renderSigninButton() {
+    if (store.getState().auth.loading) {
+      return (
+        <button disabled className="signin-button disabled">
+          WORKING ON IT...
+        </button>
+      );
+    } else {
+      return (
+        <button className="primary signin-button" type="submit">
+          SIGN IN
+        </button>
+      );
+    }
+  }
 
   render() {
     return (
-      <div id="signin" >
+      <div id="signin">
         <h2 className="signin-title"> Sign In </h2>
         <form noValidate onSubmit={this.onSubmit}>
           <div className="labeld-input">
@@ -44,12 +63,10 @@ class Signin extends Component {
               type="password"
             />
           </div>
-          <div className="action-section">
-            <button className="primary signin-button" type="submit">SIGN IN</button>
-          </div>
+          <div className="action-section">{this.renderSigninButton()}</div>
         </form>
       </div>
-    )
+    );
   }
 }
 
