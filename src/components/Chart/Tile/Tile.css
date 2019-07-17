@@ -1,10 +1,24 @@
 #tile {
-    background-color: #F9FBFC;
+    /* background-color: #F9FBFC; */
     margin: 12px 64px;
     border-radius: 10px;
 }
 
+#tile:hover {
+    background-color: rgba(255,255,255,0.1);
+}
+
 .tile-username {
     display: inline-block;
-    text-align: center;
+    color: #F9FBFC;
+    
+}
+
+.tile-points {
+    display: inline-block;
+    padding: 8px;
+    border: 3px solid #F9FBFC;
+    border-radius: 10px;
+    margin: 4px 16px;
+    color: #F9FBFC
 }

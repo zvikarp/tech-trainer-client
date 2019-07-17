@@ -93,18 +93,11 @@ class Chart extends Component {
     }
   }
 
-  welcomeMessage() {
-    if (this.state.authed) {
-      return <h2>Hi {this.state.user.name}!</h2>;
-    }
-  }
-
   render() {
     return (
       <div>
         <div className="top-section">{this.renderAuth()}</div>
         <h1 className="chart-message">welcome to orange</h1>
-        {this.welcomeMessage()}
         <TopThree top3={this.state.top3} />
         <Passed passed={this.state.passed} />
         <Under under={this.state.under} />

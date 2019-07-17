@@ -7,8 +7,8 @@ class Tile extends Component {
     if (this.props.user) {
       return (
         <div id="tile">
+          <h3 className="tile-points"> {this.props.user.points} </h3>
           <h3 className="tile-username"> {this.props.user.name} </h3>
-          <h3 className="tile-username"> {this.props.user.points} </h3>
         </div>
       );
     } else {

@@ -23,7 +23,7 @@ class Under extends Component {
   render() {
     return (
       <div id="under">
-        <h2 className="under-title"> Under </h2>
+        <h2 className="under-title"> Users that have less then 50 points </h2>
         <div className="under-cards">
           {this.renderTiles()}
         </div>

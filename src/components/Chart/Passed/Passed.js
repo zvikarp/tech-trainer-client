@@ -23,7 +23,7 @@ class Passed extends Component {
   render() {
     return (
       <div id="passed">
-        <h2 className="passed-title"> Passed </h2>
+        <h2 className="passed-title"> Users that have more then 50 points </h2>
         <div className="passed-cards">
           {this.renderTiles()}
         </div>
