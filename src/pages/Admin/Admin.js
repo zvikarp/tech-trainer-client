@@ -9,7 +9,7 @@ class Admin extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            websites: [],
+            websites: {},
             token: localStorage.jwtToken
         }
         this.getWebsites();
@@ -27,7 +27,7 @@ class Admin extends Component {
             Object.keys(recivedAccounts.otherFields).forEach(key => {
                 fields.push(recivedAccounts.otherFields[key]);
             });
-            this.setState({ websites: websites, fields: fields })
+            this.setState({ websites: recivedAccounts.websites, fields: fields })
         });
     }
 

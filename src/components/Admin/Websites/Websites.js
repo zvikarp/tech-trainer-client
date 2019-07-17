@@ -31,9 +31,9 @@ class Websites extends Component {
 
 
     onAccountChange = e => {
-        // var accountsFieldsTemp = this.state.accountsFields;
-        // accountsFieldsTemp[e.target.id] = e.target.value;
-        // this.setState({ accountsFields: accountsFieldsTemp });
+        var websitesFieldsTemp = this.state.websitesFields;
+        websitesFieldsTemp[e.target.id] = e.target.value;
+        this.setState({ websitesFields: websitesFieldsTemp });
     };
 
     onChange = e => {
@@ -60,13 +60,13 @@ class Websites extends Component {
 
     renderWebsiteField(website) {
         return (
-            <div key={website}>
+            <div key={website.name}>
                 <div className="labeld-input">
-                    <label>{website}:</label>
+                    <label>{website.name} points:</label>
                     <input
                         onChange={this.onWebsiteChange}
-                        value={this.state.name}
-                        id={website}
+                        value={website.points}
+                        id={website.points}
                         type="text"
                     />
                 </div>
@@ -77,9 +77,11 @@ class Websites extends Component {
     renderWebsitesFields() {
         const websites = this.props.websites;
         var websitesFields = [];
-        for (var i = 0; i < websites.length; i++) {
-            websitesFields.push(this.renderWebsiteField(websites[i]));
-        }
+        Object.keys(websites).forEach(key => {
+            websitesFields.push(this.renderWebsiteField(websites[key]));
+        });
+        // for (var i = 0; i < websites.length; i++) {
+        // }
         return (websitesFields);
     }
 
