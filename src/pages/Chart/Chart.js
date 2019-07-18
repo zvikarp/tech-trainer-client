@@ -88,11 +88,13 @@ class Chart extends Component {
     }
   }
 
-  renderLastUpdatedChart() {    
+  renderLastUpdatedChart() {
     if (!this.state.lastUpdatedChart || this.state.lastUpdatedChart === "") {
       return <span className="last-updated-loading">Loading...</span>;
     } else {
-      return <span className="last-updated">{this.state.lastUpdatedChart}</span>;
+      const lastUpdatedAsDate = new Date(this.state.lastUpdatedChart);
+      const lastUpdated = lastUpdatedAsDate.getDate() + "-" + (lastUpdatedAsDate.getMonth() + 1) + "-" + lastUpdatedAsDate.getFullYear()
+      return <span className="last-updated">{lastUpdated}</span>;
     }
   }
 
@@ -133,7 +135,7 @@ class Chart extends Component {
         <Passed passed={this.state.passed} />
         <Under under={this.state.under} />
         <div className="last-updated">
-          last updated at: {this.renderLastUpdatedChart()}
+          last updated at:{this.renderLastUpdatedChart()}
         </div>
       </div>
     );
