@@ -21,3 +21,9 @@
     margin: 4px 16px;
     color: #FFFFFF;
 }
+
+@media only screen and (max-width: 800px) {
+  #tile {
+    margin: 12px 12px;
+  }
+}

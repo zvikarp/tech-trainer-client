@@ -129,7 +129,7 @@ input {
   background-color: #f9e1dc;
   border-radius: 5px;
   border: none;
-  width: 50%;
+  width: 45%;
 }
 
 /* label */
@@ -137,6 +137,12 @@ input {
 label {
   width: 30%;
   display: inline-block;
+}
+
+@media only screen and (max-width: 800px) {
+	.labeld-input {
+		margin: 12px;
+	}
 }
 
 /* link */

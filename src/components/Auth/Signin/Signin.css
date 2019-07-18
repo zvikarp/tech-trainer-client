@@ -1,20 +1,26 @@
 #signin {
-    background-color: #FFFFFF;
-    width: 40%;
-    margin: 0 auto;
-    border-radius: 10px;
+	background-color: #ffffff;
+	width: 40%;
+	margin: 0 auto;
+	border-radius: 10px;
 }
 
 .signin-title {
-    text-align: center;
-    padding: 24px;
+	text-align: center;
+	padding: 24px;
 }
 
 .action-section {
-    padding: 24px;
+	padding: 24px;
 }
 
 .signin-button {
-    display: table;
-    margin: 0px auto;
+	display: table;
+	margin: 0px auto;
+}
+
+@media only screen and (max-width: 800px) {
+	#signin {
+		width: 90%;
+	}
 }

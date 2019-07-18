@@ -3,10 +3,18 @@
 }
 
 .top-three-title {
-  padding: 8px;
-  margin: 4px 64px;
+	padding: 8px;
+	margin: 0px 64px;
   color: #FFFFFF;
 }
 .top-three-cards {
-  margin: 0 auto;
+	display: grid;
+  align-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+@media only screen and (max-width: 800px) {
+  .top-three-title {
+		margin: 0px 12px;
+  }
 }
