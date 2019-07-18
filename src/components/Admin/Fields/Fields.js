@@ -20,7 +20,7 @@ class Fields extends Component {
     }
 
     getUsersAccounts() {
-        axios.get('/api/user/accounts/get', { headers: { 'token': this.state.token } }).then(res => {
+        axios.get('https://board2675.herokuapp.com/api/user/accounts/get', { headers: { 'token': this.state.token } }).then(res => {
             var userAccounts = res.data;
             Object.keys(userAccounts).forEach(key => {
                 this.setState({[key]: userAccounts[key]});
@@ -33,7 +33,7 @@ class Fields extends Component {
     }
 
     getAccountsTypes() {
-        axios.get("/api/accounts/get", { headers: { 'token': this.state.token } }).then(res => {
+        axios.get("https://board2675.herokuapp.com/api/accounts/get", { headers: { 'token': this.state.token } }).then(res => {
             var recivedAccounts = res.data;
             console.log(recivedAccounts);
             var accounts = [];
@@ -64,7 +64,7 @@ class Fields extends Component {
         e.preventDefault();
         // this.props.onSignin({ email: this.state.email, password: this.state.password })
         axios
-            .post("/api/user/accounts/update", { 'accounts': this.state.accountsFields }, {
+            .post("https://board2675.herokuapp.com/api/user/accounts/update", { 'accounts': this.state.accountsFields }, {
                 headers: {
                     'Content-Type': 'application/json',
                 }

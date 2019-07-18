@@ -26,7 +26,7 @@ class Chart extends Component {
   }
 
   getChart() {
-    axios.get("/api/chart/get").then(res => {
+    axios.get("https://board2675.herokuapp.com/api/chart/get").then(res => {
       this.setState({
         top3: res.data.top3,
         passed: res.data.passed,
@@ -38,7 +38,7 @@ class Chart extends Component {
 
   checkIfAdmin() {
     axios
-      .get("/api/user/admin/get", { headers: { token: this.state.token } })
+      .get("https://board2675.herokuapp.com/api/user/admin/get", { headers: { token: this.state.token } })
       .then(res => {
         var isAdmin = res.data.admin;
         console.log(isAdmin);
