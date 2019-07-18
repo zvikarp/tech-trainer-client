@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { Auth, Chat, Chart, Settings, Admin } from './pages/index.js';
+import { Auth, Chart, Settings, Admin } from './pages/index.js';
 import {ToastsContainer, ToastsStore} from 'react-toasts';
 import store from './redux/store';
 import jwt_decode from "jwt-decode";
@@ -41,7 +41,6 @@ class App extends Component {
           <div className="App">
             <Route exact path="/" component={Chart} />
             <Route exact path="/auth" component={Auth} />
-            <Route exact path="/chat" component={Chat} />
             <Route exact path="/settings" component={Settings} />
             <Route exact path="/admin" component={Admin} />
           </div>

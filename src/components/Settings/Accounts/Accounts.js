@@ -21,6 +21,19 @@ class Accounts extends Component {
 		this.getUsersAccounts();
 	}
 
+	errorToString(err) {
+		var msg = "";
+		const type = Object.prototype.toString.call(err);
+		if (type === '[object Object]') {
+			Object.keys(err).forEach(key => {
+				msg += err[key];
+				msg += ". ";
+			});
+		}
+		if (msg === "") msg = "Unknown Error.";
+		return msg;
+	}
+
 	getUsersAccounts() {
 		axios.get('/api/user/accounts/get', { headers: { 'token': this.state.token } }).then(res => {
 			var userAccounts = res.data;
@@ -68,7 +81,7 @@ class Accounts extends Component {
 				if (res.data.success)
 					ToastsStore.info("✔️ Your changes have been saved.");
 				else
-					ToastsStore.info("⚠️ Error Saving Your changes.");
+					ToastsStore.info("⚠️ Error: " + this.errorToString(res.data.message));
 					this.setState({loading: false});
 			}).catch(err => {
 				ToastsStore.info("⚠️ Error Saving Your changes.");
