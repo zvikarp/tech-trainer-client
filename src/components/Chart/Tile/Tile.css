@@ -1,5 +1,4 @@
 #tile {
-    /* background-color: #F9FBFC; */
     margin: 12px 64px;
     border-radius: 10px;
 }
@@ -10,15 +9,15 @@
 
 .tile-username {
     display: inline-block;
-    color: #F9FBFC;
+    color: #FFFFFF;
     
 }
 
 .tile-points {
     display: inline-block;
     padding: 8px;
-    border: 3px solid #F9FBFC;
+    border: 3px solid #FFFFFF;
     border-radius: 10px;
     margin: 4px 16px;
-    color: #F9FBFC
+    color: #FFFFFF;
 }

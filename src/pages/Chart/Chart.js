@@ -18,7 +18,8 @@ class Chart extends Component {
       token: localStorage.jwtToken,
       top3: [],
       passed: [],
-      under: []
+      under: [],
+      lastUpdatedChart: ""
     };
     this.checkIfAdmin();
     this.getChart();
@@ -29,7 +30,8 @@ class Chart extends Component {
       this.setState({
         top3: res.data.top3,
         passed: res.data.passed,
-        under: res.data.under
+        under: res.data.under,
+        lastUpdatedChart: res.data.lastUpdated
       });
     });
   }
@@ -68,7 +70,7 @@ class Chart extends Component {
     if (this.state.authed) {
       return (
         <h1 className="chart-message">
-          hi {this.state.user.name} 
+          hi {this.state.user.name}
           <span role="img" aria-label="banana">
             👋
           </span>
@@ -77,12 +79,20 @@ class Chart extends Component {
     } else {
       return (
         <h1 className="chart-message">
-          welcome to orange 
+          welcome to orange
           <span role="img" aria-label="banana">
             👋
           </span>
         </h1>
       );
+    }
+  }
+
+  renderLastUpdatedChart() {    
+    if (!this.state.lastUpdatedChart || this.state.lastUpdatedChart === "") {
+      return <span className="last-updated-loading">Loading...</span>;
+    } else {
+      return <span className="last-updated">{this.state.lastUpdatedChart}</span>;
     }
   }
 
@@ -123,8 +133,7 @@ class Chart extends Component {
         <Passed passed={this.state.passed} />
         <Under under={this.state.under} />
         <div className="last-updated">
-          last updated at:{" "}
-          <span className="last-updated-loading">Loading...</span>
+          last updated at: {this.renderLastUpdatedChart()}
         </div>
       </div>
     );

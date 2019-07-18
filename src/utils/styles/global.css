@@ -16,7 +16,7 @@
 }
 
 body {
-  background-color: #f9fbfc;
+  background-color: #FFFFFF;
 }
 
 /* typogrophy */
@@ -65,7 +65,7 @@ button.primary:hover {
 }
 
 button.secondary {
-  background-color: #f9e1dc;
+  background-color: #F9E1DC;
   color: #fe724d;
 }
 

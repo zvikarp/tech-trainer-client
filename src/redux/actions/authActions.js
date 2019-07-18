@@ -8,10 +8,13 @@ import { GET_ERRORS, SET_CURRENT_USER, USER_LOADING } from "./types";
 
 function errorToString(err) {
   var msg = "";
-  Object.keys(err).forEach(key => {
-    msg += err[key];
-    msg += ". ";
-  });
+  const type = Object.prototype.toString.call(err);
+  if (type === '[object Object]') {
+    Object.keys(err).forEach(key => {
+      msg += err[key];
+      msg += ". ";
+    });
+  }
   if (msg === "") msg = "Unknown Error.";
   return msg;
 }
@@ -41,7 +44,7 @@ export const signupNewUser = (userData, history) => dispatch => {
 export const signinUser = (userData, history) => dispatch => {
   dispatch(setUserLoading(true));
   console.log(store.getState().auth.loading);
-  
+
   axios
     .post("/api/auth/login", userData)
     .then(res => {
