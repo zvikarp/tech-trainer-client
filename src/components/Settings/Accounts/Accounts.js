@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { ToastsStore } from 'react-toasts';
 import axios from "axios";
+import ReactTooltip from 'react-tooltip'
+
 
 import "../../../utils/styles/global.css";
 import "./Accounts.css";
@@ -12,7 +14,8 @@ class Accounts extends Component {
 		this.state = {
 			accountsFields: {},
 			accounts: {},
-			token: localStorage.jwtToken
+			token: localStorage.jwtToken,
+			loading: false,
 		}
 		this.getAccountsTypes();
 		this.getUsersAccounts();
@@ -36,13 +39,6 @@ class Accounts extends Component {
 			console.log(recivedAccounts);
 
 			delete recivedAccounts._id;
-			// var accounts = [];
-			// Object.keys(recivedAccounts.websites).forEach(key => {
-			// 	accounts.push(recivedAccounts.websites[key].name);
-			// });
-			// Object.keys(recivedAccounts.otherFields).forEach(key => {
-			// 	accounts.push(recivedAccounts.otherFields[key]);
-			// });
 			this.setState({ accounts: recivedAccounts })
 		});
 	}
@@ -62,6 +58,7 @@ class Accounts extends Component {
 
 	onSubmit = e => {
 		e.preventDefault();
+		this.setState({loading: true});
 		axios
 			.post("/api/user/accounts/update", { 'accounts': this.state.accountsFields }, {
 				headers: {
@@ -72,11 +69,28 @@ class Accounts extends Component {
 					ToastsStore.info("✔️ Your changes have been saved.");
 				else
 					ToastsStore.info("⚠️ Error Saving Your changes.");
-
+					this.setState({loading: false});
 			}).catch(err => {
 				ToastsStore.info("⚠️ Error Saving Your changes.");
+				this.setState({loading: false});
 			});
 	};
+
+	renderSaveButton() {
+		if (this.state.loading) {
+			return (
+				<button disabled className="signin-button disabled">
+					WORKING ON IT...
+        </button>
+			);
+		} else {
+			return (
+				<button className="primary signin-button" type="submit">
+					SAVE CHANGES
+        </button>
+			);
+		}
+	}
 
 	renderAccountField(key, account) {
 		return (
@@ -89,6 +103,8 @@ class Accounts extends Component {
 						id={key}
 						type="text"
 					/>
+					<i data-tip={account.instructions} className="fas fa-info-circle tooltip-button"></i>
+					<ReactTooltip />
 				</div>
 			</div>
 		);
@@ -109,7 +125,7 @@ class Accounts extends Component {
 				<form noValidate onSubmit={this.onSubmit}>
 					{this.renderAccountFields()}
 					<div className="action-section">
-						<button className="primary signin-button" type="submit">SAVE CHANGES</button>
+						{this.renderSaveButton()}
 					</div>
 				</form>
 			</div>

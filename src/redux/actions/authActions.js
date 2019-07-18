@@ -53,23 +53,25 @@ export const signinUser = (userData, history) => dispatch => {
 				localStorage.setItem("jwtToken", token);
 				setAuthToken(token);
 				const decoded = jwt_decode(token);
-				var userData = decoded;
-				axios
-					.get("/api/user/get", { headers: { 'token': token } })
-					.then(res => {
-						console.log(res);
+				// var userData = decoded;
+				// axios
+				// 	.get("/api/user/get", { headers: { 'token': token } })
+				// 	.then(res => {
+				// 		console.log(res);
 
-						userData.email = res.data.user.email;
-						userData.points = res.data.user.points;
-						dispatch(setCurrentUser(userData));
-						dispatch(setUserLoading(false));
-						history.push("/");
-					})
-					.catch(err => {
-						console.log(err);
-						ToastsStore.info("⚠️ Error Signing in: " + errorToString(""));
-						dispatch(setUserLoading(false));
-					});
+				// 		userData.email = res.data.user.email;
+				// 		userData.points = res.data.user.points;
+				// 		dispatch(setCurrentUser(userData));
+				// 		dispatch(setUserLoading(false));
+				// 		history.push("/");
+				// 	})
+				// 	.catch(err => {
+				// 		console.log(err);
+				// 		ToastsStore.info("⚠️ Error Signing in: " + errorToString(""));
+				// 		dispatch(setUserLoading(false));
+				// 	});
+				dispatch(setCurrentUser(decoded));
+        console.log(token);
 			} catch {
 				ToastsStore.info("⚠️ Error Signing in: " + errorToString(""));
 				dispatch(setUserLoading(false));

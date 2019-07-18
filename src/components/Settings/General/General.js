@@ -8,10 +8,29 @@ class General extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			name: this.props.name,
-			email: this.props.email,
-			points: this.props.points,
+			name: "",
+			email: "",
+			points: 0,
+			loading: false,
 		};
+		this.getAccountDetailes();
+	}
+
+	getAccountDetailes() {
+		axios
+			.get("/api/user/get", { headers: { 'token': localStorage.jwtToken } })
+			.then(res => {
+				console.log(res);
+				this.setState({
+					name: res.data.user.name,
+					email: res.data.user.email,
+					points: res.data.user.points,
+				});
+			})
+			.catch(err => {
+				console.log(err);
+				ToastsStore.info("⚠️ Unknown Error");
+			});
 	}
 
 	onChange = e => {
@@ -20,21 +39,40 @@ class General extends Component {
 
 	onSubmit = e => {
 		e.preventDefault();
+		this.setState({ loading: true });
 		axios
-		.post("/api/user/settings/update", { 'name': this.state.name, 'email': this.state.email }, {
-			headers: {
-				'Content-Type': 'application/json',
-			}
-		}).then(res => {
-			if (res.data.success)
-				ToastsStore.info("✔️ Your changes have been saved.");
-			else
+			.post("/api/user/settings/update", { 'name': this.state.name, 'email': this.state.email }, {
+				headers: {
+					'Content-Type': 'application/json',
+				}
+			}).then(res => {
+				if (res.data.success)
+					ToastsStore.info("✔️ Your changes have been saved.");
+				else
 				ToastsStore.info("⚠️ Error Saving Your changes.");
-
-		}).catch(err => {
-			ToastsStore.info("⚠️ Error Saving Your changes.");
-		});
+				
+				this.setState({ loading: false });
+			}).catch(err => {
+				ToastsStore.info("⚠️ Error Saving Your changes.");
+				this.setState({loading: false});
+			});
 	};
+
+	renderSaveButton() {
+		if (this.state.loading) {
+			return (
+				<button disabled className="signin-button disabled">
+					WORKING ON IT...
+        </button>
+			);
+		} else {
+			return (
+				<button className="primary signin-button" type="submit">
+					SAVE CHANGES
+        </button>
+			);
+		}
+	}
 
 	render() {
 		return (
@@ -64,9 +102,7 @@ class General extends Component {
 						<input value={this.state.points} id="points" type="text" disabled />
 					</div>
 					<div className="action-section">
-						<button className="primary signin-button" type="submit">
-							SAVE CHANGES
-            </button>
+						{this.renderSaveButton()}
 					</div>
 				</form>
 			</div>
