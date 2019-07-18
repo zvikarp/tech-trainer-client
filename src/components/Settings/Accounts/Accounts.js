@@ -11,7 +11,7 @@ class Accounts extends Component {
 		super(props);
 		this.state = {
 			accountsFields: {},
-			accounts: [],
+			accounts: {},
 			token: localStorage.jwtToken
 		}
 		this.getAccountsTypes();
@@ -34,14 +34,16 @@ class Accounts extends Component {
 		axios.get("/api/accounts/get", { headers: { 'token': this.state.token } }).then(res => {
 			var recivedAccounts = res.data;
 			console.log(recivedAccounts);
-			var accounts = [];
-			Object.keys(recivedAccounts.websites).forEach(key => {
-				accounts.push(recivedAccounts.websites[key].name);
-			});
-			Object.keys(recivedAccounts.otherFields).forEach(key => {
-				accounts.push(recivedAccounts.otherFields[key]);
-			});
-			this.setState({ accounts: accounts })
+
+			delete recivedAccounts._id;
+			// var accounts = [];
+			// Object.keys(recivedAccounts.websites).forEach(key => {
+			// 	accounts.push(recivedAccounts.websites[key].name);
+			// });
+			// Object.keys(recivedAccounts.otherFields).forEach(key => {
+			// 	accounts.push(recivedAccounts.otherFields[key]);
+			// });
+			this.setState({ accounts: recivedAccounts })
 		});
 	}
 
@@ -76,15 +78,15 @@ class Accounts extends Component {
 			});
 	};
 
-	renderAccountField(account) {
+	renderAccountField(key, account) {
 		return (
-			<div key={account}>
+			<div key={key}>
 				<div className="labeld-input">
-					<label>{account}:</label>
+					<label>{account.name}:</label>
 					<input
 						onChange={this.onAccountChange}
-						value={this.state.name}
-						id={account}
+						value={this.state.key}
+						id={key}
 						type="text"
 					/>
 				</div>
@@ -93,11 +95,10 @@ class Accounts extends Component {
 	}
 
 	renderAccountFields() {
-		const accounts = this.state.accounts;
 		var accountsFields = [];
-		for (var i = 0; i < accounts.length; i++) {
-			accountsFields.push(this.renderAccountField(accounts[i]));
-		}
+		Object.keys(this.state.accounts).forEach(key => {
+			accountsFields.push(this.renderAccountField(key, this.state.accounts[key]));
+		})
 		return (accountsFields);
 	}
 
