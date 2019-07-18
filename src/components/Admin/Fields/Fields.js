@@ -15,12 +15,12 @@ class Fields extends Component {
             password: "",
             token: localStorage.jwtToken
         }
-        this.getAccountsTypes();
-        this.getUsersAccounts();
+        // this.getAccountsTypes();
+        // this.getUsersAccounts();
     }
 
     getUsersAccounts() {
-        axios.get('https://board2675.herokuapp.com/api/user/accounts/get', { headers: { 'token': this.state.token } }).then(res => {
+        axios.get('/api/user/accounts/get', { headers: { 'token': this.state.token } }).then(res => {
             var userAccounts = res.data;
             Object.keys(userAccounts).forEach(key => {
                 this.setState({[key]: userAccounts[key]});
@@ -32,20 +32,20 @@ class Fields extends Component {
         });
     }
 
-    getAccountsTypes() {
-        axios.get("https://board2675.herokuapp.com/api/accounts/get", { headers: { 'token': this.state.token } }).then(res => {
-            var recivedAccounts = res.data;
-            console.log(recivedAccounts);
-            var accounts = [];
-            Object.keys(recivedAccounts.websites).forEach(key => {
-                accounts.push(recivedAccounts.websites[key].name);
-            });
-            Object.keys(recivedAccounts.otherFields).forEach(key => {
-                accounts.push(recivedAccounts.otherFields[key]);
-            });
-            this.setState({ accounts: accounts })
-        });
-    }
+    // getAccountsTypes() {
+    //     axios.get("/api/accounts/get", { headers: { 'token': this.state.token } }).then(res => {
+    //         var recivedAccounts = res.data;
+    //         console.log(recivedAccounts);
+    //         var accounts = [];
+    //         // Object.keys(recivedAccounts.websites).forEach(key => {
+    //         //     accounts.push(recivedAccounts.websites[key].name);
+    //         // });
+    //         // Object.keys(recivedAccounts.otherFields).forEach(key => {
+    //         //     accounts.push(recivedAccounts.otherFields[key]);
+    //         // });
+    //         // this.setState({ accounts: accounts })
+    //     });
+    // }
 
 
     onAccountChange = e => {
@@ -64,7 +64,7 @@ class Fields extends Component {
         e.preventDefault();
         // this.props.onSignin({ email: this.state.email, password: this.state.password })
         axios
-            .post("https://board2675.herokuapp.com/api/user/accounts/update", { 'accounts': this.state.accountsFields }, {
+            .post("/api/user/accounts/update", { 'accounts': this.state.accountsFields }, {
                 headers: {
                     'Content-Type': 'application/json',
                 }

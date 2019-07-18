@@ -20,12 +20,12 @@ function errorToString(err) {
 }
 
 // Register User
-export const signupNewUser = (userData, history) => dispatch => {
-	dispatch(setUserLoading(true));
+export const SignupNewUser = (userData, history) => dispatch => {
+	dispatch(SetUserLoading(true));
 	axios
-		.post("https://board2675.herokuapp.com/api/auth/register", userData)
+		.post("/api/auth/register", userData)
 		.then(res => {
-			dispatch(signinUser(userData, history));
+			dispatch(SigninUser(userData, history));
 		})
 		.catch(err => {
 			console.log(err.response.data);
@@ -36,28 +36,28 @@ export const signupNewUser = (userData, history) => dispatch => {
 			ToastsStore.info(
 				"⚠️ Error Signing up: " + errorToString(err.response.data)
 			);
-			dispatch(setUserLoading(false));
+			dispatch(SetUserLoading(false));
 		});
 };
 
 // Login - get user token
-export const signinUser = (userData, history) => dispatch => {
-	dispatch(setUserLoading(true));
+export const SigninUser = (userData, history) => dispatch => {
+	dispatch(SetUserLoading(true));
 	console.log(store.getState().auth.loading);
 
 	axios
-		.post("https://board2675.herokuapp.com/api/auth/login", userData)
+		.post("/api/auth/login", userData)
 		.then(res => {
 			try {
 				const { token } = res.data;
 				localStorage.setItem("jwtToken", token);
 				setAuthToken(token);
 				const decoded = jwt_decode(token);
-				dispatch(setCurrentUser(decoded));
+				dispatch(SetCurrentUser(decoded));
         console.log(token);
 			} catch {
 				ToastsStore.info("⚠️ Error Signing in: " + errorToString(""));
-				dispatch(setUserLoading(false));
+				dispatch(SetUserLoading(false));
 				console.log(store.getState().auth.loading);
 			}
 		})
@@ -69,20 +69,20 @@ export const signinUser = (userData, history) => dispatch => {
 			ToastsStore.info(
 				"⚠️ Error Signing in: " + errorToString(err.response.data)
 			);
-			dispatch(setUserLoading(false));
+			dispatch(SetUserLoading(false));
 		});
 };
 
-export const connectCurrentUser = (userData, token) => dispatch => {
+export const ConnectCurrentUser = (userData, token) => dispatch => {
 	console.log("hi");
 	axios
-		.get("https://board2675.herokuapp.com/api/user/get", { headers: { 'token': token } })
+		.get("/api/user/get", { headers: { 'token': token } })
 		.then(res => {
 			userData.email = res.data.user.email;
 			userData.points = res.data.user.points;
 			console.log("hi2");
 			
-			dispatch(setCurrentUser(userData));
+			dispatch(SetCurrentUser(userData));
 		})
 		.catch(err => {
 			console.log(err);
@@ -91,7 +91,7 @@ export const connectCurrentUser = (userData, token) => dispatch => {
 }
 
 // Set logged in user
-export const setCurrentUser = (decoded) => {
+export const SetCurrentUser = (decoded) => {
 	return {
 		type: SET_CURRENT_USER,
 		payload: decoded
@@ -99,7 +99,7 @@ export const setCurrentUser = (decoded) => {
 };
 
 // User loading
-export const setUserLoading = isLoading => {
+export const SetUserLoading = isLoading => {
 	return {
 		type: USER_LOADING,
 		payload: isLoading
@@ -107,8 +107,8 @@ export const setUserLoading = isLoading => {
 };
 
 // Log user out
-export const logoutUser = () => dispatch => {
+export const LogoutUser = () => dispatch => {
 	localStorage.removeItem("jwtToken");
 	setAuthToken(false);
-	dispatch(setCurrentUser({}));
+	dispatch(SetCurrentUser({}));
 };

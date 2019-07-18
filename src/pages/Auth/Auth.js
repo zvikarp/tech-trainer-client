@@ -3,7 +3,7 @@ import { Signup, Signin } from '../../components/Auth/index.js'
 import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { signupNewUser, signinUser } from "../../redux/actions/authActions";
+import { SignupNewUser, SigninUser } from "../../redux/actions/authActions";
 import "../../utils/styles/global.css";
 import "./Auth.css";
 
@@ -30,7 +30,7 @@ class Auth extends Component {
 	}
 
 	onSignin(user) {
-		this.props.signinUser(user, this.props.history);
+		this.props.SigninUser(user, this.props.history);
 	}
 
 	renderForm() {
@@ -64,7 +64,7 @@ class Auth extends Component {
 
 Auth.propTypes = {
 	signupNewUser: PropTypes.func.isRequired,
-	signinUser: PropTypes.func.isRequired,
+	SigninUser: PropTypes.func.isRequired,
 	auth: PropTypes.object.isRequired,
 	errors: PropTypes.object.isRequired
 };
@@ -76,5 +76,5 @@ const mapStateToProps = state => ({
 
 export default connect(
 	mapStateToProps,
-	{ signupNewUser, signinUser }
+	{ SignupNewUser, SigninUser }
 )(withRouter(Auth));

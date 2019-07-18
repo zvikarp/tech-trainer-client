@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import store from "../../redux/store";
 import axios from "axios";
-import { logoutUser } from "../../redux/actions/authActions";
 import { connect } from "react-redux";
+
+import { LogoutUser } from "../../redux/actions/authActions";
 import { TopThree, Passed, Under } from "../../components/Chart";
 import "../../utils/styles/global.css";
 import "./Chart.css";
@@ -26,7 +27,7 @@ class Chart extends Component {
   }
 
   getChart() {
-    axios.get("https://board2675.herokuapp.com/api/chart/get").then(res => {
+    axios.get("/api/chart/get").then(res => {
       this.setState({
         top3: res.data.top3,
         passed: res.data.passed,
@@ -38,7 +39,7 @@ class Chart extends Component {
 
   checkIfAdmin() {
     axios
-      .get("https://board2675.herokuapp.com/api/user/admin/get", { headers: { token: this.state.token } })
+      .get("/api/user/admin/get", { headers: { token: this.state.token } })
       .then(res => {
         var isAdmin = res.data.admin;
         console.log(isAdmin);
@@ -50,7 +51,7 @@ class Chart extends Component {
   }
 
   signout = e => {
-    this.props.logoutUser();
+    this.props.LogoutUser();
     window.location.reload();
   };
 
@@ -143,12 +144,12 @@ class Chart extends Component {
 }
 
 Chart.propTypes = {
-  logoutUser: PropTypes.func.isRequired
+  LogoutUser: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({});
 
 export default connect(
   mapStateToProps,
-  { logoutUser }
+  { LogoutUser }
 )(Chart);

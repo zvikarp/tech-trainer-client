@@ -1,39 +1,26 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { Auth, Chart, Settings, Admin } from './pages/index.js';
 import {ToastsContainer, ToastsStore} from 'react-toasts';
+import JwtDecode from "jwt-decode";
+
+import { Auth, Chart, Settings, Admin } from './pages/index.js';
+import { SetCurrentUser, LogoutUser } from "./redux/actions/authActions";
+import SetAuthToken from "./utils/auth/setAuthToken";
 import store from './redux/store';
-import jwt_decode from "jwt-decode";
-import setAuthToken from "./utils/auth/setAuthToken";
-import { setCurrentUser, logoutUser } from "./redux/actions/authActions";
 
 if (localStorage.jwtToken) {
   const token = localStorage.jwtToken;
-  setAuthToken(token);
-  const decoded = jwt_decode(token);
-  store.dispatch(setCurrentUser(decoded));
+  SetAuthToken(token);
+  const decoded = JwtDecode(token);
+  store.dispatch(SetCurrentUser(decoded));
   const currentTime = Date.now() / 1000;
   if (decoded.exp < currentTime) {
-    store.dispatch(logoutUser());
-    window.location.href = "./welcome";
+    store.dispatch(LogoutUser());
   }
 }
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      authed: true
-    }
-  }
-
-  changeAuthed(state) {
-    this.setState({
-      authed: state
-    })
-  }
-
   render() {
     return (
       <Provider store={store}>
