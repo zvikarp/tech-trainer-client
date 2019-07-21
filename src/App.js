@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import {ToastsContainer, ToastsStore} from 'react-toasts';
 import JwtDecode from "jwt-decode";
 
-import { Auth, Chart, Settings, Admin } from './pages/index.js';
+import { Auth, Chart, Settings, Admin, Profile } from './pages/index.js';
 import { SetCurrentUser, LogoutUser } from "./redux/actions/authActions";
 import SetAuthToken from "./utils/auth/setAuthToken";
 import store from './redux/store';
@@ -30,6 +30,7 @@ class App extends Component {
             <Route exact path="/auth" component={Auth} />
             <Route exact path="/settings" component={Settings} />
             <Route exact path="/admin" component={Admin} />
+            <Route exact path="/profile" component={Profile} />
           </div>
         </Router>
         <ToastsContainer store={ToastsStore}/>

@@ -108,6 +108,10 @@ class Chart extends Component {
             className="fas fa-cogs icon-button chart-icon-button"
             onClick={() => this.props.history.push("/settings")}
           />
+          <i
+            className="fas fa-user icon-button chart-icon-button"
+            onClick={() => this.props.history.push("/profile")}
+          />
           <button className="secondary" onClick={() => this.signout()}>
             Sign Out
           </button>
