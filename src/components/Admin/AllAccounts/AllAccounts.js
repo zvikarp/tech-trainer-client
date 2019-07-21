@@ -73,10 +73,17 @@ class AllAccounts extends Component {
 	}
 
 	renderAccountCards() {
+		const length = Object.keys(this.state.accounts).length;
+		console.log(length);
+		
+		if (length < 1) {
+			return (<div className="all-accounts-loading">Loading...</div>)
+		}
 		var accountsCards = [];
 		Object.keys(this.state.accounts).forEach(accountId => {
 			accountsCards.push(this.renderAccountCard(accountId, this.state.accounts[accountId]));
 		});
+		accountsCards.push(<div className="divider horizontal" />);
 		return (accountsCards);
 	}
 
@@ -85,7 +92,6 @@ class AllAccounts extends Component {
 			<div id="accounts" >
 				<h2 className="signin-title">Accounts</h2>
 				{this.renderAccountCards()}
-				<div className="divider horizontal" />
 				<div className="all-accounts-action-section">
 					<button className="primary align-horizontally" onClick={this.handleOnAddAccount}>ADD ACCOUNT</button>
 					<button className="primary align-horizontally" onClick={this.handleOnSaveChanges}>SAVE CHANGES</button>
