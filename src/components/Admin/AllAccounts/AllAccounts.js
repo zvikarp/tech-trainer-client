@@ -30,7 +30,12 @@ class AllAccounts extends Component {
 	}
 
 	handleOnSaveChanges() {
-		axios.post("/api/accounts/update", { 'accounts': this.state.accounts }).then(res => {
+		var accountsToBeUpdated = {};
+		Object.keys(this.state.accounts).forEach(accountId => {
+			if (this.state.accounts[accountId].action)
+				accountsToBeUpdated[accountId] = this.state.accounts[accountId];
+		});
+		axios.post("/api/accounts/update", { 'accounts': accountsToBeUpdated }).then(res => {
 			console.log(res);
 		});
 	}
@@ -42,19 +47,22 @@ class AllAccounts extends Component {
 			'points': '0',
 			'instructions': "new",
 			'type': "field",
+			'action': "new",
 		}
 		this.setState({ accounts: updatedAccounts });
 	}
 
 	handleOnAccountDelete(accountId) {
 		var updatedAccounts = this.state.accounts;
-		delete updatedAccounts[accountId];
+		updatedAccounts[accountId].action = "delete"
 		this.setState({ accounts: updatedAccounts });
 	}
 
 	handleOnAccountChange(accountId, field, value) {
 		var updatedAccounts = this.state.accounts;
 		updatedAccounts[accountId][field] = value;
+		const lastAction = updatedAccounts[accountId].action;
+		if (lastAction !== "new") updatedAccounts[accountId].action = "modified"
 		this.setState({ accounts: updatedAccounts })
 	}
 
