@@ -5,11 +5,6 @@ import "./TopThree.css";
 
 class TopThree extends Component {
 
-  constructor(props) {
-    super(props);
-    console.log("in top three");
-  }
-
   render() {
     return (
       <div id="top-three">

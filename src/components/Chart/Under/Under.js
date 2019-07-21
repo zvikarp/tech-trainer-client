@@ -4,11 +4,7 @@ import "../../../utils/styles/global.css";
 import "./Under.css";
 
 class Under extends Component {
-  constructor(props) {
-    super(props);
-    console.log("in under");
-  }
-
+	
   renderTiles() {
     const tiles = this.props.under;
     if (tiles.length === 0) {

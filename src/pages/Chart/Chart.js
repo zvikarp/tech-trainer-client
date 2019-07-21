@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import store from "../../redux/store";
 import axios from "axios";
 import { connect } from "react-redux";
+import { ToastsStore } from 'react-toasts';
 
 import { LogoutUser } from "../../redux/actions/authActions";
 import { TopThree, Passed, Under } from "../../components/Chart";
@@ -22,19 +23,21 @@ class Chart extends Component {
       under: [],
       lastUpdatedChart: ""
     };
-    this.checkIfAdmin();
     this.getChart();
   }
-
+	
   getChart() {
-    axios.get("/api/chart/get").then(res => {
-      this.setState({
-        top3: res.data.top3,
+		axios.get("/api/chart/get").then(res => {
+			this.checkIfAdmin();
+			this.setState({
+				top3: res.data.top3,
         passed: res.data.passed,
         under: res.data.under,
         lastUpdatedChart: res.data.lastUpdated
       });
-    });
+    }).catch(err => {
+			ToastsStore.info("⚠️ Error Loading Data.");
+		});
   }
 
   checkIfAdmin() {
@@ -47,7 +50,9 @@ class Chart extends Component {
         this.setState({
           admin: isAdmin
         });
-      });
+      }).catch(err => {
+				ToastsStore.info("⚠️ Error Loading Data.");
+			});
   }
 
   signout = e => {

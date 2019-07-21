@@ -4,10 +4,6 @@ import "../../../utils/styles/global.css";
 import "./Passed.css";
 
 class Passed extends Component {
-  constructor(props) {
-    super(props);
-    console.log("in passed");
-  }
 
   renderTiles() {
     const tiles = this.props.passed;
