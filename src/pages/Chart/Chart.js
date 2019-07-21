@@ -21,19 +21,21 @@ class Chart extends Component {
       top3: [],
       passed: [],
       under: [],
-      lastUpdatedChart: ""
+			lastUpdatedChart: "",
+			loaded: false,
     };
     this.getChart();
   }
 	
   getChart() {
 		axios.get("/api/chart/get").then(res => {
-			this.checkIfAdmin();
+			if (this.state.token) this.checkIfAdmin();
 			this.setState({
 				top3: res.data.top3,
         passed: res.data.passed,
         under: res.data.under,
-        lastUpdatedChart: res.data.lastUpdated
+				lastUpdatedChart: res.data.lastUpdated,
+				loaded: true,
       });
     }).catch(err => {
 			ToastsStore.info("⚠️ Error Loading Data.");
@@ -141,9 +143,9 @@ class Chart extends Component {
       <div>
         <div className="top-section">{this.renderAuth()}</div>
         {this.welcomeMessage()}
-        <TopThree top3={this.state.top3} />
-        <Passed passed={this.state.passed} />
-        <Under under={this.state.under} />
+        <TopThree top3={this.state.top3} loaded={this.state.loaded} />
+        <Passed passed={this.state.passed} loaded={this.state.loaded} />
+        <Under under={this.state.under} loaded={this.state.loaded} />
         <div className="last-updated">
           last updated at:{this.renderLastUpdatedChart()}
         </div>

@@ -7,9 +7,11 @@ class Under extends Component {
 	
   renderTiles() {
     const tiles = this.props.under;
-    if (tiles.length === 0) {
+    if (!this.props.loaded) {
       return <div className="under-text under-loading">Loading...</div>;
-    }
+    } else if (tiles.length === 0) {
+			return <div className="passed-text passed-loading">Humm... This section is currently empty</div>;
+		}
     var tilesObjects = [];
     for (var i = 0; i < tiles.length; i++) {
       tilesObjects.push(<Tile key={i} user={this.props.under[i]} />);
@@ -22,10 +24,9 @@ class Under extends Component {
       <div id="under">
         <div className="under-text">
           {" "}
-          <span role="img" aria-label="banana">
-            😔
-          </span>{" "}
-          Users that have less then 50 points{" "}
+					<span role="img" aria-label="banana">😔</span>
+					{" "}
+          Users that have less then 50 points
         </div>
         <div className="under-cards">{this.renderTiles()}</div>
       </div>

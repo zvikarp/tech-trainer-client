@@ -4,9 +4,9 @@ import "./Top.css";
 
 class Top extends Component {
   render() {
-    if (this.props.user) {
-      return (
-        <div id="top">
+		if (this.props.user) {
+			return (
+				<div id="top">
           <div className="top-child top-icon">
           <span role="img" aria-label="banana">{this.props.icon}</span>
           </div>
@@ -16,11 +16,16 @@ class Top extends Component {
           </div>
         </div>
       );
-    } else {
-      return (
-        <div id="top" className="top-loading">Loading...</div>
-      );
-    }
+		}
+		else if (this.props.loaded) {
+			return (
+				<div id="top" className="top-loading">Don't have a solid top 3 yet! <span role="img" aria-label="banana">😱</span></div>
+				);
+			} else {
+				return (
+					<div id="top" className="top-loading">Loading...</div>
+				);
+				}
   }
 }
 
