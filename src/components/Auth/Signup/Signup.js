@@ -34,7 +34,7 @@ class Signup extends Component {
   renderSignupButton() {
     if (store.getState().auth.loading) {
       return (
-        <button disabled className="signup-button disabled">
+        <button disabled className="signup-button">
           WORKING ON IT...
         </button>
       );

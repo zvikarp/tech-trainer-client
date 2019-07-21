@@ -27,7 +27,7 @@ class Signin extends Component {
   renderSigninButton() {
     if (store.getState().auth.loading) {
       return (
-        <button disabled className="signin-button disabled">
+        <button disabled className="signin-button">
           WORKING ON IT...
         </button>
       );

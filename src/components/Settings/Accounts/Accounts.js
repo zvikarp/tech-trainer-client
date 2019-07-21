@@ -92,7 +92,7 @@ class Accounts extends Component {
 	renderSaveButton() {
 		if (this.state.loading) {
 			return (
-				<button disabled className="signin-button disabled">
+				<button disabled className="signin-button">
 					WORKING ON IT...
         </button>
 			);

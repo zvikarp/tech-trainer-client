@@ -33,6 +33,12 @@ h2 {
   font-weight: 900px;
 }
 
+/* layout */
+
+.align-horizontally {
+	display: inline-block;
+}
+
 /* colors */
 
 .white {
@@ -74,13 +80,26 @@ button.secondary:hover {
   color: #ffffff;
 }
 
-button.disabled {
-  background-color: #feaf99;
-  color: #ffffff;
-  cursor: not-allowed;
+button:disabled {
+	/* background-color: #feaf99; */
+	box-shadow: none;
+  /* color: #ffffff; */
+	cursor: not-allowed;
+	opacity: 0.5;
 }
-button.disabled:hover {
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+
+button:disabled:hover {
+	box-shadow: none;
+}
+
+button.primary:disabled:hover {
+  background-color: #fe724d;
+  color: #ffffff;
+}
+
+button.secondary:disabled:hover {
+  background-color: #F9E1DC;
+  color: #fe724d;
 }
 
 /* icon-button */
@@ -155,13 +174,13 @@ label {
 /* divider */
 
 .divider.vertical {
-  width: 1px;
+  width: 3px;
   height: 100%;
   background-color: #f9e1dc;
 }
 
 .divider.horizontal {
   width: 100%;
-  height: 1px;
+  height: 3px;
   background-color: #f9e1dc;
 }
