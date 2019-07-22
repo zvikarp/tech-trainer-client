@@ -5,17 +5,10 @@ import "./User.css";
 
 class User extends Component {
 
-	constructor(props) {
-		super(props);
-		this.state = {
-			user: store.getState().auth.user,
-		};
-	}
-
 	render() {
 			return (
 				<div id="user">
-					<h3 className="user-points"> {this.state.user.name} </h3>
+					<h3 className="user-points"> {this.props.user.name} </h3>
 				</div>
 			);
 	}
