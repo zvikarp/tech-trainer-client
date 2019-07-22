@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AllAccounts, Fields } from '../../components/Admin';
+import { AllAccounts } from '../../components/Admin';
 import axios from "axios";
 
 import '../../utils/styles/global.css';
@@ -41,7 +41,6 @@ class Admin extends Component {
 			<div>
 				<i className="fas fa-chevron-left icon-button back-button" onClick={() => this.props.history.push('/')}></i>
 				<AllAccounts websites={this.state.websites} />
-				<Fields fields={this.state.fields} />
 			</div>
 		);
 	}
