@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { AccountCard } from '../';
 import axios from "axios";
+import { ToastsStore } from 'react-toasts';
 
 import "../../../utils/styles/global.css";
 import "./AllAccounts.css";
@@ -16,7 +17,8 @@ class AllAccounts extends Component {
 		this.state = { temperature: '', scale: 'c' };
 		this.state = {
 			accounts: {},
-			token: localStorage.jwtToken
+			token: localStorage.jwtToken,
+			loading: false,
 		}
 		this.getAccounts();
 	}
@@ -30,6 +32,7 @@ class AllAccounts extends Component {
 	}
 
 	handleOnSaveChanges() {
+		this.setState({ loading: true });
 		var accountsToBeUpdated = {};
 		Object.keys(this.state.accounts).forEach(accountId => {
 			if (this.state.accounts[accountId].action)
@@ -37,12 +40,18 @@ class AllAccounts extends Component {
 		});
 		axios.post("/api/accounts/update", { 'accounts': accountsToBeUpdated }).then(res => {
 			console.log(res);
+			ToastsStore.info("✔️ Your changes have been saved.");
+			this.setState({ loading: false })
+		}).catch(err => {
+			ToastsStore.info("⚠️ Error Saving Your changes.");
+			this.setState({ loading: false })
 		});
 	}
 
 	handleOnAddAccount() {
 		var updatedAccounts = this.state.accounts;
-		updatedAccounts['newId'] = {
+		const newId = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15) + (new Date()).getTime();
+		updatedAccounts[newId] = {
 			'name': "new",
 			'points': '0',
 			'instructions': "new",
@@ -53,6 +62,8 @@ class AllAccounts extends Component {
 	}
 
 	handleOnAccountDelete(accountId) {
+		console.log(this.state.accounts);
+		
 		var updatedAccounts = this.state.accounts;
 		updatedAccounts[accountId].action = "delete"
 		this.setState({ accounts: updatedAccounts });
@@ -67,6 +78,9 @@ class AllAccounts extends Component {
 	}
 
 	renderAccountCard(accountId, account) {
+		if (account.action === "delete") return (
+			<div key={accountId}></div>
+		)
 		return (
 			<div key={accountId}>
 				<div className="divider horizontal" />
@@ -82,8 +96,7 @@ class AllAccounts extends Component {
 
 	renderAccountCards() {
 		const length = Object.keys(this.state.accounts).length;
-		console.log(length);
-		
+
 		if (length < 1) {
 			return (<div className="all-accounts-loading">Loading...</div>)
 		}
@@ -91,8 +104,22 @@ class AllAccounts extends Component {
 		Object.keys(this.state.accounts).forEach(accountId => {
 			accountsCards.push(this.renderAccountCard(accountId, this.state.accounts[accountId]));
 		});
-		accountsCards.push(<div className="divider horizontal" />);
+		accountsCards.push(<div key="bottomDivider" className="divider horizontal" />);
 		return (accountsCards);
+	}
+
+	renderSaveButton() {
+		if (this.state.loading) {
+			return (
+				<button disabled className="primary align-horizontally">
+					WORKING ON IT...
+        </button>
+			);
+		} else {
+			return (
+				<button className="primary align-horizontally" onClick={this.handleOnSaveChanges}>SAVE CHANGES</button>
+			);
+		}
 	}
 
 	render() {
@@ -102,7 +129,7 @@ class AllAccounts extends Component {
 				{this.renderAccountCards()}
 				<div className="all-accounts-action-section">
 					<button className="primary align-horizontally" onClick={this.handleOnAddAccount}>ADD ACCOUNT</button>
-					<button className="primary align-horizontally" onClick={this.handleOnSaveChanges}>SAVE CHANGES</button>
+					{this.renderSaveButton()}
 				</div>
 			</div>
 		)
