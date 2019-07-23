@@ -1,28 +1,33 @@
 import React, { Component } from "react";
 import { User, History } from '../../components/Profile';
-
+import axios from "axios";
+import { ToastsStore } from 'react-toasts';
 
 class Profile extends Component {
 
 	constructor(props) {
 		super(props);
-		const { data } = this.props.location;
-		console.log(data);
 		this.state = {
+			token: localStorage.jwtToken,
 			user: {},
-			history: {},
+			history: {}
 		};
-		// this.getUser();
-		
+	}
+	
+	
+	componentDidMount() {
+		this.getUser();
 	}
 	
 	getUser() {
-		this.setState({user: {name: "zvi karp"}});
-		console.log(this.state.user.name);
-	}
-
-	getHistory() {
-		
+		axios
+			.get("/api/user/get", { headers: { token: this.state.token } })
+			.then(res => {
+				this.setState({user: res.data.user})				
+			}).catch(err => {
+				ToastsStore.info("⚠️ Error Loading Data.");
+			});
+		this.setState({user: this.state.user});
 	}
 
 	render() {
@@ -34,7 +39,6 @@ class Profile extends Component {
 			</div>
 		);
 	}
-
 
 }
 

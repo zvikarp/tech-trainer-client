@@ -9,6 +9,8 @@ import { SetCurrentUser, LogoutUser } from "./redux/actions/authActions";
 import SetAuthToken from "./utils/auth/setAuthToken";
 import store from './redux/store';
 
+
+// handels user token on page reload 
 if (localStorage.jwtToken) {
   const token = localStorage.jwtToken;
   SetAuthToken(token);

@@ -26,7 +26,7 @@ class Auth extends Component {
 	}
 
 	onSignup(user) {
-		this.props.signupNewUser(user, this.props.history);
+		this.props.SignupNewUser(user, this.props.history);
 	}
 
 	onSignin(user) {
@@ -55,7 +55,7 @@ class Auth extends Component {
 		return (
 			<div id="auth">
 				<i className="fas fa-chevron-left icon-button back-button" onClick={() => this.props.history.push('/')}></i>
-				<h1 className="auth-message">connect to orange <span role="img" aria-label="banana">🧡</span></h1>
+				<h1 className="auth-message">Connect to Orange <span role="img" aria-label="banana">🧡</span></h1>
 				{this.renderForm()}
 			</div>
 		)
@@ -63,7 +63,7 @@ class Auth extends Component {
 };
 
 Auth.propTypes = {
-	signupNewUser: PropTypes.func.isRequired,
+	SignupNewUser: PropTypes.func.isRequired,
 	SigninUser: PropTypes.func.isRequired,
 	auth: PropTypes.object.isRequired,
 	errors: PropTypes.object.isRequired

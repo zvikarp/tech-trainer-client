@@ -10,6 +10,7 @@ import { TopThree, Passed, Under } from "../../components/Chart";
 import "../../utils/styles/global.css";
 import "./Chart.css";
 
+
 class Chart extends Component {
 	constructor(props) {
 		super(props);
@@ -43,15 +44,13 @@ class Chart extends Component {
 	}
 
 	checkIfAdmin() {
+		console.log("dfgdfgd");
+		
 		axios
 			.get("/api/user/admin/get", { headers: { token: this.state.token } })
 			.then(res => {
 				var isAdmin = res.data.admin;
-				console.log(isAdmin);
-
-				this.setState({
-					admin: isAdmin
-				});
+				this.setState({admin: isAdmin});
 			}).catch(err => {
 				ToastsStore.info("⚠️ Error Loading Data.");
 			});
@@ -78,7 +77,7 @@ class Chart extends Component {
 		if (this.state.authed) {
 			return (
 				<h1 className="chart-message">
-					hi {this.state.user.name}
+					Hi {this.state.user.name}
 					<span role="img" aria-label="banana">
 						👋
           </span>
@@ -87,7 +86,7 @@ class Chart extends Component {
 		} else {
 			return (
 				<h1 className="chart-message">
-					welcome to orange
+					Welcome to Orange
           <span role="img" aria-label="banana">
 						👋
           </span>
@@ -117,10 +116,7 @@ class Chart extends Component {
 					/>
 					<i
 						className="fas fa-user icon-button chart-icon-button"
-						onClick={() => this.props.history.push({
-							pathname: '/profile',
-							// data: this.state.user.id
-						})}
+						onClick={() => this.props.history.push("/profile")}
 					/>
 					<button className="secondary" onClick={() => this.signout()}>
 						Sign Out
