@@ -49,8 +49,6 @@ class Accounts extends Component {
 	getAccountsTypes() {
 		axios.get("/api/accounts/get", { headers: { 'token': this.state.token } }).then(res => {
 			var recivedAccounts = res.data;
-			console.log(recivedAccounts);
-
 			delete recivedAccounts._id;
 			this.setState({ accounts: recivedAccounts })
 		});

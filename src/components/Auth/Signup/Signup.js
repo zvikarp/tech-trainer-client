@@ -25,9 +25,6 @@ class Signup extends Component {
       email: this.state.email,
       password: this.state.password
     };
-
-    console.log(newUser);
-
     this.props.onSignup(newUser);
   };
 

@@ -2,7 +2,6 @@ import axios from "axios";
 import setAuthToken from "../../utils/auth/setAuthToken";
 import jwt_decode from "jwt-decode";
 import { ToastsStore } from "react-toasts";
-import store from "../../redux/store";
 
 import { GET_ERRORS, SET_CURRENT_USER, USER_LOADING } from "./types";
 
@@ -28,7 +27,6 @@ export const SignupNewUser = (userData, history) => dispatch => {
 			dispatch(SigninUser(userData, history));
 		})
 		.catch(err => {
-			console.log(err.response.data);
 			dispatch({
 				type: GET_ERRORS,
 				payload: err.response.data
@@ -43,8 +41,6 @@ export const SignupNewUser = (userData, history) => dispatch => {
 // Login - get user token
 export const SigninUser = (userData, history) => dispatch => {
 	dispatch(SetUserLoading(true));
-	console.log(store.getState().auth.loading);
-
 	axios
 		.post("/api/auth/login", userData)
 		.then(res => {
@@ -54,11 +50,9 @@ export const SigninUser = (userData, history) => dispatch => {
 				setAuthToken(token);
 				const decoded = jwt_decode(token);
 				dispatch(SetCurrentUser(decoded));
-        console.log(token);
 			} catch {
 				ToastsStore.info("⚠️ Error Signing in: " + errorToString(""));
 				dispatch(SetUserLoading(false));
-				console.log(store.getState().auth.loading);
 			}
 		})
 		.catch(err => {
@@ -74,18 +68,14 @@ export const SigninUser = (userData, history) => dispatch => {
 };
 
 export const ConnectCurrentUser = (userData, token) => dispatch => {
-	console.log("hi");
 	axios
 		.get("/api/user/get", { headers: { 'token': token } })
 		.then(res => {
 			userData.email = res.data.user.email;
 			userData.points = res.data.user.points;
-			console.log("hi2");
-			
 			dispatch(SetCurrentUser(userData));
 		})
 		.catch(err => {
-			console.log(err);
 			ToastsStore.info("⚠️ Error Signing in: " + errorToString(""));
 		});
 }

@@ -39,7 +39,6 @@ class AllAccounts extends Component {
 				accountsToBeUpdated[accountId] = this.state.accounts[accountId];
 		});
 		axios.post("/api/accounts/update", { 'accounts': accountsToBeUpdated }).then(res => {
-			console.log(res);
 			ToastsStore.info("✔️ Your changes have been saved.");
 			this.setState({ loading: false })
 		}).catch(err => {
@@ -62,8 +61,6 @@ class AllAccounts extends Component {
 	}
 
 	handleOnAccountDelete(accountId) {
-		console.log(this.state.accounts);
-		
 		var updatedAccounts = this.state.accounts;
 		updatedAccounts[accountId].action = "delete"
 		this.setState({ accounts: updatedAccounts });

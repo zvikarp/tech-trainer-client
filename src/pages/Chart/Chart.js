@@ -43,9 +43,7 @@ class Chart extends Component {
 		});
 	}
 
-	checkIfAdmin() {
-		console.log("dfgdfgd");
-		
+	checkIfAdmin() {		
 		axios
 			.get("/api/user/admin/get", { headers: { token: this.state.token } })
 			.then(res => {
@@ -63,7 +61,6 @@ class Chart extends Component {
 
 	renderAdminButton() {
 		if (this.state.admin) {
-			console.log(this.state.admin);
 			return (
 				<i
 					className="fas fa-unlock-alt icon-button chart-icon-button"

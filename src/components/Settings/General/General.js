@@ -20,7 +20,6 @@ class General extends Component {
 		axios
 			.get("/api/user/get", { headers: { 'token': localStorage.jwtToken } })
 			.then(res => {
-				console.log(res);
 				this.setState({
 					name: res.data.user.name,
 					email: res.data.user.email,
@@ -28,7 +27,6 @@ class General extends Component {
 				});
 			})
 			.catch(err => {
-				console.log(err);
 				ToastsStore.info("⚠️ Unknown Error");
 			});
 	}

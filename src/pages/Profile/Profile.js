@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { User, History } from '../../components/Profile';
 import axios from "axios";
 import { ToastsStore } from 'react-toasts';
+import "../../utils/styles/global.css";
+import "./Profile.css";
 
 class Profile extends Component {
 
@@ -13,29 +15,81 @@ class Profile extends Component {
 			history: {}
 		};
 	}
-	
-	
+
+
 	componentDidMount() {
 		this.getUser();
+		this.getHistory();
 	}
-	
+
 	getUser() {
 		axios
 			.get("/api/user/get", { headers: { token: this.state.token } })
 			.then(res => {
-				this.setState({user: res.data.user})				
+				this.setState({ user: res.data.user })
 			}).catch(err => {
 				ToastsStore.info("⚠️ Error Loading Data.");
 			});
-		this.setState({user: this.state.user});
+		this.setState({ user: this.state.user });
+	}
+
+	getHistory() {
+		axios.get("/api/history/get", { headers: { 'token': this.state.token } }).then(res => {
+			var accounts = {};
+			var dates = [];
+			Object.values(res.data).forEach(doc => {
+				dates.push(doc.timestamp);
+				if (!accounts.points) accounts.points = [];
+				accounts.points.push(doc.points);
+				Object.keys(doc.accounts).forEach(account => {
+					if (!accounts[account]) accounts[account] = [];
+					accounts[account].push(doc.accounts[account]);
+				});
+			});
+			var series = [];
+			const categories = dates
+			Object.keys(accounts).forEach(account => {
+				series.push({
+					name: account,
+					data: accounts[account],
+				});
+			});
+			const history = {
+				series: series,
+				categories: categories,
+			}
+			this.setState({history: history});
+		}).catch(err => {
+			ToastsStore.info("⚠️ Error Loading Data.");
+		});
+	}
+
+	renderLoading() {
+		return(<div className="profile-loading">Loading...</div>);
+	}
+
+	renderUser() {
+		if (this.state.user.name) {
+			return (<User user={this.state.user} />);
+		} else {
+			return (this.renderLoading());
+		}
+	}
+
+	renderHistory() {
+		if (this.state.history.categories) {
+			return (<History history={this.state.history} />);
+		} else {
+			return (this.renderLoading());
+		}
 	}
 
 	render() {
 		return (
 			<div>
 				<i className="fas fa-chevron-left icon-button back-button" onClick={() => this.props.history.push('/')}></i>
-				<User user={this.state.user} />
-				<History />
+				{this.renderUser()}
+				{this.renderHistory()}
 			</div>
 		);
 	}
