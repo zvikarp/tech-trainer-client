@@ -17,6 +17,9 @@ class Accounts extends Component {
 			token: localStorage.jwtToken,
 			loading: false,
 		}
+	}
+	
+	componentDidMount() {
 		this.getAccountsTypes();
 		this.getUsersAccounts();
 	}

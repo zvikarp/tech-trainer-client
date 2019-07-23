@@ -13,6 +13,9 @@ class General extends Component {
 			points: 0,
 			loading: false,
 		};
+	}
+
+	componentDidMount() {
 		this.getAccountDetailes();
 	}
 
@@ -38,20 +41,20 @@ class General extends Component {
 		e.preventDefault();
 		this.setState({ loading: true });
 		axios.post("https://board2675.herokuapp.com/api/user/settings/update", { 'name': this.state.name, 'email': this.state.email }, {
-				headers: {
-					'Content-Type': 'application/json',
-				}
-			}).then(res => {
-				if (res.data.success)
-					ToastsStore.info("✔️ Your changes have been saved.");
-				else
+			headers: {
+				'Content-Type': 'application/json',
+			}
+		}).then(res => {
+			if (res.data.success)
+				ToastsStore.info("✔️ Your changes have been saved.");
+			else
 				ToastsStore.info("⚠️ Error Saving Your changes.");
-				
-				this.setState({ loading: false });
-			}).catch(err => {
-				ToastsStore.info("⚠️ Error Saving Your changes.");
-				this.setState({loading: false});
-			});
+
+			this.setState({ loading: false });
+		}).catch(err => {
+			ToastsStore.info("⚠️ Error Saving Your changes.");
+			this.setState({ loading: false });
+		});
 	};
 
 	renderSaveButton() {

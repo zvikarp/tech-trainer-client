@@ -20,6 +20,9 @@ class AllAccounts extends Component {
 			token: localStorage.jwtToken,
 			loading: false,
 		}
+	}
+	
+	componentDidMount() {
 		this.getAccounts();
 	}
 

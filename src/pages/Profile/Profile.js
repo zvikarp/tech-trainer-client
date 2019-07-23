@@ -92,7 +92,7 @@ class Profile extends Component {
 
 	renderUser() {
 		if ((this.state.user.name) && (Object.keys(this.state.accounts).length > 0)) {
-			return (<User user={this.state.user} accounts={this.accounts} />);
+			return (<User user={this.state.user} accounts={this.state.accounts} />);
 		} else {
 			return (this.renderLoading());
 		}

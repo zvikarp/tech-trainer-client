@@ -25,6 +25,9 @@ class Chart extends Component {
 			lastUpdatedChart: "",
 			loaded: false,
 		};
+	}
+	
+	componentDidMount() {
 		this.getChart();
 	}
 

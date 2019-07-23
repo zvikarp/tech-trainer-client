@@ -14,6 +14,9 @@ class Admin extends Component {
 			fields: [],
 			token: localStorage.jwtToken
 		}
+	}
+	
+	componentDidMount() {
 		this.getWebsites();
 	}
 
