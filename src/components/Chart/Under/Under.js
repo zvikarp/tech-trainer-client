@@ -14,7 +14,7 @@ class Under extends Component {
 		}
     var tilesObjects = [];
     for (var i = 0; i < tiles.length; i++) {
-      tilesObjects.push(<Tile key={i} user={this.props.under[i]} />);
+      tilesObjects.push(<Tile key={i} user={this.props.under[i]} admin={this.props.admin} />);
     }
     return tilesObjects;
   }

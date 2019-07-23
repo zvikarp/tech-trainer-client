@@ -10,9 +10,9 @@ class TopThree extends Component {
       <div id="top-three">
         <div className="top-three-title"><span role="img" aria-label="banana">🏆</span> Top three </div>
         <div className="top-three-cards">
-          <Top user={this.props.top3[0]} loaded={this.props.loaded} icon="🥇" />
-          <Top user={this.props.top3[1]} loaded={this.props.loaded} icon="🥈"/>
-          <Top user={this.props.top3[2]} loaded={this.props.loaded} icon="🥉"/>
+          <Top user={this.props.top3[0]} loaded={this.props.loaded} admin={this.props.admin} icon="🥇" />
+          <Top user={this.props.top3[1]} loaded={this.props.loaded} admin={this.props.admin} icon="🥈"/>
+          <Top user={this.props.top3[2]} loaded={this.props.loaded} admin={this.props.admin} icon="🥉"/>
         </div>
       </div>
     );

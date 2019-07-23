@@ -139,9 +139,9 @@ class Chart extends Component {
 			<div>
 				<div className="top-section">{this.renderAuth()}</div>
 				{this.welcomeMessage()}
-				<TopThree top3={this.state.top3} loaded={this.state.loaded} />
-				<Passed passed={this.state.passed} loaded={this.state.loaded} />
-				<Under under={this.state.under} loaded={this.state.loaded} />
+				<TopThree top3={this.state.top3} loaded={this.state.loaded} admin={this.state.admin}/>
+				<Passed passed={this.state.passed} loaded={this.state.loaded} admin={this.state.admin}/>
+				<Under under={this.state.under} loaded={this.state.loaded} admin={this.state.admin}/>
 				<div className="last-updated">
 					last updated at:{this.renderLastUpdatedChart()}
 				</div>

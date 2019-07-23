@@ -32,3 +32,7 @@
     text-align: center;
     color: #feaf99;
 }
+
+.admin-top-button {
+	cursor: pointer;
+}

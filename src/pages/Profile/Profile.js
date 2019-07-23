@@ -9,11 +9,20 @@ class Profile extends Component {
 
 	constructor(props) {
 		super(props);
+		const data = this.props.location.data;
+		console.log(data);
+		var userId;
+		if (data) {
+			userId = data.userId;
+		}
+		console.log(userId);
 		this.state = {
 			token: localStorage.jwtToken,
 			user: {},
-			history: {}
+			history: {},
+			userId: userId
 		};
+		
 	}
 
 
@@ -24,23 +33,25 @@ class Profile extends Component {
 
 	getUser() {
 		axios
-			.get("/api/user/get", { headers: { token: this.state.token } })
+			.get("/api/user/get", { headers: { token: this.state.token, userid: this.state.userId } })
 			.then(res => {
 				this.setState({ user: res.data.user })
 			}).catch(err => {
 				ToastsStore.info("⚠️ Error Loading Data.");
+				console.log(err);
 			});
 		this.setState({ user: this.state.user });
 	}
 
 	getHistory() {
-		axios.get("/api/history/get", { headers: { 'token': this.state.token } }).then(res => {
+		axios.get("/api/history/get", { headers: { 'token': this.state.token, userid: this.state.userId } }).then(res => {
 			var accounts = {};
 			var dates = [];
 			Object.values(res.data).forEach(doc => {
 				dates.push(doc.timestamp);
 				if (!accounts.points) accounts.points = [];
 				accounts.points.push(doc.points);
+				if (!doc.accounts) return;
 				Object.keys(doc.accounts).forEach(account => {
 					if (!accounts[account]) accounts[account] = [];
 					accounts[account].push(doc.accounts[account]);
@@ -58,14 +69,16 @@ class Profile extends Component {
 				series: series,
 				categories: categories,
 			}
-			this.setState({history: history});
+			this.setState({ history: history });
 		}).catch(err => {
+			console.log(err);
+			
 			ToastsStore.info("⚠️ Error Loading Data.");
 		});
 	}
 
 	renderLoading() {
-		return(<div className="profile-loading">Loading...</div>);
+		return (<div className="profile-loading">Loading...</div>);
 	}
 
 	renderUser() {

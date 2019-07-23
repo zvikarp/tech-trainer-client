@@ -22,6 +22,10 @@
     color: #FFFFFF;
 }
 
+.admin-tile-button {
+	cursor: pointer;
+}
+
 @media only screen and (max-width: 800px) {
   #tile {
     margin: 12px 12px;
