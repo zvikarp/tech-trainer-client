@@ -20,15 +20,25 @@ class Profile extends Component {
 			token: localStorage.jwtToken,
 			user: {},
 			history: {},
+			accounts: {},
 			userId: userId
 		};
-		
+
 	}
 
 
 	componentDidMount() {
+		this.getAccounts();
 		this.getUser();
 		this.getHistory();
+	}
+
+	getAccounts() {
+		axios.get("https://board2675.herokuapp.com/api/accounts/get", { headers: { 'token': this.state.token } }).then(res => {
+			var accounts = res.data;
+			delete accounts._id;
+			this.setState({ accounts: accounts });
+		});
 	}
 
 	getUser() {
@@ -71,7 +81,7 @@ class Profile extends Component {
 			this.setState({ history: history });
 		}).catch(err => {
 			console.log(err);
-			
+
 			ToastsStore.info("⚠️ Error Loading Data.");
 		});
 	}
@@ -81,8 +91,8 @@ class Profile extends Component {
 	}
 
 	renderUser() {
-		if (this.state.user.name) {
-			return (<User user={this.state.user} />);
+		if ((this.state.user.name) && (Object.keys(this.state.accounts).length > 0)) {
+			return (<User user={this.state.user} accounts={this.accounts} />);
 		} else {
 			return (this.renderLoading());
 		}

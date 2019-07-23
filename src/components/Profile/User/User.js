@@ -6,11 +6,11 @@ import "./User.css";
 class User extends Component {
 
 	accountsList() {
-		const accounts = this.props.user.accounts;
-		if (accounts) {
+		const accountsById = this.props.user.accounts;
+		if (accountsById) {
 			var userAccounts = "";
-			Object.keys(accounts).forEach(key => {
-				userAccounts += key + ": " + accounts[key] + ", "
+			Object.keys(accountsById).forEach(key => {
+				userAccounts += this.props.accounts[key].name + ": " + accountsById[key] + ", "
 			});
 			return userAccounts;
 		} else {
