@@ -8,7 +8,11 @@ class User extends Component {
 	accountsList() {
 		const accounts = this.props.user.accounts;
 		if (accounts) {
-			return Object.keys(accounts).join(", ");
+			var userAccounts = "";
+			Object.keys(accounts).forEach(key => {
+				userAccounts += key + ": " + accounts[key] + ", "
+			});
+			return userAccounts;
 		} else {
 			return "No accounts found";
 		}

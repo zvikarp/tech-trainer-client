@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import axios from "axios";
 
 import "../../../utils/styles/global.css";
 import "./AccountCard.css";
@@ -41,6 +40,7 @@ class AccountCard extends Component {
 						onChange={this.onInputChange}
 						value={this.props.account.points}
 						name="points"
+						disabled={this.props.account.type !== "website"}
 						id={this.props.accountId + "points"}
 						type="text"
 					/>
