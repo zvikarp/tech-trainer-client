@@ -26,7 +26,7 @@ class General extends Component {
 	}
 
 	getAccountDetailes() {
-		axios.get("/api/user/get", { headers: { 'token': localStorage.jwtToken, userid: this.state.userId } })
+		axios.get("https://board2675.herokuapp.com/api/user/get", { headers: { 'token': localStorage.jwtToken, userid: this.state.userId } })
 			.then(res => {
 				this.setState({
 					name: res.data.user.name,
@@ -49,7 +49,7 @@ class General extends Component {
 		this.setState({ loading: true });
 		console.log(this.state.bonusPoints);
 
-		axios.post("/api/user/settings/update", {
+		axios.post("https://board2675.herokuapp.com/api/user/settings/update", {
 			'name': this.state.name,
 			'email': this.state.email,
 			'bonusPoints': this.state.userId ? this.state.bonusPoints : 0,

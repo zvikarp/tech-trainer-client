@@ -16,7 +16,7 @@ class Top extends Component {
 		return (
 			<div>
 				<div className="top-child top-icon">
-					<span role="img" aria-label="banana">{this.props.icon}</span>
+					<span role="img" aria-label="emoji">{this.props.icon}</span>
 				</div>
 				<div className="top-child">
 					<h3> {this.props.user.name} </h3>
@@ -39,7 +39,7 @@ class Top extends Component {
 		}
 		else if (this.props.loaded) {
 			return (
-				<div id="top" className="top-loading">Don't have a solid top 3 yet! <span role="img" aria-label="banana">😱</span></div>
+				<div id="top" className="top-loading">Don't have a solid top 3 yet! <span role="img" aria-label="emoji">😱</span></div>
 			);
 		} else {
 			return (

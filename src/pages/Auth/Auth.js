@@ -58,7 +58,7 @@ class Auth extends Component {
 					<i className="fas fa-chevron-left" />
 					<div className="button-text">BACK</div>
 				</button>
-				<h1 className="auth-message">Connect to Orange <span role="img" aria-label="banana">🧡</span></h1>
+				<h1 className="auth-message">Connect to Orange <span role="img" aria-label="emoji">🧡</span></h1>
 				{this.renderForm()}
 			</div>
 		)

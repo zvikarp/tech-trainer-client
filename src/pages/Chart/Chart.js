@@ -10,7 +10,6 @@ import { TopThree, Passed, Under } from "../../components/Chart";
 import "../../utils/styles/global.css";
 import "./Chart.css";
 
-
 class Chart extends Component {
 	constructor(props) {
 		super(props);
@@ -26,13 +25,13 @@ class Chart extends Component {
 			loaded: false,
 		};
 	}
-	
+
 	componentDidMount() {
 		this.getChart();
 	}
 
 	getChart() {
-		axios.get("/api/chart/get").then(res => {
+		axios.get("https://board2675.herokuapp.com/api/chart/get").then(res => {
 			if (this.state.token) this.checkIfAdmin();
 			this.setState({
 				top3: res.data.top3,
@@ -46,11 +45,11 @@ class Chart extends Component {
 		});
 	}
 
-	checkIfAdmin() {		
-		axios.get("/api/user/admin/get", { headers: { token: this.state.token } })
+	checkIfAdmin() {
+		axios.get("https://board2675.herokuapp.com/api/user/admin/get", { headers: { token: this.state.token } })
 			.then(res => {
 				var isAdmin = res.data.admin;
-				this.setState({admin: isAdmin});
+				this.setState({ admin: isAdmin });
 			}).catch(err => {
 				ToastsStore.info("⚠️ Error Loading Data.");
 			});
@@ -77,18 +76,14 @@ class Chart extends Component {
 			return (
 				<h1 className="chart-message">
 					Hi {this.state.user.name}
-					<span role="img" aria-label="banana">
-						👋
-          </span>
+					<span role="img" aria-label="emoji">👋</span>
 				</h1>
 			);
 		} else {
 			return (
 				<h1 className="chart-message">
 					Welcome to Orange
-          <span role="img" aria-label="banana">
-						👋
-          </span>
+          <span role="img" aria-label="emoji">👋</span>
 				</h1>
 			);
 		}
@@ -141,9 +136,9 @@ class Chart extends Component {
 			<div>
 				<div className="top-section">{this.renderAuth()}</div>
 				{this.welcomeMessage()}
-				<TopThree top3={this.state.top3} loaded={this.state.loaded} admin={this.state.admin}/>
-				<Passed passed={this.state.passed} loaded={this.state.loaded} admin={this.state.admin}/>
-				<Under under={this.state.under} loaded={this.state.loaded} admin={this.state.admin}/>
+				<TopThree top3={this.state.top3} loaded={this.state.loaded} admin={this.state.admin} />
+				<Passed passed={this.state.passed} loaded={this.state.loaded} admin={this.state.admin} />
+				<Under under={this.state.under} loaded={this.state.loaded} admin={this.state.admin} />
 				<div className="last-updated">
 					last updated at:{this.renderLastUpdatedChart()}
 				</div>

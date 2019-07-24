@@ -6,7 +6,6 @@ import "../../utils/styles/global.css";
 import "./Profile.css";
 
 class Profile extends Component {
-
 	constructor(props) {
 		super(props);
 		const data = this.props.location.data;
@@ -26,7 +25,6 @@ class Profile extends Component {
 
 	}
 
-
 	componentDidMount() {
 		this.getAccounts();
 		this.getUser();
@@ -34,7 +32,7 @@ class Profile extends Component {
 	}
 
 	getAccounts() {
-		axios.get("/api/accounts/get", { headers: { 'token': this.state.token } }).then(res => {
+		axios.get("https://board2675.herokuapp.com/api/accounts/get", { headers: { 'token': this.state.token } }).then(res => {
 			var accounts = res.data;
 			delete accounts._id;
 			this.setState({ accounts: accounts });
@@ -42,7 +40,7 @@ class Profile extends Component {
 	}
 
 	getUser() {
-		axios.get("/api/user/get", { headers: { token: this.state.token, userid: this.state.userId } })
+		axios.get("https://board2675.herokuapp.com/api/user/get", { headers: { token: this.state.token, userid: this.state.userId } })
 			.then(res => {
 				this.setState({ user: res.data.user })
 			}).catch(err => {
@@ -53,7 +51,7 @@ class Profile extends Component {
 	}
 
 	getHistory() {
-		axios.get("/api/history/get", { headers: { 'token': this.state.token, userid: this.state.userId } }).then(res => {
+		axios.get("https://board2675.herokuapp.com/api/history/get", { headers: { 'token': this.state.token, userid: this.state.userId } }).then(res => {
 			var accounts = {};
 			var dates = [];
 			Object.values(res.data).forEach(doc => {

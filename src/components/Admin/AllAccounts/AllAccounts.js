@@ -27,7 +27,7 @@ class AllAccounts extends Component {
 	}
 
 	getAccounts() {
-		axios.get("/api/accounts/get", { headers: { 'token': this.state.token } }).then(res => {
+		axios.get("https://board2675.herokuapp.com/api/accounts/get", { headers: { 'token': this.state.token } }).then(res => {
 			var accounts = res.data;
 			delete accounts._id;
 			this.setState({ accounts: accounts });
@@ -41,7 +41,7 @@ class AllAccounts extends Component {
 			if (this.state.accounts[accountId].action)
 				accountsToBeUpdated[accountId] = this.state.accounts[accountId];
 		});
-		axios.post("/api/accounts/update", { 'accounts': accountsToBeUpdated }).then(res => {
+		axios.post("https://board2675.herokuapp.com/api/accounts/update", { 'accounts': accountsToBeUpdated }).then(res => {
 			ToastsStore.info("✔️ Your changes have been saved.");
 			this.setState({ loading: false })
 		}).catch(err => {

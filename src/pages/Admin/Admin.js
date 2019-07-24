@@ -21,7 +21,7 @@ class Admin extends Component {
 	}
 
 	getWebsites() {
-		axios.get("/api/accounts/get", { headers: { 'token': this.state.token } }).then(res => {
+		axios.get("https://board2675.herokuapp.com/api/accounts/get", { headers: { 'token': this.state.token } }).then(res => {
 			var accounts = res.data;
 			delete accounts._id;
 			var websites = [];

@@ -26,7 +26,7 @@ class Passed extends Component {
 			<div id="passed">
 				<div className="passed-text">
 					{" "}
-					<span role="img" aria-label="banana">🤙</span>
+					<span role="img" aria-label="emoji">🤙</span>
 					{" "}
 					Users that have more then 50 points
         </div>

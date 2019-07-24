@@ -19,7 +19,6 @@ class AccountCard extends Component {
 		this.props.onAccountDelete(this.props.accountId);
 	}
 
-
 	render() {		
 		return (
 			<div key={this.props.accountId}>
@@ -72,9 +71,7 @@ class AccountCard extends Component {
 				>DELETE</button>
 			</div>
 		);
-	}
-
-	
+	}	
 }
 
 export default AccountCard;

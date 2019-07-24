@@ -24,7 +24,7 @@ class Under extends Component {
       <div id="under">
         <div className="under-text">
           {" "}
-					<span role="img" aria-label="banana">😔</span>
+					<span role="img" aria-label="emoji">😔</span>
 					{" "}
           Users that have less then 50 points
         </div>
