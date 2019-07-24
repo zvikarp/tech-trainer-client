@@ -15,13 +15,13 @@ class Admin extends Component {
 			token: localStorage.jwtToken
 		}
 	}
-	
+
 	componentDidMount() {
 		this.getWebsites();
 	}
 
 	getWebsites() {
-		axios.get("https://board2675.herokuapp.com/api/accounts/get", { headers: { 'token': this.state.token } }).then(res => {
+		axios.get("/api/accounts/get", { headers: { 'token': this.state.token } }).then(res => {
 			var accounts = res.data;
 			delete accounts._id;
 			var websites = [];
@@ -42,7 +42,10 @@ class Admin extends Component {
 	render() {
 		return (
 			<div>
-				<i className="fas fa-chevron-left icon-button back-button" onClick={() => this.props.history.push('/')}></i>
+				<button className="primary back-button" onClick={() => this.props.history.push("/")}>
+					<i className="fas fa-chevron-left" />
+					<div className="button-text">BACK</div>
+				</button>
 				<AllAccounts websites={this.state.websites} />
 			</div>
 		);

@@ -6,8 +6,12 @@
 
 .chart-top-bar-right {
   position: absolute;
-  right: 0;
-  margin: 0px 16px;
+	right: 0;
+	margin: 0px 8px;
+}
+
+.chart-top-bar-right * {
+	margin: 0px 8px;
 }
 
 .chart-top-bar-left {
@@ -34,7 +38,6 @@
   color: #FFFFFF;
 }
 
-.chartsigninbutton {
-	color:blue;
-	padding: 100px;
+.button-text{
+	margin-left: 8px;
 }

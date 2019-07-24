@@ -8,7 +8,10 @@ class Settings extends Component {
 	render() {
 		return (
 			<div>
-				<i className="fas fa-chevron-left icon-button back-button" onClick={() => this.props.history.push('/')}></i>
+				<button className="primary back-button" onClick={() => this.props.history.push("/")}>
+					<i className="fas fa-chevron-left" />
+					<div className="button-text">BACK</div>
+				</button>
 				<General/>
 				<Accounts />
 			</div>

@@ -32,7 +32,7 @@ class Chart extends Component {
 	}
 
 	getChart() {
-		axios.get("https://board2675.herokuapp.com/api/chart/get").then(res => {
+		axios.get("/api/chart/get").then(res => {
 			if (this.state.token) this.checkIfAdmin();
 			this.setState({
 				top3: res.data.top3,
@@ -47,7 +47,7 @@ class Chart extends Component {
 	}
 
 	checkIfAdmin() {		
-		axios.get("https://board2675.herokuapp.com/api/user/admin/get", { headers: { token: this.state.token } })
+		axios.get("/api/user/admin/get", { headers: { token: this.state.token } })
 			.then(res => {
 				var isAdmin = res.data.admin;
 				this.setState({admin: isAdmin});
@@ -64,10 +64,10 @@ class Chart extends Component {
 	renderAdminButton() {
 		if (this.state.admin) {
 			return (
-				<i
-					className="fas fa-unlock-alt icon-button chart-icon-button"
-					onClick={() => this.props.history.push("/admin")}
-				/>
+				<button className="primary" onClick={() => this.props.history.push("/admin")}>
+					<i className="fas fa-unlock-alt" />
+					<div className="button-text">ADIMN</div>
+				</button>
 			);
 		}
 	}
@@ -109,14 +109,14 @@ class Chart extends Component {
 			return (
 				<div className="chart-top-bar-right">
 					{this.renderAdminButton()}
-					<i
-						className="fas fa-cogs icon-button chart-icon-button"
-						onClick={() => this.props.history.push("/settings")}
-					/>
-					<i
-						className="fas fa-user icon-button chart-icon-button"
-						onClick={() => this.props.history.push("/profile")}
-					/>
+					<button className="primary" onClick={() => this.props.history.push("/settings")}>
+						<i className="fas fa-cogs" />
+						<div className="button-text">SETTINGS</div>
+					</button>
+					<button className="primary" onClick={() => this.props.history.push("/profile")}>
+						<i className="fas fa-user" />
+						<div className="button-text">PROFILE</div>
+					</button>
 					<button className="secondary" onClick={() => this.signout()}>
 						Sign Out
           </button>
