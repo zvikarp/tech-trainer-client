@@ -58,8 +58,8 @@ class Profile extends Component {
 			var dates = [];
 			Object.values(res.data).forEach(doc => {
 				dates.push(doc.timestamp);
-				if (!accounts.points) accounts.points = [];
-				accounts.points.push(doc.points);
+				if (!accounts['all points']) accounts['all points'] = [];
+				accounts['all points'].push(doc.points);
 				if (!doc.accounts) return;
 				Object.keys(doc.accounts).forEach(account => {
 					if (!accounts[account]) accounts[account] = [];
