@@ -23,7 +23,7 @@ class Accounts extends Component {
 			userId: userId,
 		}
 	}
-	
+
 	componentDidMount() {
 		this.getAccountsTypes();
 		this.getUsersAccounts();
@@ -77,22 +77,29 @@ class Accounts extends Component {
 
 	onSubmit = e => {
 		e.preventDefault();
-		this.setState({loading: true});
+		this.setState({ loading: true });
 		axios.post("/api/user/accounts/update", { 'accounts': this.state.accountsFields }, {
-				headers: {
-					'Content-Type': 'application/json',
-					'userid': this.state.userId,
-				}
-			}).then(res => {
-				if (res.data.success)
-					ToastsStore.info("✔️ Your changes have been saved.");
-				else
-					ToastsStore.info("⚠️ Error: " + this.errorToString(res.data.message));
-					this.setState({loading: false});
-			}).catch(err => {
-				ToastsStore.info("⚠️ Error Saving Your changes.");
-				this.setState({loading: false});
-			});
+			headers: {
+				'Content-Type': 'application/json',
+				'userid': this.state.userId,
+			}
+		}).then(res => {
+			if (res.data.success) {
+				ToastsStore.info("✔️ Your changes have been saved.");
+				ToastsStore.info("ℹ️ We are working on appling your changes to the chart.");
+				axios.post("/api/cronjob/updateuserspoints", { 'accounts': this.state.accountsFields }).then(res => {
+					ToastsStore.info("✔️ Your changes were applied to the chart!");
+				}).catch(err => {
+					ToastsStore.info("⚠️ Error appling your changes to the chart.");
+				});
+			}
+			else
+				ToastsStore.info("⚠️ Error: " + this.errorToString(res.data.message));
+			this.setState({ loading: false });
+		}).catch(err => {
+			ToastsStore.info("⚠️ Error Saving Your changes.");
+			this.setState({ loading: false });
+		});
 	};
 
 	renderSaveButton() {
