@@ -8,9 +8,10 @@ class User extends Component {
 	accountsList() {
 		const accountsById = this.props.user.accounts;
 		if (accountsById) {
-			var userAccounts = "";
+			var userAccounts = [];
 			Object.keys(accountsById).forEach(key => {
-				userAccounts += this.props.accounts[key].name + ": " + accountsById[key] + ", "
+				userAccounts.push(<br />);
+				userAccounts.push(this.props.accounts[key].name + ": " + accountsById[key]);
 			});
 			return userAccounts;
 		} else {
@@ -21,16 +22,13 @@ class User extends Component {
 	render() {
 		return (
 			<div id="user">
-				<h2 className="user-points"> {this.props.user.name} </h2>
-				<div className="user-account-detailes">
-					<div>Email: {this.props.user.email},</div>
-					<div>Points: {this.props.user.points},</div>
-					<div>Bonus Points: {this.props.user.bonusPoints},</div>
+				<h2 className="user-name"> {this.props.user.name} </h2>
+					<div>Email: {this.props.user.email}</div>
+					<div>Points: {this.props.user.points}</div>
+					<div>Bonus Points: {this.props.user.bonusPoints}</div>
 					<div>Role: {this.props.user.role}</div>
-				</div>
-				<div className="user-account-detailes">
+					<br />
 					<div>Accounts: {this.accountsList()}</div>
-				</div>
 			</div>
 		);
 	}
