@@ -7,11 +7,16 @@ import axios from "axios";
 class General extends Component {
 	constructor(props) {
 		super(props);
+		var userId;
+		if (this.props.ofUser) {
+			userId = this.props.ofUser.userId;
+		}
 		this.state = {
 			name: "",
 			email: "",
 			points: 0,
 			loading: false,
+			userId: userId,
 		};
 	}
 
@@ -20,7 +25,7 @@ class General extends Component {
 	}
 
 	getAccountDetailes() {
-		axios.get("/api/user/get", { headers: { 'token': localStorage.jwtToken } })
+		axios.get("/api/user/get", { headers: { 'token': localStorage.jwtToken, userid: this.state.userId } })
 			.then(res => {
 				this.setState({
 					name: res.data.user.name,
@@ -43,6 +48,7 @@ class General extends Component {
 		axios.post("/api/user/settings/update", { 'name': this.state.name, 'email': this.state.email }, {
 			headers: {
 				'Content-Type': 'application/json',
+				'userid': this.state.userId,
 			}
 		}).then(res => {
 			if (res.data.success)

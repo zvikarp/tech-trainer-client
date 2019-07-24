@@ -12,8 +12,8 @@ class Settings extends Component {
 					<i className="fas fa-chevron-left" />
 					<div className="button-text">BACK</div>
 				</button>
-				<General/>
-				<Accounts />
+				<General ofUser={this.props.location.data}/>
+				<Accounts ofUser={this.props.location.data} />
 			</div>
 		);
 	}

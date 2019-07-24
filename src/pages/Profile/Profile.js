@@ -86,6 +86,24 @@ class Profile extends Component {
 		});
 	}
 
+	renderSettingsButton() {
+		if (this.state.userId) {
+			return (
+				<button
+					className="primary settings-button"
+					onClick={() => this.props.history.push({
+						pathname: '/settings',
+						data: { "userId": this.state.userId },
+					})} >
+					<i className="fas fa-cogs" />
+					<div className="button-text">SETTINGS</div>
+				</button>
+			);
+		} else {
+			return (<div />);
+		}
+	}
+
 	renderLoading() {
 		return (<div className="profile-loading">Loading...</div>);
 	}
@@ -113,6 +131,7 @@ class Profile extends Component {
 					<i className="fas fa-chevron-left" />
 					<div className="button-text">BACK</div>
 				</button>
+				{this.renderSettingsButton()}
 				{this.renderUser()}
 				{this.renderHistory()}
 			</div>
