@@ -15,6 +15,7 @@ class General extends Component {
 			name: "",
 			email: "",
 			points: 0,
+			bonusPoints: 0,
 			loading: false,
 			userId: userId,
 		};
@@ -31,6 +32,7 @@ class General extends Component {
 					name: res.data.user.name,
 					email: res.data.user.email,
 					points: res.data.user.points,
+					bonusPoints: res.data.user.bonusPoints,
 				});
 			})
 			.catch(err => {
@@ -45,22 +47,29 @@ class General extends Component {
 	onSubmit = e => {
 		e.preventDefault();
 		this.setState({ loading: true });
-		axios.post("/api/user/settings/update", { 'name': this.state.name, 'email': this.state.email }, {
-			headers: {
-				'Content-Type': 'application/json',
-				'userid': this.state.userId,
-			}
-		}).then(res => {
-			if (res.data.success)
-				ToastsStore.info("✔️ Your changes have been saved.");
-			else
-				ToastsStore.info("⚠️ Error Saving Your changes.");
+		console.log(this.state.bonusPoints);
 
-			this.setState({ loading: false });
-		}).catch(err => {
-			ToastsStore.info("⚠️ Error Saving Your changes.");
-			this.setState({ loading: false });
-		});
+		axios.post("/api/user/settings/update", {
+			'name': this.state.name,
+			'email': this.state.email,
+			'bonusPoints': this.state.userId ? this.state.bonusPoints : 0,
+		},
+			{
+				headers: {
+					'Content-Type': 'application/json',
+					'userid': this.state.userId,
+				}
+			}).then(res => {
+				if (res.data.success)
+					ToastsStore.info("✔️ Your changes have been saved.");
+				else
+					ToastsStore.info("⚠️ Error Saving Your changes.");
+
+				this.setState({ loading: false });
+			}).catch(err => {
+				ToastsStore.info("⚠️ Error Saving Your changes.");
+				this.setState({ loading: false });
+			});
 	};
 
 	renderSaveButton() {
@@ -104,7 +113,22 @@ class General extends Component {
 					</div>
 					<div className="labeld-input">
 						<label>Points:</label>
-						<input value={this.state.points} id="points" type="text" disabled />
+						<input
+							value={this.state.points}
+							id="points"
+							type="text"
+							disabled
+							/>
+					</div>
+					<div className="labeld-input">
+						<label>Bonus Points:</label>
+						<input
+							onChange={this.onChange}
+							value={this.state.bonusPoints}
+							id="bonusPoints"
+							type="text"
+							disabled={!this.state.userId}
+						/>
 					</div>
 					<div className="action-section">
 						{this.renderSaveButton()}

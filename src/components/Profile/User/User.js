@@ -23,8 +23,9 @@ class User extends Component {
 			<div id="user">
 				<h2 className="user-points"> {this.props.user.name} </h2>
 				<div className="user-account-detailes">
-					<div>Email: {this.props.user.email}</div>
-					<div>Points: {this.props.user.points}</div>
+					<div>Email: {this.props.user.email},</div>
+					<div>Points: {this.props.user.points},</div>
+					<div>Bonus Points: {this.props.user.bonusPoints},</div>
 					<div>Role: {this.props.user.role}</div>
 				</div>
 				<div className="user-account-detailes">

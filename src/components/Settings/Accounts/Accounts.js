@@ -11,11 +11,16 @@ class Accounts extends Component {
 
 	constructor(props) {
 		super(props);
+		var userId;
+		if (this.props.ofUser) {
+			userId = this.props.ofUser.userId;
+		}
 		this.state = {
 			accountsFields: {},
 			accounts: {},
 			token: localStorage.jwtToken,
 			loading: false,
+			userId: userId,
 		}
 	}
 	
@@ -38,7 +43,7 @@ class Accounts extends Component {
 	}
 
 	getUsersAccounts() {
-		axios.get('/api/user/accounts/get', { headers: { 'token': this.state.token } }).then(res => {
+		axios.get('/api/user/accounts/get', { headers: { 'token': this.state.token, userid: this.state.userId } }).then(res => {
 			var userAccounts = res.data;
 			Object.keys(userAccounts).forEach(key => {
 				this.setState({ [key]: userAccounts[key] });
@@ -76,6 +81,7 @@ class Accounts extends Component {
 		axios.post("/api/user/accounts/update", { 'accounts': this.state.accountsFields }, {
 				headers: {
 					'Content-Type': 'application/json',
+					'userid': this.state.userId,
 				}
 			}).then(res => {
 				if (res.data.success)
