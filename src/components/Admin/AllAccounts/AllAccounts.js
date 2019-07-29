@@ -14,7 +14,6 @@ class AllAccounts extends Component {
 		this.handleOnAccountDelete = this.handleOnAccountDelete.bind(this);
 		this.handleOnAddAccount = this.handleOnAddAccount.bind(this);
 		this.handleOnSaveChanges = this.handleOnSaveChanges.bind(this);
-		this.state = { temperature: '', scale: 'c' };
 		this.state = {
 			accounts: {},
 			token: localStorage.jwtToken,

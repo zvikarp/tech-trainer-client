@@ -1,4 +1,5 @@
 .chart-message {
+	margin: 0px;
   padding: 140px 64px 64px 64px;
   text-align: center;
   color: #ffffff;
@@ -7,11 +8,11 @@
 .chart-top-bar-right {
   position: absolute;
 	right: 0;
-	margin: 0px 8px;
+	margin: 8px;
 }
 
-.chart-top-bar-right * {
-	margin: 0px 8px;
+.chart-top-bar-right button {
+	margin: 8px;
 }
 
 .chart-top-bar-left {
