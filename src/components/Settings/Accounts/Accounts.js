@@ -43,7 +43,7 @@ class Accounts extends Component {
 	}
 
 	getUsersAccounts() {
-		axios.get('https://board2675.herokuapp.com/api/user/accounts/get', { headers: { 'token': this.state.token, userid: this.state.userId } }).then(res => {
+		axios.get(process.env.REACT_APP_API_URL + "/user/accounts/get", { headers: { 'token': this.state.token, userid: this.state.userId } }).then(res => {
 			var userAccounts = res.data;
 			Object.keys(userAccounts).forEach(key => {
 				this.setState({ [key]: userAccounts[key] });
@@ -55,7 +55,7 @@ class Accounts extends Component {
 	}
 
 	getAccountsTypes() {
-		axios.get("https://board2675.herokuapp.com/api/accounts/get", { headers: { 'token': this.state.token } }).then(res => {
+		axios.get(process.env.REACT_APP_API_URL + "/accounts/", { headers: { 'token': this.state.token } }).then(res => {
 			var recivedAccounts = res.data;
 			delete recivedAccounts._id;
 			this.setState({ accounts: recivedAccounts })
@@ -78,7 +78,7 @@ class Accounts extends Component {
 	onSubmit = e => {
 		e.preventDefault();
 		this.setState({ loading: true });
-		axios.post("https://board2675.herokuapp.com/api/user/accounts/update", { 'accounts': this.state.accountsFields }, {
+		axios.post(process.env.REACT_APP_API_URL + "/user/accounts/update", { 'accounts': this.state.accountsFields }, {
 			headers: {
 				'Content-Type': 'application/json',
 				'userid': this.state.userId,
@@ -87,7 +87,7 @@ class Accounts extends Component {
 			if (res.data.success) {
 				ToastsStore.info("✔️ Your changes have been saved.");
 				ToastsStore.info("ℹ️ We are working on appling your changes to the chart.");
-				axios.post("https://board2675.herokuapp.com/api/cronjob/updateuserspoints", { 'accounts': this.state.accountsFields }).then(res => {
+				axios.post(process.env.REACT_APP_API_URL + "/cronjob/updateuserspoints", { 'accounts': this.state.accountsFields }).then(res => {
 					ToastsStore.info("✔️ Your changes were applied to the chart!");
 				}).catch(err => {
 					ToastsStore.info("⚠️ Error appling your changes to the chart.");

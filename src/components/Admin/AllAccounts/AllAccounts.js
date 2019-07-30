@@ -26,7 +26,7 @@ class AllAccounts extends Component {
 	}
 
 	getAccounts() {
-		axios.get("https://board2675.herokuapp.com/api/accounts/get", { headers: { 'token': this.state.token } }).then(res => {
+		axios.get(process.env.REACT_APP_API_URL + "/accounts/", { headers: { 'token': this.state.token } }).then(res => {
 			var accounts = res.data;
 			delete accounts._id;
 			this.setState({ accounts: accounts });
@@ -40,7 +40,7 @@ class AllAccounts extends Component {
 			if (this.state.accounts[accountId].action)
 				accountsToBeUpdated[accountId] = this.state.accounts[accountId];
 		});
-		axios.post("https://board2675.herokuapp.com/api/accounts/update", { 'accounts': accountsToBeUpdated }).then(res => {
+		axios.put(process.env.REACT_APP_API_URL + "/accounts/", { 'accounts': accountsToBeUpdated }).then(res => {
 			ToastsStore.info("✔️ Your changes have been saved.");
 			this.setState({ loading: false })
 		}).catch(err => {
@@ -127,7 +127,7 @@ class AllAccounts extends Component {
 				<h2 className="signin-title">Accounts</h2>
 				{this.renderAccountCards()}
 				<div className="all-accounts-action-section">
-					<button className="primary align-horizontally" onClick={this.handleOnAddAccount}>ADD ACCOUNT</button>
+					<button className="primary align-horizontally" onClick={this.handleOnAddAccount}>ADD FIELD</button>
 					{this.renderSaveButton()}
 				</div>
 			</div>

@@ -32,7 +32,7 @@ class Profile extends Component {
 	}
 
 	getAccounts() {
-		axios.get("https://board2675.herokuapp.com/api/accounts/get", { headers: { 'token': this.state.token } }).then(res => {
+		axios.get(process.env.REACT_APP_API_URL + "/accounts/", { headers: { 'token': this.state.token } }).then(res => {
 			var accounts = res.data;
 			delete accounts._id;
 			this.setState({ accounts: accounts });
@@ -40,7 +40,7 @@ class Profile extends Component {
 	}
 
 	getUser() {
-		axios.get("https://board2675.herokuapp.com/api/user/get", { headers: { token: this.state.token, userid: this.state.userId } })
+		axios.get(process.env.REACT_APP_API_URL + "/user/get", { headers: { token: this.state.token, userid: this.state.userId } })
 			.then(res => {
 				this.setState({ user: res.data.user })
 			}).catch(err => {
@@ -51,7 +51,7 @@ class Profile extends Component {
 	}
 
 	getHistory() {
-		axios.get("https://board2675.herokuapp.com/api/history/get", { headers: { 'token': this.state.token, userid: this.state.userId } }).then(res => {
+		axios.get(process.env.REACT_APP_API_URL + "/history/get", { headers: { 'token': this.state.token, userid: this.state.userId } }).then(res => {
 			var accounts = {};
 			var dates = [];
 			Object.values(res.data).forEach(doc => {

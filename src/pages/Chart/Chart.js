@@ -31,7 +31,7 @@ class Chart extends Component {
 	}
 
 	getChart() {
-		axios.get("https://board2675.herokuapp.com/api/chart/get").then(res => {
+		axios.get(process.env.REACT_APP_API_URL + "/chart/get").then(res => {
 			if (this.state.token) this.checkIfAdmin();
 			this.setState({
 				top3: res.data.top3,
@@ -46,7 +46,7 @@ class Chart extends Component {
 	}
 
 	checkIfAdmin() {
-		axios.get("https://board2675.herokuapp.com/api/user/admin/get", { headers: { token: this.state.token } })
+		axios.get(process.env.REACT_APP_API_URL + "/user/admin/get", { headers: { token: this.state.token } })
 			.then(res => {
 				var isAdmin = res.data.admin;
 				this.setState({ admin: isAdmin });

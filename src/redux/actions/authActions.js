@@ -22,7 +22,7 @@ function errorToString(err) {
 export const SignupNewUser = (userData, history) => dispatch => {
 	dispatch(SetUserLoading(true));
 	axios
-		.post("https://board2675.herokuapp.com/api/auth/register", userData)
+		.post(process.env.REACT_APP_API_URL + "/auth/register", userData)
 		.then(res => {
 			dispatch(SigninUser(userData, history));
 		})
@@ -42,7 +42,7 @@ export const SignupNewUser = (userData, history) => dispatch => {
 export const SigninUser = (userData, history) => dispatch => {
 	dispatch(SetUserLoading(true));
 	axios
-		.post("https://board2675.herokuapp.com/api/auth/login", userData)
+		.post(process.env.REACT_APP_API_URL + "/auth/login", userData)
 		.then(res => {
 			try {
 				const { token } = res.data;
@@ -69,7 +69,7 @@ export const SigninUser = (userData, history) => dispatch => {
 
 export const ConnectCurrentUser = (userData, token) => dispatch => {
 	axios
-		.get("https://board2675.herokuapp.com/api/user/get", { headers: { 'token': token } })
+		.get(process.env.REACT_APP_API_URL + "/user/get", { headers: { 'token': token } })
 		.then(res => {
 			userData.email = res.data.user.email;
 			userData.points = res.data.user.points;
