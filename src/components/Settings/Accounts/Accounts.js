@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { ToastsStore } from 'react-toasts';
 import axios from "axios";
 import ReactTooltip from 'react-tooltip'
+import store from "../../../redux/store";
 
 
 import "../../../utils/styles/global.css";
@@ -14,6 +15,8 @@ class Accounts extends Component {
 		var userId;
 		if (this.props.ofUser) {
 			userId = this.props.ofUser.userId;
+		} else {
+			userId = store.getState().auth.user.id
 		}
 		this.state = {
 			accountsFields: {},
@@ -30,20 +33,22 @@ class Accounts extends Component {
 	}
 
 	errorToString(err) {
-		var msg = "";
-		const type = Object.prototype.toString.call(err);
-		if (type === '[object Object]') {
-			Object.keys(err).forEach(key => {
-				msg += err[key];
-				msg += ". ";
-			});
-		}
-		if (msg === "") msg = "Unknown Error.";
+		var msg = " " + err.join(", ");
+		
+		// const type = Object.prototype.toString.call(err);
+		// console.log(type);
+		// if (type === '[object Object]') {
+		// 	Object.keys(err).forEach(key => {
+		// 		msg += err[key];
+		// 		msg += ". ";
+		// 	});
+		// }
+		// if (msg === "") msg = " Unknown Error.";
 		return msg;
 	}
 
 	getUsersAccounts() {
-		axios.get(process.env.REACT_APP_API_URL + "/user/accounts/get", { headers: { 'token': this.state.token, userid: this.state.userId } }).then(res => {
+		axios.get(process.env.REACT_APP_API_URL + "/user/accounts/" + this.state.userId, { headers: { 'token': this.state.token } }).then(res => {
 			var userAccounts = res.data;
 			Object.keys(userAccounts).forEach(key => {
 				this.setState({ [key]: userAccounts[key] });
@@ -78,11 +83,8 @@ class Accounts extends Component {
 	onSubmit = e => {
 		e.preventDefault();
 		this.setState({ loading: true });
-		axios.post(process.env.REACT_APP_API_URL + "/user/accounts/update", { 'accounts': this.state.accountsFields }, {
-			headers: {
-				'Content-Type': 'application/json',
-				'userid': this.state.userId,
-			}
+		axios.put(process.env.REACT_APP_API_URL + "/user/accounts/" + this.state.userId, { 'accounts': this.state.accountsFields }, {
+			headers: { 'Content-Type': 'application/json' }
 		}).then(res => {
 			if (res.data.success) {
 				ToastsStore.info("✔️ Your changes have been saved.");
@@ -94,10 +96,12 @@ class Accounts extends Component {
 				});
 			}
 			else
-				ToastsStore.info("⚠️ Error: " + this.errorToString(res.data.message));
+				ToastsStore.info("⚠️ Error: " + this.errorToString(res.data.messages));
 			this.setState({ loading: false });
 		}).catch(err => {
-			ToastsStore.info("⚠️ Error Saving Your changes.");
+			console.log(err.response.data);
+			
+			ToastsStore.info("⚠️ Error:" + this.errorToString(err.response.data.messages));
 			this.setState({ loading: false });
 		});
 	};

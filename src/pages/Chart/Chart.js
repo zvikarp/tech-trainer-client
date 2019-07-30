@@ -46,7 +46,7 @@ class Chart extends Component {
 	}
 
 	checkIfAdmin() {
-		axios.get(process.env.REACT_APP_API_URL + "/user/admin/get", { headers: { token: this.state.token } })
+		axios.get(process.env.REACT_APP_API_URL + "/user/admin/" + this.state.user.id, { headers: { token: this.state.token } })
 			.then(res => {
 				var isAdmin = res.data.admin;
 				this.setState({ admin: isAdmin });

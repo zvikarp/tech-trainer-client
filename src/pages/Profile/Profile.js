@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { User, History } from '../../components/Profile';
 import axios from "axios";
 import { ToastsStore } from 'react-toasts';
+import store from "../../redux/store";
 import "../../utils/styles/global.css";
 import "./Profile.css";
 
@@ -9,10 +10,11 @@ class Profile extends Component {
 	constructor(props) {
 		super(props);
 		const data = this.props.location.data;
-		console.log(data);
 		var userId;
 		if (data) {
 			userId = data.userId;
+		} else {
+			userId = store.getState().auth.user.id
 		}
 		console.log(userId);
 		this.state = {
@@ -51,7 +53,7 @@ class Profile extends Component {
 	}
 
 	getHistory() {
-		axios.get(process.env.REACT_APP_API_URL + "/history/get", { headers: { 'token': this.state.token, userid: this.state.userId } }).then(res => {
+		axios.get(process.env.REACT_APP_API_URL + "/history/" + this.state.userId, { headers: { 'token': this.state.token } }).then(res => {
 			var accounts = {};
 			var dates = [];
 			Object.values(res.data).forEach(doc => {
