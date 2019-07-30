@@ -31,7 +31,7 @@ class Chart extends Component {
 	}
 
 	getChart() {
-		axios.get(process.env.REACT_APP_API_URL + "/chart/get").then(res => {
+		axios.get(process.env.REACT_APP_API_URL + "/chart/").then(res => {
 			if (this.state.token) this.checkIfAdmin();
 			this.setState({
 				top3: res.data.top3,
