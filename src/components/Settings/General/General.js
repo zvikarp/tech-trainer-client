@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { ToastsStore } from 'react-toasts';
+import store from "../../../redux/store";
 import "../../../utils/styles/global.css";
 import "./General.css";
 import axios from "axios";
@@ -10,6 +11,8 @@ class General extends Component {
 		var userId;
 		if (this.props.ofUser) {
 			userId = this.props.ofUser.userId;
+		} else {
+			userId = store.getState().auth.user.id
 		}
 		this.state = {
 			name: "",
@@ -26,16 +29,18 @@ class General extends Component {
 	}
 
 	getAccountDetailes() {
-		axios.get(process.env.REACT_APP_API_URL + "/user/get", { headers: { 'token': localStorage.jwtToken, userid: this.state.userId } })
+		axios.get(process.env.REACT_APP_API_URL + "/user/" + this.state.userId, { headers: { 'token': localStorage.jwtToken } })
 			.then(res => {
 				this.setState({
-					name: res.data.user.name,
-					email: res.data.user.email,
-					points: res.data.user.points,
-					bonusPoints: res.data.user.bonusPoints,
+					name: res.data.name,
+					email: res.data.email,
+					points: res.data.points,
+					bonusPoints: res.data.bonusPoints,
 				});
 			})
 			.catch(err => {
+				console.log(err);
+				
 				ToastsStore.info("⚠️ Unknown Error");
 			});
 	}
@@ -47,9 +52,7 @@ class General extends Component {
 	onSubmit = e => {
 		e.preventDefault();
 		this.setState({ loading: true });
-		console.log(this.state.bonusPoints);
-
-		axios.post(process.env.REACT_APP_API_URL + "/user/settings/update", {
+		axios.put(process.env.REACT_APP_API_URL + "/user/settings/" + this.state.userId, {
 			'name': this.state.name,
 			'email': this.state.email,
 			'bonusPoints': this.state.userId ? this.state.bonusPoints : 0,
@@ -57,7 +60,6 @@ class General extends Component {
 			{
 				headers: {
 					'Content-Type': 'application/json',
-					'userid': this.state.userId,
 				}
 			}).then(res => {
 				if (res.data.success)

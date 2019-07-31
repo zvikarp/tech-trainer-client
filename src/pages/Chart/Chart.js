@@ -140,7 +140,7 @@ class Chart extends Component {
 				<Passed passed={this.state.passed} loaded={this.state.loaded} admin={this.state.admin} />
 				<Under under={this.state.under} loaded={this.state.loaded} admin={this.state.admin} />
 				<div className="last-updated">
-					last updated at:{this.renderLastUpdatedChart()}
+					last updated at: {this.renderLastUpdatedChart()}
 				</div>
 			</div>
 		);

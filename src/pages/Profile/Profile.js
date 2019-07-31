@@ -42,9 +42,9 @@ class Profile extends Component {
 	}
 
 	getUser() {
-		axios.get(process.env.REACT_APP_API_URL + "/user/get", { headers: { token: this.state.token, userid: this.state.userId } })
+		axios.get(process.env.REACT_APP_API_URL + "/user/" + this.state.userId, { headers: { token: this.state.token } })
 			.then(res => {
-				this.setState({ user: res.data.user })
+				this.setState({ user: res.data })
 			}).catch(err => {
 				ToastsStore.info("⚠️ Error Loading Data.");
 				console.log(err);

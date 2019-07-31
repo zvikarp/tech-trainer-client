@@ -67,18 +67,19 @@ export const SigninUser = (userData, history) => dispatch => {
 		});
 };
 
-export const ConnectCurrentUser = (userData, token) => dispatch => {
-	axios
-		.get(process.env.REACT_APP_API_URL + "/user/get", { headers: { 'token': token } })
-		.then(res => {
-			userData.email = res.data.user.email;
-			userData.points = res.data.user.points;
-			dispatch(SetCurrentUser(userData));
-		})
-		.catch(err => {
-			ToastsStore.info("⚠️ Error Signing in: " + errorToString(""));
-		});
-}
+// export const ConnectCurrentUser = (userData, token) => dispatch => {
+// 	console.log(userData);
+// 	axios
+// 		.get(process.env.REACT_APP_API_URL + "/user/" + userData.token, { headers: { 'token': token } })
+// 		.then(res => {
+// 			userData.email = res.data.user.email;
+// 			userData.points = res.data.user.points;
+// 			dispatch(SetCurrentUser(userData));
+// 		})
+// 		.catch(err => {
+// 			ToastsStore.info("⚠️ Error Signing in: " + errorToString(""));
+// 		});
+// }
 
 // Set logged in user
 export const SetCurrentUser = (decoded) => {
