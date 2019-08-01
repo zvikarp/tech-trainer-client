@@ -89,7 +89,7 @@ class Accounts extends Component {
 			if (res.data.success) {
 				ToastsStore.info("✔️ Your changes have been saved.");
 				ToastsStore.info("ℹ️ We are working on appling your changes to the chart.");
-				axios.post(process.env.REACT_APP_API_URL + "/cronjob/updateuserspoints", { 'accounts': this.state.accountsFields }).then(res => {
+				axios.post(process.env.REACT_APP_API_URL + "/cronjob/updateuserspoints/" + this.state.userId, { 'accounts': this.state.accountsFields }).then(res => {
 					ToastsStore.info("✔️ Your changes were applied to the chart!");
 				}).catch(err => {
 					ToastsStore.info("⚠️ Error appling your changes to the chart.");
