@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import store from "../../redux/store";
-import axios from "axios";
 import { connect } from "react-redux";
 import { ToastsStore } from 'react-toasts';
 
 import messages from "../../consts/messages"
 import { LogoutUser } from "../../redux/actions/authActions";
 import { TopThree, Passed, Under } from "../../components/Chart";
+import { getChart } from "../../sheard/apis/chart"
+import { checkIfAdmin } from "../../sheard/apis/user"
 
 import "../../utils/styles/global.css";
 import "./Chart.css";
@@ -29,32 +30,33 @@ class Chart extends Component {
 	}
 
 	componentDidMount() {
-		this.getChart();
+		this.loadChart();
 	}
 
-	getChart() {
-		axios.get(process.env.REACT_APP_API_URL + "/chart/").then(res => {
-			if (this.state.token) this.checkIfAdmin();
+	async loadChart() {
+		try {
+			const chart = await getChart();
+			if (this.state.token) this.updateAdminStatus();
 			this.setState({
-				top3: res.data.top3,
-				passed: res.data.passed,
-				under: res.data.under,
-				lastUpdatedChart: res.data.lastUpdated,
+				top3: chart.data.top3,
+				passed: chart.data.passed,
+				under: chart.data.under,
+				lastUpdatedChart: chart.data.lastUpdated,
 				loaded: true,
 			});
-		}).catch(err => {
+		} catch (err) {
 			ToastsStore.info(messages.ERROR_LOADING_DATA);
-		});
+		}
 	}
 
-	checkIfAdmin() {
-		axios.get(process.env.REACT_APP_API_URL + "/user/admin/" + this.state.user.id, { headers: { token: this.state.token } })
-			.then(res => {
-				var isAdmin = res.data.admin;
-				this.setState({ admin: isAdmin });
-			}).catch(err => {
-				ToastsStore.info(messages.ERROR_LOADING_DATA);
-			});
+	async updateAdminStatus() {
+		try {
+			const isAdminRes = await checkIfAdmin(this.state.user.id);
+			const isAdmin = isAdminRes.data.admin;
+			this.setState({ admin: isAdmin });
+		} catch (err) {
+			ToastsStore.info(messages.ERROR_LOADING_DATA);
+		}
 	}
 
 	signout = e => {

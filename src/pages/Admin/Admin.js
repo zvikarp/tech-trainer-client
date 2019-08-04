@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import axios from "axios";
+import { ToastsStore } from 'react-toasts';
 
+import messages from "../../consts/messages"
 import { AllAccounts } from "../../components/Admin";
+import { getAccounts } from "../../sheard/apis/accounts";
 
 import '../../utils/styles/global.css';
 import './Admin.css';
@@ -21,10 +23,9 @@ class Admin extends Component {
 		this.getWebsites();
 	}
 
-	getWebsites() {
-		axios.get(process.env.REACT_APP_API_URL + "/accounts/", { headers: { 'token': this.state.token } }).then(res => {
-			var accounts = res.data;
-			delete accounts._id;
+	async getWebsites() {
+		try {
+			const accounts = await getAccounts()
 			var websites = [];
 			var fields = [];
 			Object.keys(accounts).forEach(key => {
@@ -37,7 +38,9 @@ class Admin extends Component {
 				}
 				this.setState({ websites: websites, fields: fields });
 			});
-		});
+		} catch (err) {
+			ToastsStore.info(messages.ERROR_LOADING_DATA);
+		}
 	}
 
 	render() {

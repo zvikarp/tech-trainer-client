@@ -1,10 +1,12 @@
 import React, { Component } from "react";
-import { User, History } from '../../components/Profile';
-import axios from "axios";
 import { ToastsStore } from 'react-toasts';
 
 import messages from "../../consts/messages";
 import store from "../../redux/store";
+import { User, History } from '../../components/Profile';
+import { getAccounts } from "../../sheard/apis/accounts";
+import { getHistory } from "../../sheard/apis/history";
+import { getUser } from "../../sheard/apis/user";
 
 import "../../utils/styles/global.css";
 import "./Profile.css";
@@ -31,35 +33,35 @@ class Profile extends Component {
 	}
 
 	componentDidMount() {
-		this.getAccounts();
-		this.getUser();
-		this.getHistory();
+		this.loadAccounts();
+		this.loadUser();
+		this.loadHistory();
 	}
 
-	getAccounts() {
-		axios.get(process.env.REACT_APP_API_URL + "/accounts/", { headers: { 'token': this.state.token } }).then(res => {
-			var accounts = res.data;
-			delete accounts._id;
-			this.setState({ accounts: accounts });
-		});
+	async loadAccounts() {
+		try {
+			const accounts = await getAccounts(this.state.userId);
+			this.setState({ accounts });
+		} catch (err) {
+			ToastsStore.info(messages.ERROR_LOADING_DATA);
+		}
 	}
 
-	getUser() {
-		axios.get(process.env.REACT_APP_API_URL + "/user/" + this.state.userId, { headers: { token: this.state.token } })
-			.then(res => {
-				this.setState({ user: res.data })
-			}).catch(err => {
-				ToastsStore.info(messages.ERROR_LOADING_DATA);
-				console.log(err);
-			});
-		this.setState({ user: this.state.user });
+	async loadUser() {
+		try {
+			const user = await getUser(this.state.userId);
+			this.setState({ user })
+		} catch (err) {
+			ToastsStore.info(messages.ERROR_LOADING_DATA);
+		}
 	}
 
-	getHistory() {
-		axios.get(process.env.REACT_APP_API_URL + "/history/" + this.state.userId, { headers: { 'token': this.state.token } }).then(res => {
+	async loadHistory() {
+		try {
+			const historyRes = await getHistory(this.state.userId);
 			var accounts = {};
 			var dates = [];
-			Object.values(res.data).forEach(doc => {
+			Object.values(historyRes).forEach(doc => {
 				dates.push(doc.timestamp);
 				if (!accounts['all points']) accounts['all points'] = [];
 				accounts['all points'].push(doc.points);
@@ -82,11 +84,9 @@ class Profile extends Component {
 				categories: categories,
 			}
 			this.setState({ history: history });
-		}).catch(err => {
-			console.log(err);
-
+		} catch (err) {
 			ToastsStore.info(messages.ERROR_LOADING_DATA);
-		});
+		}
 	}
 
 	renderSettingsButton() {
