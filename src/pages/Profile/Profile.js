@@ -2,7 +2,10 @@ import React, { Component } from "react";
 import { User, History } from '../../components/Profile';
 import axios from "axios";
 import { ToastsStore } from 'react-toasts';
+
+import messages from "../../consts/messages";
 import store from "../../redux/store";
+
 import "../../utils/styles/global.css";
 import "./Profile.css";
 
@@ -46,7 +49,7 @@ class Profile extends Component {
 			.then(res => {
 				this.setState({ user: res.data })
 			}).catch(err => {
-				ToastsStore.info("⚠️ Error Loading Data.");
+				ToastsStore.info(messages.ERROR_LOADING_DATA);
 				console.log(err);
 			});
 		this.setState({ user: this.state.user });
@@ -82,7 +85,7 @@ class Profile extends Component {
 		}).catch(err => {
 			console.log(err);
 
-			ToastsStore.info("⚠️ Error Loading Data.");
+			ToastsStore.info(messages.ERROR_LOADING_DATA);
 		});
 	}
 

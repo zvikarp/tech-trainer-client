@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import "../../../utils/styles/global.css";
-import "./Top.css";
 import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
+
+import "../../../utils/styles/global.css";
+import "./Top.css";
 
 class Top extends Component {
 	onAdminClick() {

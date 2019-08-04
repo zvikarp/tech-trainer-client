@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { AccountCard } from '../';
 import axios from "axios";
 import { ToastsStore } from 'react-toasts';
+
+import messages from "../../../consts/messages";
+import { AccountCard } from "../";
 
 import "../../../utils/styles/global.css";
 import "./AllAccounts.css";
@@ -41,10 +43,10 @@ class AllAccounts extends Component {
 				accountsToBeUpdated[accountId] = this.state.accounts[accountId];
 		});
 		axios.put(process.env.REACT_APP_API_URL + "/accounts/", { 'accounts': accountsToBeUpdated }).then(res => {
-			ToastsStore.info("✔️ Your changes have been saved.");
+			ToastsStore.info(messages.SUCCESS_SAVING_CHANGES);
 			this.setState({ loading: false })
 		}).catch(err => {
-			ToastsStore.info("⚠️ Error Saving Your changes.");
+			ToastsStore.info(messages.ERROR_SAVING_CHANGES);
 			this.setState({ loading: false })
 		});
 	}
@@ -95,8 +97,7 @@ class AllAccounts extends Component {
 
 	renderAccountCards() {
 		const length = Object.keys(this.state.accounts).length;
-
-		if (length < 1) {
+		if (length < 1) { 
 			return (<div className="all-accounts-loading">Loading...</div>)
 		}
 		var accountsCards = [];

@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import Line from "react-apexcharts";
+
+import store from "../../../redux/store";
+
 import "../../../utils/styles/global.css";
 import "./History.css";
-import store from "../../../redux/store";
 
 class History extends Component {
 	constructor(props) {

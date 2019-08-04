@@ -1,8 +1,9 @@
 import axios from "axios";
-import setAuthToken from "../../utils/auth/setAuthToken";
 import jwt_decode from "jwt-decode";
 import { ToastsStore } from "react-toasts";
 
+import messages from "../../consts/messages"
+import setAuthToken from "../../utils/auth/setAuthToken";
 import { GET_ERRORS, SET_CURRENT_USER, USER_LOADING } from "./types";
 
 function errorToString(err) {
@@ -32,7 +33,7 @@ export const SignupNewUser = (userData, history) => dispatch => {
 				payload: err.response.data
 			});
 			ToastsStore.info(
-				"⚠️ Error Signing up: " + errorToString(err.response.data)
+				messages.KNOWN_ERROR_PREFIX + errorToString(err.response.data)
 			);
 			dispatch(SetUserLoading(false));
 		});
@@ -51,7 +52,7 @@ export const SigninUser = (userData, history) => dispatch => {
 				const decoded = jwt_decode(token);
 				dispatch(SetCurrentUser(decoded));
 			} catch {
-				ToastsStore.info("⚠️ Error Signing in: " + errorToString(""));
+				ToastsStore.info(messages.KNOWN_ERROR_PREFIX + errorToString(""));
 				dispatch(SetUserLoading(false));
 			}
 		})
@@ -61,25 +62,11 @@ export const SigninUser = (userData, history) => dispatch => {
 				payload: err.response.data
 			});
 			ToastsStore.info(
-				"⚠️ Error Signing in: " + errorToString(err.response.data)
+				messages.KNOWN_ERROR_PREFIX + errorToString(err.response.data)
 			);
 			dispatch(SetUserLoading(false));
 		});
 };
-
-// export const ConnectCurrentUser = (userData, token) => dispatch => {
-// 	console.log(userData);
-// 	axios
-// 		.get(process.env.REACT_APP_API_URL + "/user/" + userData.token, { headers: { 'token': token } })
-// 		.then(res => {
-// 			userData.email = res.data.user.email;
-// 			userData.points = res.data.user.points;
-// 			dispatch(SetCurrentUser(userData));
-// 		})
-// 		.catch(err => {
-// 			ToastsStore.info("⚠️ Error Signing in: " + errorToString(""));
-// 		});
-// }
 
 // Set logged in user
 export const SetCurrentUser = (decoded) => {

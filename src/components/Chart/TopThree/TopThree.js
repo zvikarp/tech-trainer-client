@@ -1,5 +1,7 @@
 import React, { Component } from "react";
+
 import { Top } from "../index";
+
 import "../../../utils/styles/global.css";
 import "./TopThree.css";
 

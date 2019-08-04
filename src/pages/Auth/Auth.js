@@ -1,9 +1,11 @@
-import React, { Component } from 'react'
-import { Signup, Signin } from '../../components/Auth/index.js'
+import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+
+import { Signup, Signin } from "../../components/Auth/index.js";
 import { SignupNewUser, SigninUser } from "../../redux/actions/authActions";
+
 import "../../utils/styles/global.css";
 import "./Auth.css";
 

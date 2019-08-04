@@ -5,8 +5,10 @@ import axios from "axios";
 import { connect } from "react-redux";
 import { ToastsStore } from 'react-toasts';
 
+import messages from "../../consts/messages"
 import { LogoutUser } from "../../redux/actions/authActions";
 import { TopThree, Passed, Under } from "../../components/Chart";
+
 import "../../utils/styles/global.css";
 import "./Chart.css";
 
@@ -41,7 +43,7 @@ class Chart extends Component {
 				loaded: true,
 			});
 		}).catch(err => {
-			ToastsStore.info("⚠️ Error Loading Data.");
+			ToastsStore.info(messages.ERROR_LOADING_DATA);
 		});
 	}
 
@@ -51,7 +53,7 @@ class Chart extends Component {
 				var isAdmin = res.data.admin;
 				this.setState({ admin: isAdmin });
 			}).catch(err => {
-				ToastsStore.info("⚠️ Error Loading Data.");
+				ToastsStore.info(messages.ERROR_LOADING_DATA);
 			});
 	}
 

@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-import "../../../utils/styles/global.css";
+
 import store from "../../../redux/store";
+
+import "../../../utils/styles/global.css";
 import "./Signup.css";
 
 class Signup extends Component {

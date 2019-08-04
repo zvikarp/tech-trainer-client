@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 import { ToastsStore } from 'react-toasts';
+import axios from "axios";
+
+import messages from "../../../consts/messages";
 import store from "../../../redux/store";
+
 import "../../../utils/styles/global.css";
 import "./General.css";
-import axios from "axios";
 
 class General extends Component {
 	constructor(props) {
@@ -41,7 +44,7 @@ class General extends Component {
 			.catch(err => {
 				console.log(err);
 				
-				ToastsStore.info("⚠️ Unknown Error");
+				ToastsStore.info(messages.UNKNOWN_ERROR);
 			});
 	}
 
@@ -63,13 +66,13 @@ class General extends Component {
 				}
 			}).then(res => {
 				if (res.data.success)
-					ToastsStore.info("✔️ Your changes have been saved.");
+					ToastsStore.info(messages.SUCCESS_SAVING_CHANGES);
 				else
-					ToastsStore.info("⚠️ Error Saving Your changes.");
+					ToastsStore.info(messages.ERROR_SAVING_CHANGES);
 
 				this.setState({ loading: false });
 			}).catch(err => {
-				ToastsStore.info("⚠️ Error Saving Your changes.");
+				ToastsStore.info(messages.ERROR_SAVING_CHANGES);
 				this.setState({ loading: false });
 			});
 	};

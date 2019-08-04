@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+
 import { General, Accounts } from '../../components/Settings';
+
 import '../../utils/styles/global.css';
 import './Settings.css';
 

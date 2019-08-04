@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { AllAccounts } from '../../components/Admin';
 import axios from "axios";
+
+import { AllAccounts } from "../../components/Admin";
 
 import '../../utils/styles/global.css';
 import './Admin.css';

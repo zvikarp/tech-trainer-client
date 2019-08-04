@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { ToastsStore } from 'react-toasts';
 import axios from "axios";
 import ReactTooltip from 'react-tooltip'
+
+import messages from "../../../consts/messages";
 import store from "../../../redux/store";
 
 
@@ -34,16 +36,6 @@ class Accounts extends Component {
 
 	errorToString(err) {
 		var msg = " " + err.join(", ");
-		
-		// const type = Object.prototype.toString.call(err);
-		// console.log(type);
-		// if (type === '[object Object]') {
-		// 	Object.keys(err).forEach(key => {
-		// 		msg += err[key];
-		// 		msg += ". ";
-		// 	});
-		// }
-		// if (msg === "") msg = " Unknown Error.";
 		return msg;
 	}
 
@@ -87,21 +79,21 @@ class Accounts extends Component {
 			headers: { 'Content-Type': 'application/json' }
 		}).then(res => {
 			if (res.data.success) {
-				ToastsStore.info("✔️ Your changes have been saved.");
-				ToastsStore.info("ℹ️ We are working on appling your changes to the chart.");
+				ToastsStore.info(messages.SUCCESS_SAVING_CHANGES);
+				ToastsStore.info(messages.UPDATING_CHART);
 				axios.post(process.env.REACT_APP_API_URL + "/cronjob/updateuserspoints/" + this.state.userId, { 'accounts': this.state.accountsFields }).then(res => {
-					ToastsStore.info("✔️ Your changes were applied to the chart!");
+					ToastsStore.info(messages.SUCCESS_UPDATING_CHART);
 				}).catch(err => {
-					ToastsStore.info("⚠️ Error appling your changes to the chart.");
+					ToastsStore.info(messages.ERROR_UPDATING_CHART);
 				});
 			}
 			else
-				ToastsStore.info("⚠️ Error: " + this.errorToString(res.data.messages));
+				ToastsStore.info(messages.KNOWN_ERROR_PREFIX + this.errorToString(res.data.messages));
 			this.setState({ loading: false });
 		}).catch(err => {
 			console.log(err.response.data);
 			
-			ToastsStore.info("⚠️ Error:" + this.errorToString(err.response.data.messages));
+			ToastsStore.info(messages.KNOWN_ERROR_PREFIX + this.errorToString(err.response.data.messages));
 			this.setState({ loading: false });
 		});
 	};
