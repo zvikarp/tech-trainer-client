@@ -7,7 +7,7 @@ export function getAccounts() {
 	return axios.get(process.env.REACT_APP_API_URL + "/accounts/").then(res => {
 		return res.data;
 	}).catch(err => {		
-		return err;
+		throw new Error(err);
 	});
 }
 
@@ -18,6 +18,6 @@ export function putAccounts(accounts) {
 	return axios.put(process.env.REACT_APP_API_URL + "/accounts/", { 'accounts': accounts }).then(res => {
 		return res;
 	}).catch(err => {
-		return err;
+		throw new Error(err);
 	});
 }

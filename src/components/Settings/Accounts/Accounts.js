@@ -4,6 +4,7 @@ import ReactTooltip from 'react-tooltip'
 
 import messages from "../../../consts/messages";
 import store from "../../../redux/store";
+import { OButton } from "../../core";
 import { getAccounts } from "../../../sheard/apis/accounts";
 import { updateUserCronjob } from "../../../sheard/apis/cronjob";
 import { getUserAccounts, putUserAccounts } from "../../../sheard/apis/user";
@@ -95,15 +96,19 @@ class Accounts extends Component {
 	renderSaveButton() {
 		if (this.state.loading) {
 			return (
-				<button disabled className="signin-button">
-					WORKING ON IT...
-        </button>
+				<OButton
+					disabled
+					type="primary signin-button"
+					text="WORKING ON IT..."
+				/>
 			);
 		} else {
 			return (
-				<button className="primary signin-button" type="submit">
-					SAVE CHANGES
-        </button>
+				<OButton
+					submit
+					type="primary signin-button"
+					text="SAVE CHANGES"
+				/>
 			);
 		}
 	}
@@ -129,6 +134,8 @@ class Accounts extends Component {
 	renderAccountFields() {
 		var accountsFields = [];
 		Object.keys(this.state.accounts).forEach(key => {
+			console.log(key);
+			
 			accountsFields.push(this.renderAccountField(key, this.state.accounts[key]));
 		})
 		return (accountsFields);

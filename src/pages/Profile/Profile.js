@@ -94,7 +94,7 @@ class Profile extends Component {
 		if (this.state.userId) {
 			return (
 				<OButton
-					className="settings-button"
+					type="primary settings-button"
 					text="SETTINGS"
 					icon="fas fa-cogs"
 					onClick={() => this.props.history.push({
@@ -102,15 +102,6 @@ class Profile extends Component {
 						data: { "userId": this.state.userId },
 					})}
 				/>
-				// <button
-				// 	className="primary settings-button"
-				// 	onClick={() => this.props.history.push({
-				// 		pathname: '/settings',
-				// 		data: { "userId": this.state.userId },
-				// 	})} >
-				// 	<i className="fas fa-cogs" />
-				// 	<div className="button-text">SETTINGS</div>
-				// </button>
 			);
 		} else {
 			return (<div />);
@@ -140,10 +131,12 @@ class Profile extends Component {
 	render() {
 		return (
 			<div>
-				<button className="primary back-button" onClick={() => this.props.history.push("/")}>
-					<i className="fas fa-chevron-left" />
-					<div className="button-text">BACK</div>
-				</button>
+				<OButton
+					type="primary back-button"
+					onClick={() => this.props.history.push("/")}
+					icon="fas fa-chevron-left"
+					text="BACK"
+				/>
 				{this.renderSettingsButton()}
 				{this.renderUser()}
 				{this.renderHistory()}

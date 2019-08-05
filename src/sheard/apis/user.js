@@ -7,7 +7,7 @@ export function getUser(userId) {
 	return axios.get(process.env.REACT_APP_API_URL + "/user/" + userId).then(res => {
 		return res.data;
 	}).catch(err => {		
-		return err;
+		throw new Error(err);
 	});
 }
 
@@ -18,7 +18,7 @@ export function getUserAccounts(userId) {
 	return axios.get(process.env.REACT_APP_API_URL + "/user/accounts/" + userId).then(res => {
 		return res.data;
 	}).catch(err => {		
-		return err;
+		throw new Error(err);
 	});
 }
 
@@ -29,7 +29,7 @@ export function putUserAccounts(userId, accounts) {
 	return axios.put(process.env.REACT_APP_API_URL + "/user/accounts/" + userId, { accounts }).then(res => {
 		return res;
 	}).catch(err => {
-		return err;
+		throw new Error(err);
 	});
 }
 
@@ -40,7 +40,7 @@ export function putUserSettings(userId, name, email, bonusPoints) {
 	return axios.put(process.env.REACT_APP_API_URL + "/user/settings/" + userId, { name, email, bonusPoints }).then(res => {
 		return res;
 	}).catch(err => {
-		return err;
+		throw new Error(err);
 	});
 }
 
@@ -51,6 +51,6 @@ export function checkIfAdmin(userId) {
 	return axios.get(process.env.REACT_APP_API_URL + "/user/admin/" + userId).then(res => {
 		return res;
 	}).catch(err => {		
-		return err;
+		throw new Error(err);
 	});
 }

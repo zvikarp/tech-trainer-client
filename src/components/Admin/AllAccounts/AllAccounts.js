@@ -3,6 +3,7 @@ import { ToastsStore } from 'react-toasts';
 
 import messages from "../../../consts/messages";
 import { AccountCard } from "../";
+import { OButton } from "../../core";
 import { getAccounts, putAccounts } from "../../../sheard/apis/accounts";
 
 import "../../../utils/styles/global.css";
@@ -113,13 +114,19 @@ class AllAccounts extends Component {
 	renderSaveButton() {
 		if (this.state.loading) {
 			return (
-				<button disabled className="primary align-horizontally">
-					WORKING ON IT...
-        </button>
+				<OButton
+					disabled
+					type="primary signin-button"
+					text="WORKING ON IT..."
+				/>
 			);
 		} else {
 			return (
-				<button className="primary align-horizontally" onClick={this.handleOnSaveChanges}>SAVE CHANGES</button>
+				<OButton
+				onClick={this.handleOnSaveChanges}
+					type="primary align-horizontally"
+					text="SAVE CHANGES"
+				/>
 			);
 		}
 	}
@@ -130,7 +137,11 @@ class AllAccounts extends Component {
 				<h2 className="signin-title">Accounts</h2>
 				{this.renderAccountCards()}
 				<div className="all-accounts-action-section">
-					<button className="primary align-horizontally" onClick={this.handleOnAddAccount}>ADD FIELD</button>
+				<OButton
+					onClick={this.handleOnAddAccount}
+					type="primary align-horizontally"
+					text="ADD FIELD"
+				/>
 					{this.renderSaveButton()}
 				</div>
 			</div>

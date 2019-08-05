@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { ToastsStore } from 'react-toasts';
 
 import messages from "../../consts/messages"
+import { OButton } from "../../components/core";
 import { AllAccounts } from "../../components/Admin";
 import { getAccounts } from "../../sheard/apis/accounts";
 
@@ -46,10 +47,12 @@ class Admin extends Component {
 	render() {
 		return (
 			<div>
-				<button className="primary back-button" onClick={() => this.props.history.push("/")}>
-					<i className="fas fa-chevron-left" />
-					<div className="button-text">BACK</div>
-				</button>
+				<OButton
+					type="primary back-button"
+					onClick={() => this.props.history.push("/")}
+					icon="fas fa-chevron-left"
+					text="BACK"
+				/>
 				<AllAccounts websites={this.state.websites} />
 			</div>
 		);

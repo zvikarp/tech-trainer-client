@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import { OButton } from "../../core";
+
 import "../../../utils/styles/global.css";
 import "./AccountCard.css";
 
@@ -64,11 +66,12 @@ class AccountCard extends Component {
 						type="text"
 					/>
 				</div>
-				<button
+				<OButton
 					disabled={this.props.account.type === "website"}
-					className="secondary delete-button"
 					onClick={this.onDelete}
-				>DELETE</button>
+					type="secondary delete-button"
+					text="DELETE"
+				/>
 			</div>
 		);
 	}	

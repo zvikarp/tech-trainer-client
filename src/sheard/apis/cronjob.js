@@ -9,6 +9,6 @@ export function updateUserCronjob(userId) {
 	return axios.get(process.env.REACT_APP_API_URL + "/cronjob/updateuserspoints/" + userId).then(res => {
 		return res;
 	}).catch(err => {		
-		return err;
+		throw new Error(err);
 	});
 }

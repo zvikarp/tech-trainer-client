@@ -6,6 +6,7 @@ class OButton extends Component {
 		const hasIcon = this.props.icon !== undefined;
 		return (
 			<button
+				type={this.props.submit ? "submit" : null}
 				className={this.props.type}
 				disabled={this.props.disabled}
 				onClick={this.props.onClick} >
@@ -19,6 +20,7 @@ class OButton extends Component {
 OButton.defaultProps = {
 	type: "primary",
 	disabled: false,
+	submit: false,
 }
 
 OButton.propTypes = {
@@ -27,6 +29,7 @@ OButton.propTypes = {
 	type: PropTypes.string,
 	icon: PropTypes.string,
 	disabled: PropTypes.bool,
+	submit: PropTypes.bool,
 }
 
 export default OButton;

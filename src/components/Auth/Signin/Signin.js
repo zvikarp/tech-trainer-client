@@ -1,5 +1,7 @@
 import React, { Component } from "react";
+
 import store from "../../../redux/store";
+import { OButton } from "../../core";
 
 import "../../../utils/styles/global.css";
 import "./Signin.css";
@@ -28,15 +30,19 @@ class Signin extends Component {
   renderSigninButton() {
     if (store.getState().auth.loading) {
       return (
-        <button disabled className="signin-button">
-          WORKING ON IT...
-        </button>
+        <OButton
+					disabled
+					type="primary signin-button"
+					text="WORKING ON IT..."
+				/>
       );
     } else {
       return (
-        <button className="primary signin-button" type="submit">
-          SIGN IN
-        </button>
+        <OButton
+					submit
+					type="primary signin-button"
+					text="SAVE CHANGES"
+				/>
       );
     }
   }

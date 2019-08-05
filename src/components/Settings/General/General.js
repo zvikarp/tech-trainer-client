@@ -4,6 +4,7 @@ import { ToastsStore } from 'react-toasts';
 import messages from "../../../consts/messages";
 import store from "../../../redux/store";
 import { getUser, putUserSettings } from "../../../sheard/apis/user";
+import { OButton } from "../../core";
 
 import "../../../utils/styles/global.css";
 import "./General.css";
@@ -53,7 +54,7 @@ class General extends Component {
 		e.preventDefault();
 		this.setState({ loading: true });
 		try {
-			putUserSettings(this.state.userId, this.state.name, this.state.email, this.state.bonusPoints);
+			await putUserSettings(this.state.userId, this.state.name, this.state.email, this.state.bonusPoints);
 			ToastsStore.info(messages.SUCCESS_SAVING_CHANGES);
 		} catch (err) {
 			ToastsStore.info(messages.ERROR_SAVING_CHANGES);
@@ -65,15 +66,19 @@ class General extends Component {
 	renderSaveButton() {
 		if (this.state.loading) {
 			return (
-				<button disabled className="signin-button">
-					WORKING ON IT...
-        </button>
+				<OButton
+					disabled
+					type="primary signin-button"
+					text="WORKING ON IT..."
+				/>
 			);
 		} else {
 			return (
-				<button className="primary signin-button" type="submit">
-					SAVE CHANGES
-        </button>
+				<OButton
+					submit
+					type="primary signin-button"
+					text="SAVE CHANGES"
+				/>
 			);
 		}
 	}

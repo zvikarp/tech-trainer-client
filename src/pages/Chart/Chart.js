@@ -134,12 +134,11 @@ class Chart extends Component {
 		} else {
 			return (
 				<div className="chart-top-bar-right">
-					<button
-						className="secondary chart-signin-button"
+					<OButton
+						type="secondary"
 						onClick={() => this.props.history.push("/auth")}
-					>
-						Sign In
-          </button>
+						text="SIGN IN"
+					/>
 				</div>
 			);
 		}
