@@ -4,6 +4,7 @@ import { ToastsStore } from 'react-toasts';
 import messages from "../../consts/messages";
 import store from "../../redux/store";
 import { User, History } from '../../components/Profile';
+import { OButton } from '../../components/core';
 import { getAccounts } from "../../sheard/apis/accounts";
 import { getHistory } from "../../sheard/apis/history";
 import { getUser } from "../../sheard/apis/user";
@@ -92,15 +93,24 @@ class Profile extends Component {
 	renderSettingsButton() {
 		if (this.state.userId) {
 			return (
-				<button
-					className="primary settings-button"
+				<OButton
+					className="settings-button"
+					text="SETTINGS"
+					icon="fas fa-cogs"
 					onClick={() => this.props.history.push({
 						pathname: '/settings',
 						data: { "userId": this.state.userId },
-					})} >
-					<i className="fas fa-cogs" />
-					<div className="button-text">SETTINGS</div>
-				</button>
+					})}
+				/>
+				// <button
+				// 	className="primary settings-button"
+				// 	onClick={() => this.props.history.push({
+				// 		pathname: '/settings',
+				// 		data: { "userId": this.state.userId },
+				// 	})} >
+				// 	<i className="fas fa-cogs" />
+				// 	<div className="button-text">SETTINGS</div>
+				// </button>
 			);
 		} else {
 			return (<div />);

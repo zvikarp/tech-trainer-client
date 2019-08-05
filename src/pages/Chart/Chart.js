@@ -9,6 +9,7 @@ import { LogoutUser } from "../../redux/actions/authActions";
 import { TopThree, Passed, Under } from "../../components/Chart";
 import { getChart } from "../../sheard/apis/chart"
 import { checkIfAdmin } from "../../sheard/apis/user"
+import { OButton } from "../../components/core"
 
 import "../../utils/styles/global.css";
 import "./Chart.css";
@@ -67,10 +68,11 @@ class Chart extends Component {
 	renderAdminButton() {
 		if (this.state.admin) {
 			return (
-				<button className="primary" onClick={() => this.props.history.push("/admin")}>
-					<i className="fas fa-unlock-alt" />
-					<div className="button-text">ADIMN</div>
-				</button>
+				<OButton
+					text="ADMIN"
+					icon="fas fa-unlock-alt"
+					onClick={() => this.props.history.push("/admin")}
+				/>
 			);
 		}
 	}
@@ -108,17 +110,25 @@ class Chart extends Component {
 			return (
 				<div className="chart-top-bar-right">
 					{this.renderAdminButton()}
-					<button className="primary" onClick={() => this.props.history.push("/settings")}>
-						<i className="fas fa-cogs" />
-						<div className="button-text">SETTINGS</div>
-					</button>
-					<button className="primary" onClick={() => this.props.history.push("/profile")}>
-						<i className="fas fa-user" />
-						<div className="button-text">PROFILE</div>
-					</button>
-					<button className="secondary" onClick={() => this.signout()}>
-						Sign Out
-          </button>
+
+					<OButton
+						text="SETTINGS"
+						icon="fas fa-cogs"
+						onClick={() => this.props.history.push("/settings")}
+					/>
+
+					<OButton
+						text="PROFILE"
+						icon="fas fa-user"
+						onClick={() => this.props.history.push("/profile")}
+					/>
+
+					<OButton
+						type="secondary"
+						text="SIGN OUT"
+						onClick={() => this.signout()}
+					/>
+
 				</div>
 			);
 		} else {
