@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { ToastsStore } from 'react-toasts';
-import axios from "axios";
 
 import messages from "../../../consts/messages";
 import store from "../../../redux/store";
+import { getUser, putUserSettings } from "../../../sheard/apis/user";
 
 import "../../../utils/styles/global.css";
 import "./General.css";
@@ -31,51 +31,36 @@ class General extends Component {
 		this.getAccountDetailes();
 	}
 
-	getAccountDetailes() {
-		axios.get(process.env.REACT_APP_API_URL + "/user/" + this.state.userId, { headers: { 'token': localStorage.jwtToken } })
-			.then(res => {
-				this.setState({
-					name: res.data.name,
-					email: res.data.email,
-					points: res.data.points,
-					bonusPoints: res.data.bonusPoints,
-				});
-			})
-			.catch(err => {
-				console.log(err);
-				
-				ToastsStore.info(messages.UNKNOWN_ERROR);
+	async getAccountDetailes() {
+		try {
+			const user = await getUser(this.state.userId);
+			this.setState({
+				name: user.name,
+				email: user.email,
+				points: user.points,
+				bonusPoints: user.bonusPoints,
 			});
+		} catch (err) {
+			ToastsStore.info(messages.UNKNOWN_ERROR);
+		}
 	}
 
 	onChange = e => {
 		this.setState({ [e.target.id]: e.target.value });
 	};
 
-	onSubmit = e => {
+	onSubmit = async (e) => {
 		e.preventDefault();
 		this.setState({ loading: true });
-		axios.put(process.env.REACT_APP_API_URL + "/user/settings/" + this.state.userId, {
-			'name': this.state.name,
-			'email': this.state.email,
-			'bonusPoints': this.state.userId ? this.state.bonusPoints : 0,
-		},
-			{
-				headers: {
-					'Content-Type': 'application/json',
-				}
-			}).then(res => {
-				if (res.data.success)
-					ToastsStore.info(messages.SUCCESS_SAVING_CHANGES);
-				else
-					ToastsStore.info(messages.ERROR_SAVING_CHANGES);
-
-				this.setState({ loading: false });
-			}).catch(err => {
-				ToastsStore.info(messages.ERROR_SAVING_CHANGES);
-				this.setState({ loading: false });
-			});
-	};
+		try {
+			putUserSettings(this.state.userId, this.state.name, this.state.email, this.state.bonusPoints);
+			ToastsStore.info(messages.SUCCESS_SAVING_CHANGES);
+		} catch (err) {
+			ToastsStore.info(messages.ERROR_SAVING_CHANGES);
+		} finally {
+			this.setState({ loading: false });
+		}
+	}
 
 	renderSaveButton() {
 		if (this.state.loading) {
@@ -123,7 +108,7 @@ class General extends Component {
 							id="points"
 							type="text"
 							disabled
-							/>
+						/>
 					</div>
 					<div className="labeld-input">
 						<label>Bonus Points:</label>

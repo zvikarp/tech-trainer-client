@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import axios from "axios";
 import { ToastsStore } from 'react-toasts';
 
 import messages from "../../../consts/messages";
 import { AccountCard } from "../";
+import { getAccounts, putAccounts } from "../../../sheard/apis/accounts";
 
 import "../../../utils/styles/global.css";
 import "./AllAccounts.css";
@@ -24,31 +24,33 @@ class AllAccounts extends Component {
 	}
 	
 	componentDidMount() {
-		this.getAccounts();
+		this.loadAccounts();
 	}
 
-	getAccounts() {
-		axios.get(process.env.REACT_APP_API_URL + "/accounts/", { headers: { 'token': this.state.token } }).then(res => {
-			var accounts = res.data;
-			delete accounts._id;
-			this.setState({ accounts: accounts });
-		});
+	async loadAccounts() {
+		try {
+			const accounts = await getAccounts();
+			this.setState({ accounts });
+		} catch (err) {
+			ToastsStore.info(messages.ERROR_LOADING_DATA);
+		}
 	}
 
-	handleOnSaveChanges() {
+	async handleOnSaveChanges() {
 		this.setState({ loading: true });
 		var accountsToBeUpdated = {};
-		Object.keys(this.state.accounts).forEach(accountId => {
-			if (this.state.accounts[accountId].action)
-				accountsToBeUpdated[accountId] = this.state.accounts[accountId];
-		});
-		axios.put(process.env.REACT_APP_API_URL + "/accounts/", { 'accounts': accountsToBeUpdated }).then(res => {
+		try {
+			Object.keys(this.state.accounts).forEach(accountId => {
+				if (this.state.accounts[accountId].action)
+					accountsToBeUpdated[accountId] = this.state.accounts[accountId];
+			});
+			await putAccounts(accountsToBeUpdated);
 			ToastsStore.info(messages.SUCCESS_SAVING_CHANGES);
-			this.setState({ loading: false })
-		}).catch(err => {
+		} catch (err) {
 			ToastsStore.info(messages.ERROR_SAVING_CHANGES);
-			this.setState({ loading: false })
-		});
+		} finally {
+			this.setState({ loading: false });
+		}
 	}
 
 	handleOnAddAccount() {

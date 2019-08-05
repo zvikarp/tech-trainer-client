@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { ToastsStore } from 'react-toasts';
-import axios from "axios";
 import ReactTooltip from 'react-tooltip'
 
 import messages from "../../../consts/messages";
 import store from "../../../redux/store";
+import { getAccounts } from "../../../sheard/apis/accounts";
+import { updateUserCronjob } from "../../../sheard/apis/cronjob";
+import { getUserAccounts, putUserAccounts } from "../../../sheard/apis/user";
 
 
 import "../../../utils/styles/global.css";
@@ -39,24 +41,26 @@ class Accounts extends Component {
 		return msg;
 	}
 
-	getUsersAccounts() {
-		axios.get(process.env.REACT_APP_API_URL + "/user/accounts/" + this.state.userId, { headers: { 'token': this.state.token } }).then(res => {
-			var userAccounts = res.data;
+	async getUsersAccounts() {
+		try {
+			const userAccounts = await getUserAccounts(this.state.userId);
 			Object.keys(userAccounts).forEach(key => {
-				this.setState({ [key]: userAccounts[key] });
+				this.setState({ [key]: userAccounts[key] }); // TODO: is this really a good idea?
 				if (document.getElementById(key))
 					document.getElementById(key).value = userAccounts[key];
-
 			});
-		});
+		} catch (err) {
+			ToastsStore.info(messages.ERROR_LOADING_DATA);
+		}
 	}
 
-	getAccountsTypes() {
-		axios.get(process.env.REACT_APP_API_URL + "/accounts/", { headers: { 'token': this.state.token } }).then(res => {
-			var recivedAccounts = res.data;
-			delete recivedAccounts._id;
-			this.setState({ accounts: recivedAccounts })
-		});
+	async getAccountsTypes() {
+		try {
+			const accounts = await getAccounts();
+			this.setState({ accounts });
+		} catch (err) {
+			ToastsStore.info(messages.ERROR_LOADING_DATA);
+		}
 	}
 
 
@@ -72,30 +76,20 @@ class Accounts extends Component {
 		this.setState({ accountsFields: accountsFieldsTemp });
 	};
 
-	onSubmit = e => {
+	onSubmit = async (e) => {
 		e.preventDefault();
 		this.setState({ loading: true });
-		axios.put(process.env.REACT_APP_API_URL + "/user/accounts/" + this.state.userId, { 'accounts': this.state.accountsFields }, {
-			headers: { 'Content-Type': 'application/json' }
-		}).then(res => {
-			if (res.data.success) {
-				ToastsStore.info(messages.SUCCESS_SAVING_CHANGES);
-				ToastsStore.info(messages.UPDATING_CHART);
-				axios.post(process.env.REACT_APP_API_URL + "/cronjob/updateuserspoints/" + this.state.userId, { 'accounts': this.state.accountsFields }).then(res => {
-					ToastsStore.info(messages.SUCCESS_UPDATING_CHART);
-				}).catch(err => {
-					ToastsStore.info(messages.ERROR_UPDATING_CHART);
-				});
-			}
-			else
-				ToastsStore.info(messages.KNOWN_ERROR_PREFIX + this.errorToString(res.data.messages));
+		try {
+			await putUserAccounts(this.state.userId, this.state.accountsFields);
+			ToastsStore.info(messages.SUCCESS_SAVING_CHANGES);
+			ToastsStore.info(messages.UPDATING_CHART);
+			await updateUserCronjob(this.state.userId);
+		} catch (err) { // TODO: needs better error handeling
+			ToastsStore.info(messages.ERROR_UPDATING_CHART);
+			ToastsStore.info(messages.KNOWN_ERROR_PREFIX + this.errorToString(err.data.messages));
+		} finally {
 			this.setState({ loading: false });
-		}).catch(err => {
-			console.log(err.response.data);
-			
-			ToastsStore.info(messages.KNOWN_ERROR_PREFIX + this.errorToString(err.response.data.messages));
-			this.setState({ loading: false });
-		});
+		}
 	};
 
 	renderSaveButton() {
