@@ -120,14 +120,14 @@ class AllAccounts extends Component {
 
 					<OButton
 						onClick={this.handleOnAddAccount}
-						type="primary align-horizontally"
+						customStyle="align-horizontally"
 						text="ADD FIELD"
 					/>
 
 					<OButton
 						loading={this.state.loading}
 						onClick={this.handleOnSaveChanges}
-						type="primary align-horizontally"
+						customStyle="align-horizontally"
 						text="SAVE CHANGES"
 					/>
 				</div>

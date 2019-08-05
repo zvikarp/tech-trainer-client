@@ -69,7 +69,8 @@ class AccountCard extends Component {
 				<OButton
 					disabled={this.props.account.type === "website"}
 					onClick={this.onDelete}
-					type="secondary delete-button"
+					customStyle="delete-button"
+					secondary
 					text="DELETE"
 				/>
 			</div>

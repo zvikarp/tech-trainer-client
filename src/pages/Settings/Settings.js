@@ -12,7 +12,7 @@ class Settings extends Component {
 		return (
 			<div>
 				<OButton
-					type="primary back-button"
+					customStyle="back-button"
 					onClick={() => this.props.history.push("/")}
 					icon="fas fa-chevron-left"
 					text="BACK"

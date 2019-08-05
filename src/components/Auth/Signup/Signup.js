@@ -64,12 +64,7 @@ class Signup extends Component {
             />
           </div>
           <div className="action-section">
-					<OButton
-					loading = {store.getState().auth.loading}
-					submit
-					type="primary signin-button"
-					text="SAVE CHANGES"
-				/>
+					<OButton loading = {store.getState().auth.loading} submit center text="SAVE CHANGES" />
 					</div>
         </form>
       </div>

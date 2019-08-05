@@ -94,7 +94,7 @@ class Profile extends Component {
 		if (this.state.userId) {
 			return (
 				<OButton
-					type="primary settings-button"
+					customStyle="settings-button"
 					text="SETTINGS"
 					icon="fas fa-cogs"
 					onClick={() => this.props.history.push({
@@ -132,7 +132,7 @@ class Profile extends Component {
 		return (
 			<div>
 				<OButton
-					type="primary back-button"
+					customStyle="back-button"
 					onClick={() => this.props.history.push("/")}
 					icon="fas fa-chevron-left"
 					text="BACK"

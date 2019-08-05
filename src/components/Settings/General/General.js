@@ -106,12 +106,7 @@ class General extends Component {
 						/>
 					</div>
 					<div className="action-section">
-						<OButton
-							loading={this.state.loading}
-							submit
-							type="primary signin-button"
-							text="SAVE CHANGES"
-						/>
+						<OButton loading={this.state.loading} submit center text="SAVE CHANGES" />
 					</div>
 				</form>
 			</div>

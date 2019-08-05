@@ -124,7 +124,7 @@ class Chart extends Component {
 					/>
 
 					<OButton
-						type="secondary"
+						secondary
 						text="SIGN OUT"
 						onClick={() => this.signout()}
 					/>
@@ -135,7 +135,7 @@ class Chart extends Component {
 			return (
 				<div className="chart-top-bar-right">
 					<OButton
-						type="secondary"
+						secondary
 						onClick={() => this.props.history.push("/auth")}
 						text="SIGN IN"
 					/>

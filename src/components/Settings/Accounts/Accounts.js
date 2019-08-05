@@ -129,12 +129,7 @@ class Accounts extends Component {
 				<form noValidate onSubmit={this.onSubmit}>
 					{this.renderAccountFields()}
 					<div className="action-section">
-						<OButton
-							loading={this.state.loading}
-							submit
-							type="primary signin-button"
-							text="SAVE CHANGES"
-						/>
+						<OButton loading={this.state.loading} submit center text="SAVE CHANGES" />
 					</div>
 				</form>
 			</div>
