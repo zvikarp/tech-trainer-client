@@ -3,16 +3,22 @@ import PropTypes from 'prop-types';
 
 class OInput extends Component {
 	render() {
+		const hasLabel = this.props.label !== undefined;
+		const hasTooltip = this.props.tooltip !== undefined;
+		const labledStyle = (hasLabel || hasTooltip) ? "labeld-input" : "";
 
 		return (
-			<div>
-				<label>{this.props.label}</label>
+			<div className={labledStyle}>
+				{ hasLabel ? <label>{this.props.label}</label> : null }
 				<input
 					onChange={this.props.onChange}
 					value={this.props.value}
 					id={this.props.id}
 					type={this.props.type}
+					name={this.props.name}
+					disabled={this.props.disabled}
 				/>
+				{ hasTooltip ? <i data-tip={this.props.tooltip} className="fas fa-info-circle tooltip-button"></i> : null }
 			</div>
 		);
 	}
@@ -20,14 +26,20 @@ class OInput extends Component {
 
 OInput.defaultProps = {
 	type: "text",
+	disabled: false,
+	name: "",
+	onChange: () => {},
 }
 
 OInput.propTypes = {
-	lable: PropTypes.string,
+	label: PropTypes.string,
 	onChange: PropTypes.func,
-	value: PropTypes.string,
+	value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	id: PropTypes.string,
 	type: PropTypes.string,
+	name: PropTypes.string,
+	tooltip: PropTypes.string,
+	disabled: PropTypes.bool,
 }
 
 export default OInput;

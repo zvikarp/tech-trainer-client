@@ -4,7 +4,7 @@ import ReactTooltip from 'react-tooltip'
 
 import messages from "../../../consts/messages";
 import store from "../../../redux/store";
-import { OButton } from "../../core";
+import { OButton, OInput } from "../../core";
 import { getAccounts } from "../../../sheard/apis/accounts";
 import { updateUserCronjob } from "../../../sheard/apis/cronjob";
 import { getUserAccounts, putUserAccounts } from "../../../sheard/apis/user";
@@ -80,6 +80,7 @@ class Accounts extends Component {
 	onSubmit = async (e) => {
 		e.preventDefault();
 		this.setState({ loading: true });
+		
 		try {
 			await putUserAccounts(this.state.userId, this.state.accountsFields);
 			ToastsStore.info(messages.SUCCESS_SAVING_CHANGES);
@@ -88,7 +89,7 @@ class Accounts extends Component {
 			ToastsStore.info(messages.SUCCESS_UPDATING_CHART);
 		} catch (err) { // TODO: needs better error handeling
 			ToastsStore.info(messages.ERROR_UPDATING_CHART);
-			// ToastsStore.info(messages.KNOWN_ERROR_PREFIX + this.errorToString(err.data.messages));
+			ToastsStore.info(messages.KNOWN_ERROR_PREFIX + this.errorToString(err.messages));
 		} finally {
 			this.setState({ loading: false });
 		}
@@ -97,17 +98,15 @@ class Accounts extends Component {
 	renderAccountField(key, account) {
 		return (
 			<div key={key}>
-				<div className="labeld-input">
-					<label>{account.name}:</label>
-					<input
+				
+				<OInput
+						label={account.name + ":"}
 						onChange={this.onAccountChange}
 						value={this.state.key}
 						id={key}
-						type="text"
+						tooltip={account.instructions}
 					/>
-					<i data-tip={account.instructions} className="fas fa-info-circle tooltip-button"></i>
 					<ReactTooltip />
-				</div>
 			</div>
 		);
 	}
@@ -115,8 +114,6 @@ class Accounts extends Component {
 	renderAccountFields() {
 		var accountsFields = [];
 		Object.keys(this.state.accounts).forEach(key => {
-			console.log(key);
-
 			accountsFields.push(this.renderAccountField(key, this.state.accounts[key]));
 		})
 		return (accountsFields);

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { OButton } from "../../core";
+import { OButton, OInput } from "../../core";
 
 import "../../../utils/styles/global.css";
 import "./AccountCard.css";
@@ -8,64 +8,59 @@ import "./AccountCard.css";
 class AccountCard extends Component {
 
 	constructor(props) {
-    super(props);
+		super(props);
 		this.onInputChange = this.onInputChange.bind(this);
 		this.onDelete = this.onDelete.bind(this);
-  }
+	}
 
-  onInputChange(e) {
+	onInputChange(e) {
+		console.log(e.target.name)
 		this.props.onAccountChange(this.props.accountId, e.target.name, e.target.value);
 	}
-	
+
 	onDelete() {
 		this.props.onAccountDelete(this.props.accountId);
 	}
 
-	render() {		
+	render() {
 		return (
 			<div key={this.props.accountId}>
-				<div className="labeld-input">
-					<label>Name:</label>
-					<input
-						disabled={this.props.account.type === "website"}
-						onChange={this.onInputChange}
-						value={this.props.account.name}
-						name="name"
-						id={this.props.accountId + "name"}
-						type="text"
-					/>
-				</div>
-				<div className="labeld-input">
-					<label>Points:</label>
-					<input
-						onChange={this.onInputChange}
-						value={this.props.account.points}
-						name="points"
-						disabled={this.props.account.type !== "website"}
-						id={this.props.accountId + "points"}
-						type="text"
-					/>
-				</div>
-				<div className="labeld-input">
-					<label>Instructions:</label>
-					<input
-						onChange={this.onInputChange}
-						value={this.props.account.instructions}
-						name="instructions"
-						id={this.props.accountId + "instructions"}
-						type="text"
-					/>
-				</div>
-				<div className="labeld-input">
-					<label>Type:</label>
-					<input
-						disabled
-						value={this.props.account.type}
-						name="type"
-						id={this.props.accountId + "type"}
-						type="text"
-					/>
-				</div>
+
+				<OInput
+					label="Name:"
+					disabled={this.props.account.type === "website"}
+					onChange={this.onInputChange}
+					value={this.props.account.name}
+					name="name"
+					id={this.props.accountId + "name"}
+				/>
+
+				<OInput
+					label="Points:"
+					onChange={this.onInputChange}
+					value={this.props.account.points}
+					name="points"
+					disabled={this.props.account.type !== "website"}
+					id={this.props.accountId + "points"}
+				/>
+
+				<OInput
+					label="Instructions:"
+					onChange={this.onInputChange}
+					value={this.props.account.instructions}
+					name="instructions"
+					id={this.props.accountId + "instructions"}
+				/>
+
+				<OInput
+					label="Type:"
+					disabled
+					value={this.props.account.type}
+					name="type"
+					id={this.props.accountId + "type"}
+					type="text"
+				/>
+
 				<OButton
 					disabled={this.props.account.type === "website"}
 					onClick={this.onDelete}
@@ -75,7 +70,7 @@ class AccountCard extends Component {
 				/>
 			</div>
 		);
-	}	
+	}
 }
 
 export default AccountCard;

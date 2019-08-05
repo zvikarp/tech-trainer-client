@@ -1,2 +1,3 @@
 import OButton from './OButton';
-export { OButton };
+import OInput from './OInput';
+export { OButton, OInput };

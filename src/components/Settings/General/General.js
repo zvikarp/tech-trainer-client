@@ -4,7 +4,7 @@ import { ToastsStore } from 'react-toasts';
 import messages from "../../../consts/messages";
 import store from "../../../redux/store";
 import { getUser, putUserSettings } from "../../../sheard/apis/user";
-import { OButton } from "../../core";
+import { OButton, OInput } from "../../core";
 
 import "../../../utils/styles/global.css";
 import "./General.css";
@@ -68,43 +68,36 @@ class General extends Component {
 			<div id="general">
 				<h2 className="signin-title">General Settings</h2>
 				<form noValidate onSubmit={this.onSubmit}>
-					<div className="labeld-input">
-						<label>Name:</label>
-						<input
-							onChange={this.onChange}
-							value={this.state.name}
-							id="name"
-							type="text"
-						/>
-					</div>
-					<div className="labeld-input">
-						<label>Email:</label>
-						<input
-							onChange={this.onChange}
-							value={this.state.email}
-							id="email"
-							type="email"
-						/>
-					</div>
-					<div className="labeld-input">
-						<label>Points:</label>
-						<input
-							value={this.state.points}
-							id="points"
-							type="text"
-							disabled
-						/>
-					</div>
-					<div className="labeld-input">
-						<label>Bonus Points:</label>
-						<input
-							onChange={this.onChange}
-							value={this.state.bonusPoints}
-							id="bonusPoints"
-							type="text"
-							disabled={!this.state.userId}
-						/>
-					</div>
+
+					<OInput
+						label="Name:"
+						onChange={this.onChange}
+						value={this.state.name}
+						id="name"
+					/>
+
+					<OInput
+						label="Email:"
+						onChange={this.onChange}
+						value={this.state.email}
+						id="email"
+						type="email"
+					/>
+
+					<OInput
+						label="Points:"
+						value={this.state.points}
+						id="points"
+						disabled
+					/>
+		
+					<OInput
+						label="Bonus Points:"
+						value={this.state.bonusPoints}
+						id="bonusPoints"
+						disabled={!this.state.userId}
+					/>
+		
 					<div className="action-section">
 						<OButton loading={this.state.loading} submit center text="SAVE CHANGES" />
 					</div>

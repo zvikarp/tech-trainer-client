@@ -74,6 +74,10 @@ class AllAccounts extends Component {
 	}
 
 	handleOnAccountChange(accountId, field, value) {
+		console.log(field);
+		console.log(value);
+		
+		
 		var updatedAccounts = this.state.accounts;
 		updatedAccounts[accountId][field] = value;
 		const lastAction = updatedAccounts[accountId].action;
