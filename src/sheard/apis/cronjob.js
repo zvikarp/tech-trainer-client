@@ -11,6 +11,6 @@ export function updateUserCronjob(userId) {
 	}).catch(err => {		
 		console.log(err);
 		
-		throw new Error(err);
+		throw err.response.data;
 	});
 }

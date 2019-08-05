@@ -7,6 +7,6 @@ export function getChart() {
 	return axios.get(process.env.REACT_APP_API_URL + "/chart/").then(res => {
 		return res;
 	}).catch(err => {		
-		throw new Error(err);
+		throw err.response.data;
 	});
 }
