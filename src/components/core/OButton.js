@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class OButton extends Component {
+	
 	render() {
 
 		const hasIcon = this.props.icon !== undefined;
