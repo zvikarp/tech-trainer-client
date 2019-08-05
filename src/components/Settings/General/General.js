@@ -63,26 +63,6 @@ class General extends Component {
 		}
 	}
 
-	renderSaveButton() {
-		if (this.state.loading) {
-			return (
-				<OButton
-					disabled
-					type="primary signin-button"
-					text="WORKING ON IT..."
-				/>
-			);
-		} else {
-			return (
-				<OButton
-					submit
-					type="primary signin-button"
-					text="SAVE CHANGES"
-				/>
-			);
-		}
-	}
-
 	render() {
 		return (
 			<div id="general">
@@ -126,7 +106,12 @@ class General extends Component {
 						/>
 					</div>
 					<div className="action-section">
-						{this.renderSaveButton()}
+						<OButton
+							loading={this.state.loading}
+							submit
+							type="primary signin-button"
+							text="SAVE CHANGES"
+						/>
 					</div>
 				</form>
 			</div>

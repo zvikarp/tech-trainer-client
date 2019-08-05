@@ -23,7 +23,7 @@ class AllAccounts extends Component {
 			loading: false,
 		}
 	}
-	
+
 	componentDidMount() {
 		this.loadAccounts();
 	}
@@ -100,7 +100,7 @@ class AllAccounts extends Component {
 
 	renderAccountCards() {
 		const length = Object.keys(this.state.accounts).length;
-		if (length < 1) { 
+		if (length < 1) {
 			return (<div className="all-accounts-loading">Loading...</div>)
 		}
 		var accountsCards = [];
@@ -111,38 +111,25 @@ class AllAccounts extends Component {
 		return (accountsCards);
 	}
 
-	renderSaveButton() {
-		if (this.state.loading) {
-			return (
-				<OButton
-					disabled
-					type="primary signin-button"
-					text="WORKING ON IT..."
-				/>
-			);
-		} else {
-			return (
-				<OButton
-				onClick={this.handleOnSaveChanges}
-					type="primary align-horizontally"
-					text="SAVE CHANGES"
-				/>
-			);
-		}
-	}
-
 	render() {
 		return (
 			<div id="accounts" >
 				<h2 className="signin-title">Accounts</h2>
 				{this.renderAccountCards()}
 				<div className="all-accounts-action-section">
-				<OButton
-					onClick={this.handleOnAddAccount}
-					type="primary align-horizontally"
-					text="ADD FIELD"
-				/>
-					{this.renderSaveButton()}
+
+					<OButton
+						onClick={this.handleOnAddAccount}
+						type="primary align-horizontally"
+						text="ADD FIELD"
+					/>
+
+					<OButton
+						loading={this.state.loading}
+						onClick={this.handleOnSaveChanges}
+						type="primary align-horizontally"
+						text="SAVE CHANGES"
+					/>
 				</div>
 			</div>
 		)

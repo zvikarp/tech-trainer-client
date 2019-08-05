@@ -27,26 +27,6 @@ class Signin extends Component {
     });
   };
 
-  renderSigninButton() {
-    if (store.getState().auth.loading) {
-      return (
-        <OButton
-					disabled
-					type="primary signin-button"
-					text="WORKING ON IT..."
-				/>
-      );
-    } else {
-      return (
-        <OButton
-					submit
-					type="primary signin-button"
-					text="SAVE CHANGES"
-				/>
-      );
-    }
-  }
-
   render() {
     return (
       <div id="signin">
@@ -70,7 +50,14 @@ class Signin extends Component {
               type="password"
             />
           </div>
-          <div className="action-section">{this.renderSigninButton()}</div>
+          <div className="action-section">
+					<OButton
+					loading={store.getState().auth.loading}
+					submit
+					type="primary signin-button"
+					text="SAVE CHANGES"
+				/>
+					</div>
         </form>
       </div>
     );

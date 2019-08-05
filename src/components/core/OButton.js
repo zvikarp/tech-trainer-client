@@ -8,10 +8,10 @@ class OButton extends Component {
 			<button
 				type={this.props.submit ? "submit" : null}
 				className={this.props.type}
-				disabled={this.props.disabled}
+				disabled={this.props.disabled || this.props.loading}
 				onClick={this.props.onClick} >
 					 {hasIcon ? <i className={this.props.icon} /> : null}
-					<div>{this.props.text}</div>
+					<div>{this.props.loading ? "WORKING ON IT..." : this.props.text}</div>
       </button>
 		);
 	}
@@ -21,6 +21,7 @@ OButton.defaultProps = {
 	type: "primary",
 	disabled: false,
 	submit: false,
+	loading: false,
 }
 
 OButton.propTypes = {
@@ -30,6 +31,7 @@ OButton.propTypes = {
 	icon: PropTypes.string,
 	disabled: PropTypes.bool,
 	submit: PropTypes.bool,
+	loading: PropTypes.bool,
 }
 
 export default OButton;

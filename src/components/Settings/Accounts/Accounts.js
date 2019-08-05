@@ -85,33 +85,14 @@ class Accounts extends Component {
 			ToastsStore.info(messages.SUCCESS_SAVING_CHANGES);
 			ToastsStore.info(messages.UPDATING_CHART);
 			await updateUserCronjob(this.state.userId);
+			ToastsStore.info(messages.SUCCESS_UPDATING_CHART);
 		} catch (err) { // TODO: needs better error handeling
 			ToastsStore.info(messages.ERROR_UPDATING_CHART);
-			ToastsStore.info(messages.KNOWN_ERROR_PREFIX + this.errorToString(err.data.messages));
+			// ToastsStore.info(messages.KNOWN_ERROR_PREFIX + this.errorToString(err.data.messages));
 		} finally {
 			this.setState({ loading: false });
 		}
 	};
-
-	renderSaveButton() {
-		if (this.state.loading) {
-			return (
-				<OButton
-					disabled
-					type="primary signin-button"
-					text="WORKING ON IT..."
-				/>
-			);
-		} else {
-			return (
-				<OButton
-					submit
-					type="primary signin-button"
-					text="SAVE CHANGES"
-				/>
-			);
-		}
-	}
 
 	renderAccountField(key, account) {
 		return (
@@ -135,7 +116,7 @@ class Accounts extends Component {
 		var accountsFields = [];
 		Object.keys(this.state.accounts).forEach(key => {
 			console.log(key);
-			
+
 			accountsFields.push(this.renderAccountField(key, this.state.accounts[key]));
 		})
 		return (accountsFields);
@@ -148,7 +129,12 @@ class Accounts extends Component {
 				<form noValidate onSubmit={this.onSubmit}>
 					{this.renderAccountFields()}
 					<div className="action-section">
-						{this.renderSaveButton()}
+						<OButton
+							loading={this.state.loading}
+							submit
+							type="primary signin-button"
+							text="SAVE CHANGES"
+						/>
 					</div>
 				</form>
 			</div>
