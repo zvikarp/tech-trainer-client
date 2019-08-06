@@ -43,7 +43,7 @@ class SigninWithHook extends Component {
 			localStorage.setItem("jwtToken", token);
 			setAuthToken(token);
 			const user = jwt_decode(token);
-			globalActions.updateUserId(user.id);
+			globalActions.updateUser(user);
 		} catch (err) {
 			ToastsStore.info(messages.KNOWN_ERROR_PREFIX + this.errorToString(""));
 		} finally {
