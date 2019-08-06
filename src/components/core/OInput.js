@@ -1,34 +1,33 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-class OInput extends Component {
-	render() {
-		const hasLabel = this.props.label !== undefined;
-		const hasTooltip = this.props.tooltip !== undefined;
-		const labledStyle = (hasLabel || hasTooltip) ? "labeld-input" : "";
+const OInput = (props) => {
 
-		return (
-			<div className={labledStyle}>
-				{ hasLabel ? <label>{this.props.label}</label> : null }
-				<input
-					onChange={this.props.onChange}
-					value={this.props.value}
-					id={this.props.id}
-					type={this.props.type}
-					name={this.props.name}
-					disabled={this.props.disabled}
-				/>
-				{ hasTooltip ? <i data-tip={this.props.tooltip} className="fas fa-info-circle tooltip-button"></i> : null }
-			</div>
-		);
-	}
+	const hasLabel = props.label !== undefined;
+	const hasTooltip = props.tooltip !== undefined;
+	const labledStyle = (hasLabel || hasTooltip) ? "labeld-input" : "";
+
+	return (
+		<div className={labledStyle}>
+			{hasLabel ? <label>{props.label}</label> : null}
+			<input
+				onChange={props.onChange}
+				value={props.value}
+				id={props.id}
+				type={props.type}
+				name={props.name}
+				disabled={props.disabled}
+			/>
+			{hasTooltip ? <i data-tip={props.tooltip} className="fas fa-info-circle tooltip-button"></i> : null}
+		</div>
+	);
 }
 
 OInput.defaultProps = {
 	type: "text",
 	disabled: false,
 	name: "",
-	onChange: () => {},
+	onChange: () => { },
 }
 
 OInput.propTypes = {

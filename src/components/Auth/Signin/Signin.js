@@ -1,28 +1,57 @@
 import React, { Component } from "react";
-import axios from "axios";
 import jwt_decode from "jwt-decode";
 import { ToastsStore } from "react-toasts";
-import { updateUser } from "../../../globalHook/actions";
+import useGlobal from "../../../globalHook/store";
+
 
 import setAuthToken from "../../../utils/auth/setAuthToken";
-import store from "../../../redux/store";
 import { OButton, OInput } from "../../core";
 import messages from "../../../consts/messages"
+import { authSignin } from "../../../sheard/apis/auth";
 
 import "../../../utils/styles/global.css";
 import "./Signin.css";
 
-class Signin extends Component {
+
+function signinWithHook() {
+	return function WrappedComponent(props) {
+		const [globalState, globalActions] = useGlobal();
+		return <SigninWithHook {...props} globalState={globalState} globalActions={globalActions} />;
+	}
+}
+
+class SigninWithHook extends Component {
+
 	constructor(props) {
 		super(props);
 		this.state = {
+			loading: false,
 			email: "",
 			password: "",
 		};
-		
 	}
-	
-	errorToString(err) {
+
+	async signinUser(globalActions) {
+		try {
+			const credentials = {
+				'email': this.state.email,
+				'password': this.state.password,
+			}
+			this.setState({ loading: true });
+			const res = await authSignin(credentials);
+			const token = res.token;
+			localStorage.setItem("jwtToken", token);
+			setAuthToken(token);
+			const user = jwt_decode(token);
+			globalActions.updateUserId(user.id);
+		} catch (err) {
+			ToastsStore.info(messages.KNOWN_ERROR_PREFIX + this.errorToString(""));
+		} finally {
+			this.setState({ loading: false });
+		}
+	}
+
+	errorToString(err) { // TODO: make this better...
 		var msg = "";
 		const type = Object.prototype.toString.call(err);
 		if (type === '[object Object]') {
@@ -34,30 +63,7 @@ class Signin extends Component {
 		if (msg === "") msg = "Unknown Error.";
 		return msg;
 	}
-	
-	// signinUser(userData) {
-	// 	this.setState({ loading: true });
-	// 	axios
-	// 	.post(process.env.REACT_APP_API_URL + "/auth/login", userData)
-	// 	.then(res => {
-	// 		try {
-	// 			const { token } = res.data;
-	// 			localStorage.setItem("jwtToken", token);
-	// 			setAuthToken(token);
-	// 			const decoded = jwt_decode(token);
-	// 			updateUser(decoded);
-	// 		} catch {
-	// 			ToastsStore.info(messages.KNOWN_ERROR_PREFIX + this.errorToString(""));
-	// 		}
-	// 		})
-	// 		.catch(err => {
-	// 			ToastsStore.info(
-	// 				messages.KNOWN_ERROR_PREFIX + this.errorToString(err.response.data)
-	// 			);
-	// 		}).finally(res => {
-	// 			this.setState({ loading: false });
-	// 		});
-	// };
+
 
 	onChange = e => {
 		this.setState({ [e.target.id]: e.target.value });
@@ -91,13 +97,15 @@ class Signin extends Component {
 						type="password"
 					/>
 					<div className="action-section">
-						{/* <OButton loading={store.getState().auth.loading} onClick={() => { this.signinUser() }} center text="SIGN IN" /> */}
-						<OButton loading={store.getState().auth.loading} submit center text="SIGN IN" />
+						<OButton loading={this.state.loading} onClick={() => { this.signinUser(this.props.globalActions) }} center text="SIGN IN" />
+						{/* <OButton loading={store.getState().auth.loading} submit center text="SIGN IN" /> */}
 					</div>
 				</form>
 			</div>
 		);
 	}
 }
+
+const Signin = signinWithHook();
 
 export default Signin;

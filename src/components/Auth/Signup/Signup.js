@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 
-import store from "../../../redux/store";
 import { OButton, OInput } from "../../core";
 
 import "../../../utils/styles/global.css";
@@ -10,6 +9,7 @@ class Signup extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			loading: false,
 			name: "",
 			email: "",
 			password: ""
@@ -57,7 +57,7 @@ class Signup extends Component {
 						type="password"
 					/>
 					<div className="action-section">
-						<OButton loading={store.getState().auth.loading} submit center text="SIGN UP" />
+						<OButton loading={this.state.loading} submit center text="SIGN UP" />
 					</div>
 				</form>
 			</div>

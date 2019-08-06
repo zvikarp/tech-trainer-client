@@ -1,29 +1,26 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-class OButton extends Component {
-	
-	render() {
+const OButton = (props) => {
 
-		const hasIcon = this.props.icon !== undefined;
-		const center = this.props.center ? "center " : "";
-		const type = this.props.secondary ? "secondary " : "primary ";
-		const styles = center + type + this.props.customStyle;
-		const text = this.props.loading ? "WORKING ON IT..." : this.props.text;
-		const isSubmitButton = this.props.submit ? "submit" : null;
-		const isDisabled = this.props.disabled || this.props.loading;
+	const hasIcon = props.icon !== undefined;
+	const center = props.center ? "center " : "";
+	const type = props.secondary ? "secondary " : "primary ";
+	const styles = center + type + props.customStyle;
+	const text = props.loading ? "WORKING ON IT..." : props.text;
+	const isSubmitButton = props.submit ? "submit" : null;
+	const isDisabled = props.disabled || props.loading;
 
-		return (
-			<button
-				type={isSubmitButton}
-				className={styles}
-				disabled={isDisabled}
-				onClick={this.props.onClick} >
-				{hasIcon ? <i className={this.props.icon} /> : null}
-				{text}
-			</button>
-		);
-	}
+	return (
+		<button
+			type={isSubmitButton}
+			className={styles}
+			disabled={isDisabled}
+			onClick={props.onClick} >
+			{hasIcon ? <i className={props.icon} /> : null}
+			{text}
+		</button>
+	);
 }
 
 OButton.defaultProps = {
