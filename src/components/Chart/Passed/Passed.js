@@ -17,7 +17,7 @@ class Passed extends Component {
 		}
 		var tilesObjects = [];
 		for (var i = 0; i < tiles.length; i++) {
-			tilesObjects.push(<Tile key={i} user={this.props.passed[i]} admin={this.props.admin} />);
+			tilesObjects.push(<Tile key={i} user={this.props.passed[i]} isAdmin={this.props.admin} />);
 		}
 		return tilesObjects;
 	}

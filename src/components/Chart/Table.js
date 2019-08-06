@@ -1,9 +1,13 @@
-import React from 'react';
+import React from "react";
 
-export default function Table() {
+import { TopThree, Passed, Under } from "./";
+ // TODO: not to do this...
+export default function Table(props) {
 	return (
 		<div>
-
+			<TopThree {...props} />
+			<Passed {...props} />
+			<Under {...props} />
 		</div>
 	);
 }
