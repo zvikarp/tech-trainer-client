@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import jwt_decode from "jwt-decode";
 import { ToastsStore } from "react-toasts";
-import useGlobal from "../../../globalHook/store";
+import useGlobal from "../../../store";
 
 
 import setAuthToken from "../../../utils/auth/setAuthToken";

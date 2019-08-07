@@ -3,6 +3,16 @@ export const updateUser = (store, user) => {
 		userId: user.id,
 		userName: user.name,
 		isAdmin: user.role === "admin",
+		isAuthed: true,
+	});
+};
+
+export const signoutUser = store => {
+	store.setState({
+		userId: undefined,
+		userName: undefined,
+		isAdmin: undefined,
+		isAuthed: false,
 	});
 };
 
