@@ -14,7 +14,6 @@ import "./utils/styles/global.css";
 
 const App = () => {
 
-
 	const [globalState, globalAction] = useGloble({
 		userId: undefined,
 		userName: undefined,
@@ -27,15 +26,12 @@ const App = () => {
 		// eslint-disable-next-line
 	}, []);
 
-	const signinUser = async () => {
+	const signinUser = () => {
 		if (localStorage.jwtToken) {
-			const token = await localStorage.jwtToken;
-			await SetAuthToken(token);
-			const user = await JwtDecode(token);
-			await globalAction.updateUser(user);
-			const id = await globalState.userId;
-			console.log(id);
-			
+			const token = localStorage.jwtToken;
+			SetAuthToken(token);
+			const user = JwtDecode(token);
+			globalAction.updateUser(user);
 			const currentTime = Date.now() / 1000;
 			if (user.exp < currentTime) {
 				globalAction.signoutUser();
@@ -52,7 +48,6 @@ const App = () => {
 	const adminButtons = globalState.isAdmin ? [navButtons.ADMIN] : [];
 	const authedNavButtons = [navButtons.HOME, ...adminButtons, navButtons.SETTINGS, navButtons.PROFILE, navButtons.SIGN_OUT(signoutUser)];
 	const visitorNavButtons = [navButtons.HOME, navButtons.SIGN_IN];
-
 
 	return (
 		<Provider store={store}>

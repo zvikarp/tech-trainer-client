@@ -11,8 +11,7 @@ class User extends Component {
 		if (accountsById) {
 			var userAccounts = [];
 			Object.keys(accountsById).forEach(key => {
-				userAccounts.push(<br />);
-				userAccounts.push(this.props.accounts[key].name + ": " + accountsById[key]);
+				userAccounts.push(<div key={key}> {this.props.accounts[key].name}: {accountsById[key]} </div>);
 			});
 			return userAccounts;
 		} else {

@@ -4,58 +4,36 @@ import { ToastsStore } from 'react-toasts';
 import messages from "../consts/messages";
 import useGlobal from "../store";
 import { User, History } from '../components/Profile';
-import { OButton } from '../components/core';
 import { getAccounts } from "../sheard/apis/accounts";
 import { getHistory } from "../sheard/apis/history";
 import { getUser } from "../sheard/apis/user";
-
 
 const Profile = (props) => {
 
 	const [history, setHistory] = useState({});
 	const [globalState,] = useGlobal();
+
 	const userId = globalState.userId;
-	
 	const [accounts, setAccounts] = useState({});
 	const [user, setUser] = useState({ id: userId });
+	// TODO: if admin, change the user to the user he selected.
 
 	useEffect(() => {
-		loadAccounts();
-		loadUser();
-		loadHistory();
+		loadData();
 		// eslint-disable-next-line
-	}, []);
+	}, [userId]);
 
-
-	// constructor(props) {
-	// 	super(props);
-	// 	const data = this.props.location.data;
-	// 	var userId;
-	// 	if (data) {
-	// 		userId = data.userId;
-	// 	} else {
-	// 		userId = store.getState().auth.user.id
-	// 	}
-	// 	console.log(userId);
-	// 	this.state = {
-	// 		token: localStorage.jwtToken,
-	// 		user: {},
-	// 		history: {},
-	// 		accounts: {},
-	// 		userId: userId
-	// 	};
-
-	// }
-
-	// componentDidMount() {
-	// 	this.loadAccounts();
-	// 	this.loadUser();
-	// 	this.loadHistory();
-	// }
+	const loadData = () => {
+		if (userId) {
+			loadAccounts();
+			loadUser();
+			loadHistory();
+		}
+	}
 
 	const loadAccounts = async () => {
 		try {
-			const accounts = await getAccounts(user.id);
+			const accounts = await getAccounts(userId);
 			setAccounts(accounts);
 		} catch (err) {
 			ToastsStore.info(messages.ERROR_LOADING_DATA);
@@ -63,10 +41,8 @@ const Profile = (props) => {
 	}
 
 	const loadUser = async () => {
-		console.log(userId);
-
 		try {
-			const loadedUser = await getUser(user.id);
+			const loadedUser = await getUser(userId);
 			setUser(loadedUser);
 		} catch (err) {
 			ToastsStore.info(messages.ERROR_LOADING_DATA);
@@ -75,7 +51,7 @@ const Profile = (props) => {
 
 	const loadHistory = async () => {
 		try {
-			const historyRes = await getHistory(user.id);
+			const historyRes = await getHistory(userId);
 			var accounts = {};
 			var dates = [];
 			Object.values(historyRes).forEach(doc => {
@@ -106,24 +82,6 @@ const Profile = (props) => {
 		}
 	}
 
-	// const renderSettingsButton = () => {
-	// 	if (globalState.userId) {
-	// 		return (
-	// 			<OButton
-	// 				customStyle="settings-button"
-	// 				text="SETTINGS"
-	// 				icon="fas fa-cogs"
-	// 				onClick={() => this.props.history.push({
-	// 					pathname: '/settings',
-	// 					data: { "userId": globalState.userId },
-	// 				})}
-	// 			/>
-	// 		);
-	// 	} else {
-	// 		return (<div />);
-	// 	}
-	// }
-
 	const renderLoading = () => {
 		return (<div className="profile-loading">Loading...</div>);
 	}
@@ -146,7 +104,6 @@ const Profile = (props) => {
 
 	return (
 		<div>
-			{userId}
 			{renderUser()}
 			{renderHistory()}
 		</div>
