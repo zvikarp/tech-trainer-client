@@ -2,16 +2,12 @@ import React, { Component } from 'react';
 import { ToastsStore } from 'react-toasts';
 import ReactTooltip from 'react-tooltip'
 
-import messages from "../../../consts/messages";
-import store from "../../../redux/store";
-import { OButton, OInput } from "../../core";
-import { getAccounts } from "../../../sheard/apis/accounts";
-import { updateUserCronjob } from "../../../sheard/apis/cronjob";
-import { getUserAccounts, putUserAccounts } from "../../../sheard/apis/user";
-
-
-import "../../../utils/styles/global.css";
-import "./Accounts.css";
+import messages from "../../consts/messages";
+import store from "../../redux/store";
+import { OButton, OInput } from "../core";
+import { getAccounts } from "../../sheard/apis/accounts";
+import { updateUserCronjob } from "../../sheard/apis/cronjob";
+import { getUserAccounts, putUserAccounts } from "../../sheard/apis/user";
 
 class Accounts extends Component {
 

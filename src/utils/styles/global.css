@@ -294,3 +294,30 @@ label {
 	right: 0;
 	margin: 16px;
 }
+#general {
+	background-color: #ffffff;
+	width: 40%;
+	margin: 64px auto;
+	border-radius: 10px;
+}
+
+@media only screen and (max-width: 800px) {
+	#general {
+		width: 90%;
+		margin: 24px auto;
+	}
+}
+
+#accounts {
+	background-color: #ffffff;
+	width: 40%;
+	margin: 64px auto;
+	border-radius: 10px;
+}
+
+@media only screen and (max-width: 800px) {
+	#accounts {
+		width: 90%;
+		margin: 24px auto;
+	}
+}
