@@ -3,12 +3,8 @@ import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
-import { Signup, Signin } from "../../components/Auth";
-import { OButton } from "../../components/core";
-import { SignupNewUser, SigninUser } from "../../redux/actions/authActions";
-
-import "../../utils/styles/global.css";
-import "./Auth.css";
+import { Signup, Signin } from "../components/Auth";
+import { SignupNewUser, SigninUser } from "../redux/actions/authActions";
 
 class Auth extends Component {
 	constructor(props) {
@@ -57,12 +53,6 @@ class Auth extends Component {
 	render() {
 		return (
 			<div id="auth">
-				<OButton
-					customStyle="back-button"
-					onClick={() => this.props.history.push("/")}
-					icon="fas fa-chevron-left"
-					text="BACK"
-				/>
 				<h1 className="auth-message">Connect to Orange <span role="img" aria-label="emoji">🧡</span></h1>
 				{this.renderForm()}
 			</div>

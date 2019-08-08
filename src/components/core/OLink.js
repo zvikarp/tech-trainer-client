@@ -14,7 +14,7 @@ const OLink = (props) => {
 		<div
 			className={styles}
 			disabled={isDisabled}
-			onClick={() => {onClick(); props.onRouteChanged(props.route)}} >
+			onClick={() => {onClick()}} >
 			{props.text}
 		</div>
 	);

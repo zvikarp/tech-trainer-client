@@ -441,3 +441,23 @@ label {
 		margin: 4px 12px;
   }
 }
+
+body {
+	background-color: #fe724d;
+}
+
+.auth-message {
+	padding: 64px;
+	text-align: center;
+	color: #ffffff;
+}
+
+.link-to-signin {
+	text-align: center;
+	padding: 24px;
+	color: #ffffff;
+}
+
+.back-button {
+	margin: 16px;
+}

@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
 import { ToastsStore } from 'react-toasts';
 
-import messages from "../../consts/messages"
-import { OButton } from "../../components/core";
-import { AllAccounts } from "../../components/Admin";
-import { getAccounts } from "../../sheard/apis/accounts";
-
-import '../../utils/styles/global.css';
-import './Admin.css';
+import messages from "../consts/messages"
+import { OButton } from "../components/core";
+import { AllAccounts } from "../components/Admin";
+import { getAccounts } from "../sheard/apis/accounts";
 
 class Admin extends Component {
 
