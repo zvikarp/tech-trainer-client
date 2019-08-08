@@ -1,9 +1,6 @@
 import React from "react";
 
-import { Top } from "../";
-
-import "../../../utils/styles/global.css";
-import "./TopThree.css";
+import { Top } from "./";
 
 const TopThree = (props) => {
 

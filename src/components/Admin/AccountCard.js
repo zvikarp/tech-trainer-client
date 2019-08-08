@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
-
-import { OButton, OInput } from "../../core";
-
-import "../../../utils/styles/global.css";
-import "./AccountCard.css";
+import { OButton, OInput } from "../core";
 
 class AccountCard extends Component {
 

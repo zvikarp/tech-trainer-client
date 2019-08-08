@@ -6,7 +6,7 @@ const OButton = (props) => {
 	const hasIcon = props.icon !== undefined;
 	const center = props.center ? "center " : "";
 	const type = props.secondary ? "secondary " : "primary ";
-	const styles = center + type + props.customStyle;
+	const styles = "obutton " + center + type + props.customStyle;
 	const text = props.loading ? "WORKING ON IT..." : props.text;
 	const isSubmitButton = props.submit ? "submit" : null;
 	const isDisabled = props.disabled || props.loading;

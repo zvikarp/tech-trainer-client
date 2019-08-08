@@ -1,17 +1,13 @@
 import React, { Component } from "react";
 import jwt_decode from "jwt-decode";
 import { ToastsStore } from "react-toasts";
-import useGlobal from "../../../store";
+import useGlobal from "../../store";
 
 
-import setAuthToken from "../../../utils/auth/setAuthToken";
-import { OButton, OInput } from "../../core";
-import messages from "../../../consts/messages"
-import { authSignin } from "../../../sheard/apis/auth";
-
-import "../../../utils/styles/global.css";
-import "./Signin.css";
-
+import setAuthToken from "../../utils/auth/setAuthToken";
+import { OButton, OInput, OCard } from "../core";
+import messages from "../../consts/messages"
+import { authSignin } from "../../sheard/apis/auth";
 
 function signinWithHook() {
 	return function WrappedComponent(props) {
@@ -79,8 +75,8 @@ class SigninWithHook extends Component {
 
 	render() {
 		return (
-			<div id="signin">
-				<h2 className="signin-title"> Sign In </h2>
+			<OCard>
+				<h2> Sign In </h2>
 				<form noValidate onSubmit={this.onSubmit}>
 					<OInput
 						label="Email:"
@@ -101,7 +97,7 @@ class SigninWithHook extends Component {
 						{/* <OButton loading={store.getState().auth.loading} submit center text="SIGN IN" /> */}
 					</div>
 				</form>
-			</div>
+			</OCard>
 		);
 	}
 }

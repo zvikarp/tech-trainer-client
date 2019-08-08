@@ -1,9 +1,6 @@
 import React, { Component } from "react";
 
-import { OButton, OInput } from "../../core";
-
-import "../../../utils/styles/global.css";
-import "./Signup.css";
+import { OButton, OInput, OCard } from "../core";
 
 class Signup extends Component {
 	constructor(props) {
@@ -33,8 +30,8 @@ class Signup extends Component {
 
 	render() {
 		return (
-			<div id="signup">
-				<h2 className="signup-title"> Sign Up </h2>
+			<OCard>
+				<h2> Sign Up </h2>
 				<form noValidate onSubmit={this.onSubmit}>
 					<OInput
 						label="Name:"
@@ -60,7 +57,7 @@ class Signup extends Component {
 						<OButton loading={this.state.loading} submit center text="SIGN UP" />
 					</div>
 				</form>
-			</div>
+			</OCard>
 		);
 	}
 }

@@ -1,9 +1,6 @@
 import React from 'react';
 import { withRouter } from "react-router-dom";
 
-import "../../../utils/styles/global.css";
-import "./Top.css";
-
 const onAdminClick = (props) => {
 	props.history.push({
 		pathname: '/profile',
@@ -25,7 +22,7 @@ const DoesntHaveUser = () => {
 
 const HasUser = (props) => {
 	return (
-		<div>
+		<div id="top">
 			<div className="top-child top-icon">
 				<span role="img" aria-label="emoji">{props.icon}</span>
 			</div>

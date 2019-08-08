@@ -1,9 +1,6 @@
 import React, { Component } from "react";
 
-import { Tile } from "../index";
-
-import "../../../utils/styles/global.css";
-import "./Passed.css";
+import { Tile } from "./index";
 
 class Passed extends Component {
 

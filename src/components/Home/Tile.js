@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 
-import "../../../utils/styles/global.css";
-import "./Tile.css";
-
 class Tile extends Component {
 
 	onAdminClick() {

@@ -1,4 +1,4 @@
-import AllAccounts from './AllAccounts/AllAccounts';
-import AccountCard from './AccountCard/AccountCard';
+import AllAccounts from './AllAccounts';
+import AccountCard from './AccountCard';
 
 export { AllAccounts, AccountCard};

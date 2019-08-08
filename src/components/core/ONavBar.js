@@ -12,7 +12,7 @@ const ONavBar = (props) => {
 	const renderLink = (link) => <OLink {...link} selected={link.route === selected} onRouteChanged={(route) => { setSelected(route) }} />;
 
 	return (
-		<div id="nav-bar">
+		<div className="onavbar">
 			<div>
 				{leftSide.map(link => renderLink(link))}
 			</div>

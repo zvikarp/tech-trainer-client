@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { ToastsStore } from 'react-toasts';
 
 import messages from "../../consts/messages";
-import store from "../../redux/store";
+// import store from "../../redux/store";
 import { getUser, putUserSettings } from "../../sheard/apis/user";
-import { OButton, OInput } from "../core";
+import { OButton, OInput, OCard } from "../core";
 
 const General = () => {
 
@@ -68,8 +68,8 @@ const General = () => {
 	}
 
 	return (
-		<div id="general">
-			<h2 className="signin-title">General Settings</h2>
+		<OCard>
+			<h2>General Settings</h2>
 			<form noValidate onSubmit={onSubmit}>
 
 				<OInput
@@ -105,7 +105,7 @@ const General = () => {
 					<OButton loading={loading} submit center text="SAVE CHANGES" />
 				</div>
 			</form>
-		</div>
+		</OCard>
 	);
 }
 

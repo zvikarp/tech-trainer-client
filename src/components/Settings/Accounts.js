@@ -4,7 +4,7 @@ import ReactTooltip from 'react-tooltip'
 
 import messages from "../../consts/messages";
 import store from "../../redux/store";
-import { OButton, OInput } from "../core";
+import { OButton, OInput, OCard } from "../core";
 import { getAccounts } from "../../sheard/apis/accounts";
 import { updateUserCronjob } from "../../sheard/apis/cronjob";
 import { getUserAccounts, putUserAccounts } from "../../sheard/apis/user";
@@ -117,15 +117,15 @@ class Accounts extends Component {
 
 	render() {
 		return (
-			<div id="accounts" >
-				<h2 className="signin-title">Connected Accounts Settings</h2>
+			<OCard >
+				<h2>Connected Accounts Settings</h2>
 				<form noValidate onSubmit={this.onSubmit}>
 					{this.renderAccountFields()}
 					<div className="action-section">
 						<OButton loading={this.state.loading} submit center text="SAVE CHANGES" />
 					</div>
 				</form>
-			</div>
+			</OCard>
 		)
 	}
 }

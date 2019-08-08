@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
 import { ToastsStore } from 'react-toasts';
 
-import messages from "../../../consts/messages";
-import { AccountCard } from "../";
-import { OButton } from "../../core";
-import { getAccounts, putAccounts } from "../../../sheard/apis/accounts";
-
-import "../../../utils/styles/global.css";
-import "./AllAccounts.css";
+import messages from "../../consts/messages";
+import { AccountCard } from "./";
+import { OButton, OCard } from "../core";
+import { getAccounts, putAccounts } from "../../sheard/apis/accounts";
 
 class AllAccounts extends Component {
 
@@ -91,7 +88,7 @@ class AllAccounts extends Component {
 		)
 		return (
 			<div key={accountId}>
-				<div className="divider horizontal" />
+				<div className="divider" />
 				<AccountCard
 					accountId={accountId}
 					account={account}
@@ -111,16 +108,16 @@ class AllAccounts extends Component {
 		Object.keys(this.state.accounts).forEach(accountId => {
 			accountsCards.push(this.renderAccountCard(accountId, this.state.accounts[accountId]));
 		});
-		accountsCards.push(<div key="bottomDivider" className="divider horizontal" />);
+		accountsCards.push(<div key="bottomDivider" className="divider" />);
 		return (accountsCards);
 	}
 
 	render() {
 		return (
-			<div id="accounts" >
-				<h2 className="signin-title">Accounts</h2>
+			<OCard>
+				<h2>Accounts</h2>
 				{this.renderAccountCards()}
-				<div className="all-accounts-action-section">
+				<div className="action-section">
 
 					<OButton
 						onClick={this.handleOnAddAccount}
@@ -135,9 +132,9 @@ class AllAccounts extends Component {
 						text="SAVE CHANGES"
 					/>
 				</div>
-			</div>
+			</OCard>
 		)
 	}
-}
+} 
 
 export default AllAccounts;

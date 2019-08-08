@@ -4,7 +4,7 @@ import { withRouter } from "react-router-dom";
 
 const OLink = (props) => {
 	const selectedStyle = props.selected && "selected "
-	const styles = "nav-bar-link " + selectedStyle + props.customStyle;
+	const styles = "olink " + selectedStyle + props.customStyle;
 	const isDisabled = props.disabled || props.loading;
 	const onClickRoute = () => {props.history.push(props.route)};
 	const hasRoute = props.route !== undefined;
