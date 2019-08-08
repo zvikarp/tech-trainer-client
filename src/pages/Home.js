@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { ToastsStore } from "react-toasts";
 
+import useGloble from "../store";
 import messages from "../consts/messages";
 import { Welcome, Table } from "../components/Home";
 import { getChart } from "../sheard/apis/chart";
@@ -22,11 +23,12 @@ const Home = () => {
 	
 	const initalCartData = { top3: [], passed: [], under: [], loaded: false };
 	const [chartData, setChartData] = useState(initalCartData);
+	const [globalState, ] = useGloble();
 
 	return (
 		<div>
-			<Welcome userName />
-			<Table isAdmin {...chartData} />
+			<Welcome userName={globalState.userName} />
+			<Table isAdmin={globalState.isAdmin} {...chartData} />
 		</div>
 	);
 };

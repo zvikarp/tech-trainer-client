@@ -279,3 +279,18 @@ label {
 .button-text{
 	margin-left: 8px;
 }
+
+.profile-loading {
+	margin: 64px;
+	padding: 32px;
+	background-color: rgba(255,255,255,0.1);
+	text-align: center;
+	border-radius: 10px;
+	color: #FFFFFF;
+}
+
+.settings-button {
+	position: absolute;
+	right: 0;
+	margin: 16px;
+}

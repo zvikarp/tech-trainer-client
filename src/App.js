@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { ToastsContainer, ToastsStore } from 'react-toasts';
 import JwtDecode from "jwt-decode";
 
+import useGloble from "./store";
 import { Auth, Home, Settings, Admin, Profile } from './pages/index.js';
 import SetAuthToken from "./utils/auth/setAuthToken";
 import store from './redux/store';
@@ -13,32 +14,31 @@ import "./utils/styles/global.css";
 
 const App = () => {
 
+
+	const [globalState, globalAction] = useGloble({
+		userId: undefined,
+		userName: undefined,
+		isAdmin: undefined,
+		isAuthed: false,
+	});
+
 	useEffect(() => {
 		signinUser();
+		// eslint-disable-next-line
 	}, []);
 
-	const [getUser, setUser] = useState({});
-
-	const signinUser = () => {
-
+	const signinUser = async () => {
 		if (localStorage.jwtToken) {
-			const token = localStorage.jwtToken;
-			SetAuthToken(token);
-			const user = JwtDecode(token);
-			setUser({
-				userId: user.id,
-				userName: user.name,
-				isAdmin: user.role === "admin",
-				isAuthed: true,
-			});
+			const token = await localStorage.jwtToken;
+			await SetAuthToken(token);
+			const user = await JwtDecode(token);
+			await globalAction.updateUser(user);
+			const id = await globalState.userId;
+			console.log(id);
+			
 			const currentTime = Date.now() / 1000;
 			if (user.exp < currentTime) {
-				setUser({
-					userId: undefined,
-					userName: undefined,
-					isAdmin: undefined,
-					isAuthed: false,
-				});
+				globalAction.signoutUser();
 			}
 		}
 	}
@@ -46,15 +46,10 @@ const App = () => {
 	const signoutUser = () => {
 		localStorage.removeItem("jwtToken");
 		SetAuthToken(false);
-		setUser({
-			userId: undefined,
-			userName: undefined,
-			isAdmin: undefined,
-			isAuthed: false,
-		});
+		globalAction.signoutUser();
 	};
 
-	const adminButtons = getUser.isAdmin ? [navButtons.ADMIN] : [];
+	const adminButtons = globalState.isAdmin ? [navButtons.ADMIN] : [];
 	const authedNavButtons = [navButtons.HOME, ...adminButtons, navButtons.SETTINGS, navButtons.PROFILE, navButtons.SIGN_OUT(signoutUser)];
 	const visitorNavButtons = [navButtons.HOME, navButtons.SIGN_IN];
 
@@ -63,7 +58,7 @@ const App = () => {
 		<Provider store={store}>
 			<Router>
 				<div className="App">
-					<ONavBar rightSide={getUser.isAuthed ? authedNavButtons : visitorNavButtons} selected="HOME" />
+					<ONavBar rightSide={globalState.isAuthed ? authedNavButtons : visitorNavButtons} selected="HOME" />
 					<Route exact path="/" component={Home} />
 					<Route exact path="/auth" component={Auth} />
 					<Route exact path="/settings" component={Settings} />

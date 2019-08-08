@@ -25,7 +25,7 @@ const DoesntHaveUser = () => {
 
 const HasUser = (props) => {
 	return (
-		<div id="top">
+		<div>
 			<div className="top-child top-icon">
 				<span role="img" aria-label="emoji">{props.icon}</span>
 			</div>
@@ -39,7 +39,7 @@ const HasUser = (props) => {
 
 const AdminWrap = (props) => {
 	return (
-		<div className="admin-top-button" onClick={() => onAdminClick(props)}>
+		<div id="top" className="admin-top-button" onClick={() => onAdminClick(props)}>
 			{HasUser(props)}
 		</div>
 	);
