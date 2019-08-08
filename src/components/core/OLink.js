@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { withRouter } from "react-router-dom";
 
 const OLink = (props) => {
-
-	const styles = "nav-bar-link " + props.customStyle;
+	const selectedStyle = props.selected && "selected "
+	const styles = "nav-bar-link " + selectedStyle + props.customStyle;
 	const isDisabled = props.disabled || props.loading;
-	const onClickRoute = () => {props.history.push(props.route)}; 
+	const onClickRoute = () => {props.history.push(props.route)};
 	const hasRoute = props.route !== undefined;
 	const onClick = hasRoute ? onClickRoute : props.onClick;
 
@@ -14,7 +14,7 @@ const OLink = (props) => {
 		<div
 			className={styles}
 			disabled={isDisabled}
-			onClick={onClick} >
+			onClick={() => {onClick(); props.onRouteChanged(props.route)}} >
 			{props.text}
 		</div>
 	);
@@ -23,12 +23,14 @@ const OLink = (props) => {
 OLink.defaultProps = {
 	secondary: false,
 	disabled: false,
+	selected: false,
 }
 
 OLink.propTypes = {
 	onClick: PropTypes.func,
 	text: PropTypes.string.isRequired,
 	disabled: PropTypes.bool,
+	selected: PropTypes.bool,
 }
 
 export default withRouter(OLink);

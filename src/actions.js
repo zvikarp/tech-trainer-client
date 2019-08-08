@@ -5,6 +5,8 @@ export const updateUser = (store, user) => {
 		isAdmin: user.role === "admin",
 		isAuthed: true,
 	});
+	console.log(user);
+	
 };
 
 export const signoutUser = store => {
