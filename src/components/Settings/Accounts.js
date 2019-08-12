@@ -3,7 +3,6 @@ import { ToastsStore } from 'react-toasts';
 import ReactTooltip from 'react-tooltip'
 
 import messages from "../../consts/messages";
-import store from "../../redux/store";
 import { OButton, OInput, OCard } from "../core";
 import { getAccounts } from "../../sheard/apis/accounts";
 import { updateUserCronjob } from "../../sheard/apis/cronjob";
@@ -19,7 +18,7 @@ class Accounts extends Component {
 		if (this.props.ofUser) {
 			userId = this.props.ofUser.userId;
 		} else {
-			userId = store.getState().auth.user.id
+			// userId = store.getState().auth.user.id
 		}
 		this.state = {
 			accountsFields: {},

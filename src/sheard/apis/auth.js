@@ -6,7 +6,7 @@ import axios from "axios";
 export function authSignin(credentials) {
 	return axios.post(process.env.REACT_APP_API_URL + "/auth/signin", credentials).then(res => {
 		return res.data;
-	}).catch(err => {		
+	}).catch(err => {
 		throw err.response.data;
 	});
 }
@@ -14,7 +14,7 @@ export function authSignin(credentials) {
 export function authSignup(credentials) {
 	return axios.post(process.env.REACT_APP_API_URL + "/auth/signup", credentials).then(res => {
 		return res.data;
-	}).catch(err => {		
+	}).catch(err => {
 		throw err.response.data;
 	});
 }

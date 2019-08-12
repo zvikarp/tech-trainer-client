@@ -2,30 +2,11 @@ import React, { useEffect, useState } from "react";
 import { ToastsStore } from 'react-toasts';
 
 import messages from "../../consts/messages";
-// import store from "../../redux/store";
 import { getUser, putUserSettings } from "../../sheard/apis/user";
 import { OButton, OInput, OCard } from "../core";
 import { resMessageParser } from "../../utils/resParser";
 
 const General = () => {
-
-	// constructor(props) {
-	// 	super(props);
-	// 	var userId;
-	// 	if (props.ofUser) {
-	// 		userId = props.ofUser.userId;
-	// 	} else {
-	// 		userId = store.getState().auth.user.id
-	// 	}
-	// 	state = {
-	// 		name: "",
-	// 		email: "",
-	// 		points: 0,
-	// 		bonusPoints: 0,
-	// 		loading: false,
-	// 		userId: userId,
-	// 	};
-	// }
 
 	const [accounts, setAccounts] = useState({});
 	const [loading, setLoading] = useState(false);

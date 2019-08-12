@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import Line from "react-apexcharts";
 
-import store from "../../../redux/store";
-
 import "../../../utils/styles/global.css";
 import "./History.css";
 
@@ -11,7 +9,7 @@ class History extends Component {
 		super(props);
 
 		this.state = {
-			user: store.getState().auth.user,
+			// user: store.getState().auth.user,
 			token: localStorage.jwtToken,
 			options: {
 				chart: {

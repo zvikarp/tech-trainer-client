@@ -1,5 +1,5 @@
 import axios from "axios";
-import consts from "../../consts/general";
+import consts from "../../consts/consts";
 
 const setAuthToken = (token) => {
   if (token) {
