@@ -10,3 +10,11 @@ export function authSignin(credentials) {
 		throw err.response.data;
 	});
 }
+
+export function authSignup(credentials) {
+	return axios.post(process.env.REACT_APP_API_URL + "/auth/register", credentials).then(res => {
+		return res.data;
+	}).catch(err => {		
+		throw err.response.data;
+	});
+}

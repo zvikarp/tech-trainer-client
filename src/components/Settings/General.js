@@ -32,8 +32,15 @@ const General = () => {
 	const userId = "";
 
 	useEffect(() => {
-		getAccountDetailes();
-	}, [])
+		loadData();
+		// eslint-disable-next-line
+	}, [userId])
+
+	const loadData = () => {
+		if (userId) {
+			getAccountDetailes();
+		}
+	}
 
 	const getAccountDetailes = async () => {
 		try {
