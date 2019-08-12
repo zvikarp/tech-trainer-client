@@ -1,10 +1,10 @@
-import React, { Component } from "react";
+import React from "react";
 
-class Graph extends Component {
+const Graph = () => {
 
-	render() {
 		return (
 			<div></div>
 		)
-	};
 }
+
+export default Graph;

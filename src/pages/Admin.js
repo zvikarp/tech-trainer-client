@@ -1,60 +1,16 @@
-import React, { Component } from 'react';
-import { ToastsStore } from 'react-toasts';
+import React from 'react';
 
-import messages from "../consts/messages"
-import { OButton } from "../components/core";
 import { AllAccounts } from "../components/Admin";
-import { getAccounts } from "../sheard/apis/accounts";
 
-class Admin extends Component {
+// TODO: remove this component?
 
-	constructor(props) {
-		super(props);
-		this.state = {
-			websites: [],
-			fields: [],
-			token: localStorage.jwtToken
-		}
-	}
+const Admin = () => {
 
-	componentDidMount() {
-		this.getWebsites();
-	}
-
-	async getWebsites() {
-		try {
-			const accounts = await getAccounts()
-			var websites = [];
-			var fields = [];
-			Object.keys(accounts).forEach(key => {
-				var account = accounts[key];
-				account.id = key;
-				if (account.type === 'website') {
-					websites.push(account);
-				} else {
-					fields.push(account);
-				}
-				this.setState({ websites: websites, fields: fields });
-			});
-		} catch (err) {
-			ToastsStore.info(messages.ERROR_LOADING_DATA);
-		}
-	}
-
-	render() {
-		return (
-			<div>
-				<OButton
-					customStyle="back-button"
-					onClick={() => this.props.history.push("/")}
-					icon="fas fa-chevron-left"
-					text="BACK"
-				/>
-				<AllAccounts websites={this.state.websites} />
-			</div>
-		);
-	}
-
+	return (
+		<div>
+			<AllAccounts />
+		</div>
+	);
 }
 
 export default Admin

@@ -1,12 +1,12 @@
-import React, { Component } from "react";
+import React from "react";
 
 import { Tile } from "./index";
 
-class Passed extends Component {
+const Passed = (props) => {
 
-	renderTiles() {
-		const tiles = this.props.passed;
-		if (!this.props.loaded) {
+	const renderTiles = () => {
+		const tiles = props.passed;
+		if (!props.loaded) {
 			return <div className="passed-text passed-loading">Loading...</div>;
 		}
 		else if (tiles.length === 0) {
@@ -14,24 +14,23 @@ class Passed extends Component {
 		}
 		var tilesObjects = [];
 		for (var i = 0; i < tiles.length; i++) {
-			tilesObjects.push(<Tile key={i} user={this.props.passed[i]} isAdmin={this.props.admin} />);
+			tilesObjects.push(<Tile key={i} user={props.passed[i]} isAdmin={props.admin} />);
 		}
 		return tilesObjects;
 	}
 
-	render() {
-		return (
-			<div id="passed">
-				<div className="passed-text">
-					{" "}
-					<span role="img" aria-label="emoji">🤙</span>
-					{" "}
-					Users that have more then 50 points
+	// TODO: can do better then this for the string, at least make it in a const
+	return (
+		<div id="passed"> 
+			<div className="passed-text">
+				{" "}
+				<span role="img" aria-label="emoji">🤙</span>
+				{" "}
+				Users that have more then 50 points
         </div>
-				<div className="passed-cards">{this.renderTiles()}</div>
-			</div>
-		);
-	}
+			<div className="passed-cards">{renderTiles()}</div>
+		</div>
+	);
 }
 
 export default Passed;

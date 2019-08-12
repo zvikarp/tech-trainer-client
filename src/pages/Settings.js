@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { General, Accounts } from '../components/Settings';
+import { General } from '../components/Settings';
 
 const Settings = (props) => {
 

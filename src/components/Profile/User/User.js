@@ -1,17 +1,17 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import "../../../utils/styles/global.css";
 import "./User.css";
 
 
-class User extends Component {
+const User = (props) => {
 
-	accountsList() {
-		const accountsById = this.props.user.accounts;
+	const accountsList = () => {
+		const accountsById = props.user.accounts;
 		if (accountsById) {
 			var userAccounts = [];
 			Object.keys(accountsById).forEach(key => {
-				userAccounts.push(<div key={key}> {this.props.accounts[key].name}: {accountsById[key]} </div>);
+				userAccounts.push(<div key={key}> {props.accounts[key].name}: {accountsById[key]} </div>);
 			});
 			return userAccounts;
 		} else {
@@ -19,19 +19,17 @@ class User extends Component {
 		}
 	}
 
-	render() {
 		return (
 			<div id="user">
-				<h2 className="user-name"> {this.props.user.name} </h2>
-					<div>Email: {this.props.user.email}</div>
-					<div>Points: {this.props.user.points}</div>
-					<div>Bonus Points: {this.props.user.bonusPoints}</div>
-					<div>Role: {this.props.user.role}</div>
+				<h2 className="user-name"> {props.user.name} </h2>
+					<div>Email: {props.user.email}</div>
+					<div>Points: {props.user.points}</div>
+					<div>Bonus Points: {props.user.bonusPoints}</div>
+					<div>Role: {props.user.role}</div>
 					<br />
-					<div>Accounts: {this.accountsList()}</div>
+					<div>Accounts: {accountsList()}</div>
 			</div>
 		);
-	}
 }
 
 export default User;

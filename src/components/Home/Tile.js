@@ -1,46 +1,39 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { withRouter } from "react-router-dom";
-import PropTypes from "prop-types";
 
-class Tile extends Component {
+const Tile = (props) => {
 
-	onAdminClick() {
-		this.props.history.push({
+	const onAdminClick = () => {
+		props.history.push({
 			pathname: '/profile',
-			data: {"userId": this.props.user.id},
+			data: { "userId": props.user.id },
 		});
 	}
 
-	renderTile() {
-		return(
+	const renderTile = () => {
+		return (
 			<div id="tile">
-          <h3 className="tile-points"> {this.props.user.points} </h3>
-          <h3 className="tile-username"> {this.props.user.name} </h3>
-        </div>
+				<h3 className="tile-points"> {props.user.points} </h3>
+				<h3 className="tile-username"> {props.user.name} </h3>
+			</div>
 		);
 	}
 
-  render() {
-		if (this.props.admin) {
-			return (
-				<div className="admin-tile-button" onClick={() => this.onAdminClick()}>
-					{this.renderTile()}
-				</div>
-			);
-		}
-    else if (this.props.user) {
-      return (this.renderTile());
-    } else {
-      return (
-        <div id="tile">Loading...</div>
-      );
-    }
-  }
-	
-	static propTypes = {
-		history: PropTypes.object.isRequired
+	if (props.admin) {
+		return (
+			<div className="admin-tile-button" onClick={() => onAdminClick()}>
+				{renderTile()}
+			</div>
+		);
+	}
+	else if (props.user) {
+		return (renderTile());
+	} else {
+		return (
+			<div id="tile">Loading...</div>
+		);
 	}
 }
-	
+
 
 export default withRouter(Tile);

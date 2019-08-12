@@ -1,58 +1,49 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ToastsStore } from 'react-toasts';
 
 import messages from "../../consts/messages";
 import { AccountCard } from "./";
 import { OButton, OCard } from "../core";
 import { getAccounts, putAccounts } from "../../sheard/apis/accounts";
+import { errorMessageParser } from "../../utils/errorParser";
 
-class AllAccounts extends Component {
+const AllAccounts = () => {
 
-	constructor(props) {
-		super(props);
-		this.handleOnAccountChange = this.handleOnAccountChange.bind(this);
-		this.handleOnAccountDelete = this.handleOnAccountDelete.bind(this);
-		this.handleOnAddAccount = this.handleOnAddAccount.bind(this);
-		this.handleOnSaveChanges = this.handleOnSaveChanges.bind(this);
-		this.state = {
-			accounts: {},
-			token: localStorage.jwtToken,
-			loading: false,
-		}
-	}
+	const [accounts, setAccounts] = useState({});
+	const [loading, setLoading] = useState(false);
 
-	componentDidMount() {
-		this.loadAccounts();
-	}
+	useEffect(() => {
+		loadAccounts();
+	}, []);
 
-	async loadAccounts() {
+	const loadAccounts = async () => {
 		try {
 			const accounts = await getAccounts();
-			this.setState({ accounts });
+			setAccounts(accounts);
 		} catch (err) {
-			ToastsStore.info(messages.ERROR_LOADING_DATA);
+			ToastsStore.info(errorMessageParser(err, messages.ERROR_LOADING_DATA));
 		}
 	}
 
-	async handleOnSaveChanges() {
-		this.setState({ loading: true });
+	const handleOnSaveChanges = async () => {
+		setLoading(true);
 		var accountsToBeUpdated = {};
 		try {
-			Object.keys(this.state.accounts).forEach(accountId => {
-				if (this.state.accounts[accountId].action)
-					accountsToBeUpdated[accountId] = this.state.accounts[accountId];
+			Object.keys(accounts).forEach(accountId => {
+				if (accounts[accountId].action)
+					accountsToBeUpdated[accountId] = accounts[accountId];
 			});
 			await putAccounts(accountsToBeUpdated);
 			ToastsStore.info(messages.SUCCESS_SAVING_CHANGES);
 		} catch (err) {
 			ToastsStore.info(messages.ERROR_SAVING_CHANGES);
 		} finally {
-			this.setState({ loading: false });
+			setLoading(false);
 		}
 	}
 
-	handleOnAddAccount() {
-		var updatedAccounts = this.state.accounts;
+	const handleOnAddAccount = () => {
+		var updatedAccounts = Object.assign({}, accounts);
 		const newId = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15) + (new Date()).getTime();
 		updatedAccounts[newId] = {
 			'name': "new",
@@ -61,28 +52,25 @@ class AllAccounts extends Component {
 			'type': "field",
 			'action': "new",
 		}
-		this.setState({ accounts: updatedAccounts });
+		setAccounts(updatedAccounts);
 	}
 
-	handleOnAccountDelete(accountId) {
-		var updatedAccounts = this.state.accounts;
+	const handleOnAccountDelete = (accountId) => {
+		var updatedAccounts = Object.assign({}, accounts);
 		updatedAccounts[accountId].action = "delete"
-		this.setState({ accounts: updatedAccounts });
+		setAccounts(updatedAccounts);
 	}
 
-	handleOnAccountChange(accountId, field, value) {
-		console.log(field);
-		console.log(value);
+	const handleOnAccountChange = (accountId, field, value) => {
 		
-		
-		var updatedAccounts = this.state.accounts;
+		var updatedAccounts = Object.assign({}, accounts);
 		updatedAccounts[accountId][field] = value;
 		const lastAction = updatedAccounts[accountId].action;
 		if (lastAction !== "new") updatedAccounts[accountId].action = "modified"
-		this.setState({ accounts: updatedAccounts })
+		setAccounts(updatedAccounts);
 	}
 
-	renderAccountCard(accountId, account) {
+	const renderAccountCard = (accountId, account) => {
 		if (account.action === "delete") return (
 			<div key={accountId}></div>
 		)
@@ -92,49 +80,47 @@ class AllAccounts extends Component {
 				<AccountCard
 					accountId={accountId}
 					account={account}
-					onAccountChange={this.handleOnAccountChange}
-					onAccountDelete={this.handleOnAccountDelete}
+					onAccountChange={handleOnAccountChange}
+					onAccountDelete={handleOnAccountDelete}
 				/>
 			</div>
 		);
 	}
 
-	renderAccountCards() {
-		const length = Object.keys(this.state.accounts).length;
+	const renderAccountCards = () => {
+		const length = Object.keys(accounts).length;
 		if (length < 1) {
 			return (<div className="all-accounts-loading">Loading...</div>)
 		}
 		var accountsCards = [];
-		Object.keys(this.state.accounts).forEach(accountId => {
-			accountsCards.push(this.renderAccountCard(accountId, this.state.accounts[accountId]));
+		Object.keys(accounts).forEach(accountId => {
+			accountsCards.push(renderAccountCard(accountId, accounts[accountId]));
 		});
 		accountsCards.push(<div key="bottomDivider" className="divider" />);
 		return (accountsCards);
 	}
 
-	render() {
-		return (
-			<OCard>
-				<h2>Accounts</h2>
-				{this.renderAccountCards()}
-				<div className="action-section">
+	return (
+		<OCard>
+			<h2>Accounts</h2>
+			{renderAccountCards()}
+			<div className="action-section">
 
-					<OButton
-						onClick={this.handleOnAddAccount}
-						customStyle="align-horizontally"
-						text="ADD FIELD"
-					/>
+				<OButton
+					onClick={handleOnAddAccount}
+					customStyle="align-horizontally"
+					text="ADD FIELD"
+				/>
 
-					<OButton
-						loading={this.state.loading}
-						onClick={this.handleOnSaveChanges}
-						customStyle="align-horizontally"
-						text="SAVE CHANGES"
-					/>
-				</div>
-			</OCard>
-		)
-	}
-} 
+				<OButton
+					loading={loading}
+					onClick={handleOnSaveChanges}
+					customStyle="align-horizontally"
+					text="SAVE CHANGES"
+				/>
+			</div>
+		</OCard>
+	)
+}
 
 export default AllAccounts;

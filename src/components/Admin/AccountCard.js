@@ -1,72 +1,63 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { OButton, OInput } from "../core";
 
-class AccountCard extends Component {
+const AccountCard = (props) => {
 
-	constructor(props) {
-		super(props);
-		this.onInputChange = this.onInputChange.bind(this);
-		this.onDelete = this.onDelete.bind(this);
+	const onInputChange = (e) => {
+		props.onAccountChange(props.accountId, e.target.name, e.target.value);
 	}
 
-	onInputChange(e) {
-		console.log(e.target.name)
-		this.props.onAccountChange(this.props.accountId, e.target.name, e.target.value);
+	const onDelete = () => {
+		props.onAccountDelete(props.accountId);
 	}
 
-	onDelete() {
-		this.props.onAccountDelete(this.props.accountId);
-	}
+	return (
+		<div key={props.accountId}>
 
-	render() {
-		return (
-			<div key={this.props.accountId}>
+			<OInput
+				label="Name:"
+				disabled={props.account.type === "website"}
+				onChange={onInputChange}
+				value={props.account.name}
+				name="name"
+				id={props.accountId + "name"}
+			/>
 
-				<OInput
-					label="Name:"
-					disabled={this.props.account.type === "website"}
-					onChange={this.onInputChange}
-					value={this.props.account.name}
-					name="name"
-					id={this.props.accountId + "name"}
-				/>
+			<OInput
+				label="Points:"
+				onChange={onInputChange}
+				value={props.account.points}
+				name="points"
+				disabled={props.account.type !== "website"}
+				id={props.accountId + "points"}
+			/>
 
-				<OInput
-					label="Points:"
-					onChange={this.onInputChange}
-					value={this.props.account.points}
-					name="points"
-					disabled={this.props.account.type !== "website"}
-					id={this.props.accountId + "points"}
-				/>
+			<OInput
+				label="Instructions:"
+				onChange={onInputChange}
+				value={props.account.instructions}
+				name="instructions"
+				id={props.accountId + "instructions"}
+			/>
 
-				<OInput
-					label="Instructions:"
-					onChange={this.onInputChange}
-					value={this.props.account.instructions}
-					name="instructions"
-					id={this.props.accountId + "instructions"}
-				/>
+			<OInput
+				label="Type:"
+				disabled
+				value={props.account.type}
+				name="type"
+				id={props.accountId + "type"}
+				type="text"
+			/>
 
-				<OInput
-					label="Type:"
-					disabled
-					value={this.props.account.type}
-					name="type"
-					id={this.props.accountId + "type"}
-					type="text"
-				/>
-
-				<OButton
-					disabled={this.props.account.type === "website"}
-					onClick={this.onDelete}
-					customStyle="delete-button"
-					secondary
-					text="DELETE"
-				/>
-			</div>
-		);
-	}
+			<OButton
+				disabled={props.account.type === "website"}
+				onClick={onDelete}
+				customStyle="delete-button"
+				secondary
+				text="DELETE"
+			/>
+		</div>
+	);
 }
 
 export default AccountCard;

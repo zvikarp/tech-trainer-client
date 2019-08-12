@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 const OCard = props => {
 	return <div className="ocard">{props.children}</div>;
