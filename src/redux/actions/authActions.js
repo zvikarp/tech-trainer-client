@@ -5,19 +5,7 @@ import { ToastsStore } from "react-toasts";
 import messages from "../../consts/messages"
 import setAuthToken from "../../utils/auth/setAuthToken";
 import { GET_ERRORS, SET_CURRENT_USER, USER_LOADING } from "./types";
-
-function errorToString(err) {
-	var msg = "";
-	const type = Object.prototype.toString.call(err);
-	if (type === '[object Object]') {
-		Object.keys(err).forEach(key => {
-			msg += err[key];
-			msg += ". ";
-		});
-	}
-	if (msg === "") msg = "Unknown Error.";
-	return msg;
-}
+import { resMessageParser } from "../../utils/resParser";
 
 // Register User
 export const SignupNewUser = (userData, history) => dispatch => {
@@ -33,7 +21,7 @@ export const SignupNewUser = (userData, history) => dispatch => {
 				payload: err.response.data
 			});
 			ToastsStore.info(
-				messages.KNOWN_ERROR_PREFIX + errorToString(err.response.data)
+				messages.KNOWN_ERROR_PREFIX + resMessageParser(err.response.data)
 			);
 			dispatch(SetUserLoading(false));
 		});
@@ -51,8 +39,8 @@ export const SigninUser = (userData, history) => dispatch => {
 				setAuthToken(token);
 				const decoded = jwt_decode(token);
 				dispatch(SetCurrentUser(decoded));
-			} catch {
-				ToastsStore.info(messages.KNOWN_ERROR_PREFIX + errorToString(""));
+			} catch (err) {
+				ToastsStore.info(messages.KNOWN_ERROR_PREFIX + resMessageParser(err));
 				dispatch(SetUserLoading(false));
 			}
 		})
@@ -62,7 +50,7 @@ export const SigninUser = (userData, history) => dispatch => {
 				payload: err.response.data
 			});
 			ToastsStore.info(
-				messages.KNOWN_ERROR_PREFIX + errorToString(err.response.data)
+				messages.KNOWN_ERROR_PREFIX + resMessageParser(err.response.data)
 			);
 			dispatch(SetUserLoading(false));
 		});

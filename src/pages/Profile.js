@@ -7,6 +7,7 @@ import { User, History } from '../components/Profile';
 import { getAccounts } from "../sheard/apis/accounts";
 import { getHistory } from "../sheard/apis/history";
 import { getUser } from "../sheard/apis/user";
+import { resMessageParser } from "../utils/resParser";
 
 const Profile = (props) => {
 
@@ -36,7 +37,7 @@ const Profile = (props) => {
 			const accounts = await getAccounts(userId);
 			setAccounts(accounts);
 		} catch (err) {
-			ToastsStore.info(messages.ERROR_LOADING_DATA);
+			ToastsStore.info(resMessageParser(err, messages.ERROR_LOADING_DATA));
 		}
 	}
 
@@ -45,7 +46,7 @@ const Profile = (props) => {
 			const loadedUser = await getUser(userId);
 			setUser(loadedUser);
 		} catch (err) {
-			ToastsStore.info(messages.ERROR_LOADING_DATA);
+			ToastsStore.info(resMessageParser(err, messages.ERROR_LOADING_DATA));
 		}
 	}
 
@@ -78,7 +79,7 @@ const Profile = (props) => {
 			}
 			setHistory(history);
 		} catch (err) {
-			ToastsStore.info(messages.ERROR_LOADING_DATA);
+			ToastsStore.info(resMessageParser(err, messages.ERROR_LOADING_DATA));
 		}
 	}
 

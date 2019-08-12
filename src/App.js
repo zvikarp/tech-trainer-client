@@ -12,6 +12,12 @@ import { ONavBar } from "./components/core";
 import navButtons from "./consts/navButtons";
 import "./utils/styles/global.css";
 
+// this needs to run BEFORE we render the app
+if (localStorage.jwtToken) {
+	const token = localStorage.jwtToken;
+	SetAuthToken(token);
+}
+
 const App = () => {
 
 	const [globalState, globalAction] = useGloble({
@@ -29,7 +35,6 @@ const App = () => {
 	const signinUser = () => {
 		if (localStorage.jwtToken) {
 			const token = localStorage.jwtToken;
-			SetAuthToken(token);
 			const user = JwtDecode(token);
 			globalAction.updateUser(user);
 			const currentTime = Date.now() / 1000;

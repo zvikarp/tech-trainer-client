@@ -5,7 +5,7 @@ import messages from "../../consts/messages";
 import { AccountCard } from "./";
 import { OButton, OCard } from "../core";
 import { getAccounts, putAccounts } from "../../sheard/apis/accounts";
-import { errorMessageParser } from "../../utils/errorParser";
+import { resMessageParser } from "../../utils/resParser";
 
 const AllAccounts = () => {
 
@@ -21,7 +21,7 @@ const AllAccounts = () => {
 			const accounts = await getAccounts();
 			setAccounts(accounts);
 		} catch (err) {
-			ToastsStore.info(errorMessageParser(err, messages.ERROR_LOADING_DATA));
+			ToastsStore.info(resMessageParser(err, messages.ERROR_LOADING_DATA));
 		}
 	}
 
@@ -36,7 +36,7 @@ const AllAccounts = () => {
 			await putAccounts(accountsToBeUpdated);
 			ToastsStore.info(messages.SUCCESS_SAVING_CHANGES);
 		} catch (err) {
-			ToastsStore.info(messages.ERROR_SAVING_CHANGES);
+			ToastsStore.info(resMessageParser(err ,messages.ERROR_SAVING_CHANGES));
 		} finally {
 			setLoading(false);
 		}

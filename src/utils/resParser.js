@@ -2,7 +2,7 @@ import messages from '../consts/messages';
 
 
 // this util converts a error message object (string/array) to a string.
-export const errorMessageParser = (err, defaultMessage = messages.UNKNOWN_ERROR) => {
+export const resMessageParser = (err, defaultMessage = messages.UNKNOWN_ERROR) => {
 	try {
 		const messages = err.messages;
 		if (Array.isArray(messages)) {

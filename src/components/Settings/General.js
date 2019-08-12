@@ -5,6 +5,7 @@ import messages from "../../consts/messages";
 // import store from "../../redux/store";
 import { getUser, putUserSettings } from "../../sheard/apis/user";
 import { OButton, OInput, OCard } from "../core";
+import { resMessageParser } from "../../utils/resParser";
 
 const General = () => {
 
@@ -44,7 +45,7 @@ const General = () => {
 				bonusPoints: user.bonusPoints,
 			});
 		} catch (err) {
-			ToastsStore.info(messages.UNKNOWN_ERROR);
+			ToastsStore.info(resMessageParser(err, messages.UNKNOWN_ERROR));
 		}
 	}
 
@@ -61,7 +62,7 @@ const General = () => {
 			await putUserSettings(userId, accounts.name, accounts.email, accounts.bonusPoints);
 			ToastsStore.info(messages.SUCCESS_SAVING_CHANGES);
 		} catch (err) {
-			ToastsStore.info(messages.ERROR_SAVING_CHANGES);
+			ToastsStore.info(resMessageParser(err, messages.ERROR_SAVING_CHANGES));
 		} finally {
 			setLoading(false);
 		}

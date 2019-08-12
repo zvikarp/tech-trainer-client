@@ -8,6 +8,8 @@ import { OButton, OInput, OCard } from "../core";
 import { getAccounts } from "../../sheard/apis/accounts";
 import { updateUserCronjob } from "../../sheard/apis/cronjob";
 import { getUserAccounts, putUserAccounts } from "../../sheard/apis/user";
+import { resMessageParser } from '../../utils/resParser';
+
 
 class Accounts extends Component {
 
@@ -33,11 +35,6 @@ class Accounts extends Component {
 		this.getUsersAccounts();
 	}
 
-	errorToString(err) {
-		var msg = " " + err.join(", ");
-		return msg;
-	}
-
 	async getUsersAccounts() {
 		try {
 			const userAccounts = await getUserAccounts(this.state.userId);
@@ -47,7 +44,7 @@ class Accounts extends Component {
 					document.getElementById(key).value = userAccounts[key];
 			});
 		} catch (err) {
-			ToastsStore.info(messages.ERROR_LOADING_DATA);
+			ToastsStore.info(resMessageParser(err, messages.ERROR_LOADING_DATA));
 		}
 	}
 
@@ -56,7 +53,7 @@ class Accounts extends Component {
 			const accounts = await getAccounts();
 			this.setState({ accounts });
 		} catch (err) {
-			ToastsStore.info(messages.ERROR_LOADING_DATA);
+			ToastsStore.info(resMessageParser(err, messages.ERROR_LOADING_DATA));
 		}
 	}
 
@@ -85,7 +82,7 @@ class Accounts extends Component {
 			ToastsStore.info(messages.SUCCESS_UPDATING_CHART);
 		} catch (err) { // TODO: needs better error handeling
 			ToastsStore.info(messages.ERROR_UPDATING_CHART);
-			ToastsStore.info(messages.KNOWN_ERROR_PREFIX + this.errorToString(err.messages));
+			ToastsStore.info(messages.KNOWN_ERROR_PREFIX + resMessageParser(err.messages));
 		} finally {
 			this.setState({ loading: false });
 		}

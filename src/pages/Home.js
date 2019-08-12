@@ -5,6 +5,7 @@ import useGloble from "../store";
 import messages from "../consts/messages";
 import { Welcome, Table } from "../components/Home";
 import { getChart } from "../sheard/apis/chart";
+import { resMessageParser } from "../utils/resParser";
 
 const Home = () => {
 
@@ -17,7 +18,7 @@ const Home = () => {
 			const chart = await getChart();
 			setChartData({ loaded: true, ...chart.data });
 		} catch (err) {
-			ToastsStore.info(messages.ERROR_LOADING_DATA);
+			ToastsStore.info(resMessageParser(err, messages.ERROR_LOADING_DATA));
 		}
 	};
 	

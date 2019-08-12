@@ -8,6 +8,7 @@ import setAuthToken from "../../utils/auth/setAuthToken";
 import { OButton, OInput, OCard } from "../core";
 import messages from "../../consts/messages"
 import { authSignin } from "../../sheard/apis/auth";
+import { resMessageParser } from "../../utils/resParser";
 
 function signinWithHook() {
 	return function WrappedComponent(props) {
@@ -41,25 +42,11 @@ class SigninWithHook extends Component {
 			const user = jwt_decode(token);
 			globalActions.updateUser(user);
 		} catch (err) {
-			ToastsStore.info(messages.KNOWN_ERROR_PREFIX + this.errorToString(""));
+			ToastsStore.info(messages.KNOWN_ERROR_PREFIX + resMessageParser(err));
 		} finally {
 			this.setState({ loading: false });
 		}
 	}
-
-	errorToString(err) { // TODO: make this better...
-		var msg = "";
-		const type = Object.prototype.toString.call(err);
-		if (type === '[object Object]') {
-			Object.keys(err).forEach(key => {
-				msg += err[key];
-				msg += ". ";
-			});
-		}
-		if (msg === "") msg = "Unknown Error.";
-		return msg;
-	}
-
 
 	onChange = e => {
 		this.setState({ [e.target.id]: e.target.value });
