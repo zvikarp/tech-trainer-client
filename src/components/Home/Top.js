@@ -1,6 +1,8 @@
 import React from 'react';
 import { withRouter } from "react-router-dom";
 
+// TODO: 1. I can do better then this, 2. I dont think this is how it is supposed to be...
+
 const onAdminClick = (props) => {
 	props.history.push({
 		pathname: '/profile',
@@ -21,8 +23,24 @@ const DoesntHaveUser = () => {
 }
 
 const HasUser = (props) => {
+	if (props.isAdmin) {
+		return (
+			<div id="top" className="admin-top-button" onClick={() => onAdminClick(props)}>
+				{TopUser(props)}
+			</div>
+		);
+	} else {
+		return (
+			<div id="top">
+				{TopUser(props)}
+			</div>
+		);
+	}
+}
+
+const TopUser = (props) => {
 	return (
-		<div id="top">
+		<div>
 			<div className="top-child top-icon">
 				<span role="img" aria-label="emoji">{props.icon}</span>
 			</div>
@@ -34,16 +52,8 @@ const HasUser = (props) => {
 	);
 }
 
-const AdminWrap = (props) => {
-	return (
-		<div id="top" className="admin-top-button" onClick={() => onAdminClick(props)}>
-			{HasUser(props)}
-		</div>
-	);
-}
-
 const Top = (props) => {
-	const user = props.user ? props.isAdmin ? AdminWrap(props) : HasUser(props) : DoesntHaveUser();
+	const user = props.user ? HasUser(props) : DoesntHaveUser();
 	const content = props.loaded ? user : IsLoading();
 
 	return content;
