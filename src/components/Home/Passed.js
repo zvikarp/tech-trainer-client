@@ -14,7 +14,7 @@ const Passed = (props) => {
 		}
 		var tilesObjects = [];
 		for (var i = 0; i < tiles.length; i++) {
-			tilesObjects.push(<Tile key={i} user={props.passed[i]} isAdmin={props.admin} />);
+			tilesObjects.push(<Tile key={i} user={props.passed[i]} isAdmin={props.isAdmin} />);
 		}
 		return tilesObjects;
 	}

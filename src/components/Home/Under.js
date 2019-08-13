@@ -13,7 +13,7 @@ const Under = (props) => {
 		}
 		var tilesObjects = [];
 		for (var i = 0; i < tiles.length; i++) {
-			tilesObjects.push(<Tile key={i} user={props.under[i]} isAdmin={props.admin} />);
+			tilesObjects.push(<Tile key={i} user={props.under[i]} isAdmin={props.isAdmin} />);
 		}
 		return tilesObjects;
 	}
