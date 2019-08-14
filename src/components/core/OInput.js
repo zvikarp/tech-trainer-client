@@ -25,6 +25,7 @@ const OInput = (props) => {
 
 OInput.defaultProps = {
 	type: "text",
+	value:"",
 	disabled: false,
 	name: "",
 	onChange: () => { },

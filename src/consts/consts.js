@@ -1,6 +1,6 @@
 module.exports = {
 
 	// the header that identifies the user
-	AUTH_HEADER: "Authorization",
+	AUTH_HEADER: "authorization",
 
 };

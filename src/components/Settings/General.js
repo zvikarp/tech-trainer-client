@@ -6,11 +6,11 @@ import { getUser, putUserSettings } from "../../sheard/apis/user";
 import { OButton, OInput, OCard } from "../core";
 import { resMessageParser } from "../../utils/resParser";
 
-const General = () => {
+const General = (props) => {
 
 	const [accounts, setAccounts] = useState({});
 	const [loading, setLoading] = useState(false);
-	const userId = "";
+	const userId = props.userId;
 
 	useEffect(() => {
 		loadData();
@@ -38,7 +38,7 @@ const General = () => {
 	}
 
 	const onChange = (e) => {
-		var updatedAccounts = accounts;
+		var updatedAccounts = Object.assign({}, accounts);
 		updatedAccounts[e.target.id] = e.target.value;
 		setAccounts(updatedAccounts);
 	};

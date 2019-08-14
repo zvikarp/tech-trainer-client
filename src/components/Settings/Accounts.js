@@ -1,129 +1,113 @@
-import React, { Component } from 'react';
-import { ToastsStore } from 'react-toasts';
-import ReactTooltip from 'react-tooltip'
+import React, { useEffect, useState } from "react";
+import { ToastsStore } from "react-toasts";
+import ReactTooltip from "react-tooltip";
 
 import messages from "../../consts/messages";
 import { OButton, OInput, OCard } from "../core";
 import { getAccounts } from "../../sheard/apis/accounts";
 import { updateUserCronjob } from "../../sheard/apis/cronjob";
 import { getUserAccounts, putUserAccounts } from "../../sheard/apis/user";
-import { resMessageParser } from '../../utils/resParser';
+import { resMessageParser } from "../../utils/resParser";
 
+const Accounts = (props) => {
 
-class Accounts extends Component {
+	const [accounts, setAccounts] = useState({});
+	const [accountsFields, setAccountsFields] = useState({});
+	const [loading, setLoading] = useState(false);
+	const userId = props.userId;
 
-	constructor(props) {
-		super(props);
-		var userId;
-		if (this.props.ofUser) {
-			userId = this.props.ofUser.userId;
-		} else {
-			// userId = store.getState().auth.user.id
-		}
-		this.state = {
-			accountsFields: {},
-			accounts: {},
-			token: localStorage.jwtToken,
-			loading: false,
-			userId: userId,
-		}
-	}
+	useEffect(() => {
+		getAccountsTypes();
+		getUsersAccounts();
+		// eslint-disable-next-line
+	}, []);
 
-	componentDidMount() {
-		this.getAccountsTypes();
-		this.getUsersAccounts();
-	}
-
-	async getUsersAccounts() {
+	const getUsersAccounts = async () => {
 		try {
-			const userAccounts = await getUserAccounts(this.state.userId);
-			Object.keys(userAccounts).forEach(key => {
-				this.setState({ [key]: userAccounts[key] }); // TODO: is this really a good idea?
-				if (document.getElementById(key))
-					document.getElementById(key).value = userAccounts[key];
-			});
+			const userAccounts = await getUserAccounts(userId);
+			setAccountsFields(userAccounts);
 		} catch (err) {
 			ToastsStore.info(resMessageParser(err, messages.ERROR_LOADING_DATA));
 		}
-	}
+	};
 
-	async getAccountsTypes() {
+	const getAccountsTypes = async () => {
 		try {
 			const accounts = await getAccounts();
-			this.setState({ accounts });
+			setAccounts(accounts);
 		} catch (err) {
 			ToastsStore.info(resMessageParser(err, messages.ERROR_LOADING_DATA));
 		}
-	}
-
-
-	onAccountChange = e => {
-		var accountsFieldsTemp = this.state.accountsFields;
-		accountsFieldsTemp[e.target.id] = e.target.value;
-		this.setState({ accountsFields: accountsFieldsTemp });
 	};
 
-	onChange = e => {
-		var accountsFieldsTemp = this.state.accountsFields;
+	const onAccountChange = (e) => {
+		var accountsFieldsTemp = Object.assign({}, accountsFields);
 		accountsFieldsTemp[e.target.id] = e.target.value;
-		this.setState({ accountsFields: accountsFieldsTemp });
-	};
-
-	onSubmit = async (e) => {
-		e.preventDefault();
-		this.setState({ loading: true });
+		setAccountsFields(accountsFieldsTemp);
 		
+	};
+
+	const onSubmit = async (e) => {
+		e.preventDefault();
+		setLoading(true);
+
 		try {
-			await putUserAccounts(this.state.userId, this.state.accountsFields);
+			await putUserAccounts(userId, accountsFields);
 			ToastsStore.info(messages.SUCCESS_SAVING_CHANGES);
 			ToastsStore.info(messages.UPDATING_CHART);
-			await updateUserCronjob(this.state.userId);
+			await updateUserCronjob(userId);
 			ToastsStore.info(messages.SUCCESS_UPDATING_CHART);
-		} catch (err) { // TODO: needs better error handeling
-			ToastsStore.info(messages.ERROR_UPDATING_CHART);
-			ToastsStore.info(messages.KNOWN_ERROR_PREFIX + resMessageParser(err.messages));
+		} catch (err) {
+			// TODO: updateUserCronjob return a useful error message
+			ToastsStore.info(
+				messages.KNOWN_ERROR_PREFIX + resMessageParser(err, messages.ERROR_SAVING_CHANGES)
+			);
 		} finally {
-			this.setState({ loading: false });
+			setLoading(false);
 		}
 	};
 
-	renderAccountField(key, account) {
+	const renderAccountField = (key, account) => {
 		return (
 			<div key={key}>
-				
 				<OInput
-						label={account.name + ":"}
-						onChange={this.onAccountChange}
-						value={this.state.key}
-						id={key}
-						tooltip={account.instructions}
-					/>
-					<ReactTooltip />
+					label={account.name + ":"}
+					onChange={onAccountChange}
+					value={accountsFields[key]}
+					id={key}
+					tooltip={account.instructions}
+				/>
+				<ReactTooltip />
 			</div>
 		);
-	}
+	};
 
-	renderAccountFields() {
-		var accountsFields = [];
-		Object.keys(this.state.accounts).forEach(key => {
-			accountsFields.push(this.renderAccountField(key, this.state.accounts[key]));
-		})
-		return (accountsFields);
-	}
+	const renderAccountFields = () => {
+		var renderAccountsFields = [];
+		Object.keys(accounts).forEach(key => {
+			renderAccountsFields.push(
+				renderAccountField(key, accounts[key])
+			);
+		});
+		return renderAccountsFields;
+	};
 
-	render() {
-		return (
-			<OCard >
-				<h2>Connected Accounts Settings</h2>
-				<form noValidate onSubmit={this.onSubmit}>
-					{this.renderAccountFields()}
-					<div className="action-section">
-						<OButton loading={this.state.loading} submit center text="SAVE CHANGES" />
-					</div>
-				</form>
-			</OCard>
-		)
-	}
-}
+	return (
+		<OCard>
+			<h2>Connected Accounts Settings</h2>
+			<form noValidate onSubmit={onSubmit}>
+				{renderAccountFields()}
+				<div className="action-section">
+					<OButton
+						loading={loading}
+						submit
+						center
+						text="SAVE CHANGES"
+					/>
+				</div>
+			</form>
+		</OCard>
+	);
+};
 
 export default Accounts;

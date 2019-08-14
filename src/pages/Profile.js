@@ -19,6 +19,8 @@ const Profile = (props) => {
 	const [user, setUser] = useState({ id: userId });
 	// TODO: if admin, change the user to the user he selected.
 
+	// TODO: the setup here is simmerlar to the settings but here we...
+	// TODO: ...get the page content and there we do it in the children. need to decide on something.
 	useEffect(() => {
 		loadData();
 		// eslint-disable-next-line

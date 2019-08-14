@@ -1,17 +1,27 @@
-import React from 'react';
+import React from "react";
+import useGlobal from "../store";
 
-import { General } from '../components/Settings';
+import { General, Accounts } from '../components/Settings';
+
+
+
 
 // TODO: get userid here.
 
 const Settings = (props) => {
-
+	
+	const [globalState,] = useGlobal();
+	const userId = globalState.userId;
+	if (userId) {
 	return (
 		<div>
-			<General ofUser={props.location.data} />
-			{/* <Accounts ofUser={props.location.data} /> */}
+			<General userId={userId} />
+			<Accounts userId={userId} />
 		</div>
 	);
+	} else {
+		return <div />
+	}
 }
 
 export default Settings
