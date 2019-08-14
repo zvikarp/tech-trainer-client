@@ -1,4 +1,4 @@
-import User from './User/User';
-import History from './History/History';
+import User from './User';
+import History from './History';
 
 export { User, History };
