@@ -1,7 +1,6 @@
 /*  ! brand style !
     primary color: #FE724D
     background color: #F9E1DC
-    canves color: #F9FBFC
     input color: #feaf99
 */  
 
@@ -231,24 +230,23 @@ h4 {
 #tile {
 	margin: 12px 64px;
 	border-radius: 10px;
+	color: #fe724d;
 }
 
 #tile:hover {
-	background-color: rgba(255, 255, 255, 0.1);
+	background-color: #F9E1DC;
 }
 
 .tile-username {
 	display: inline-block;
-	color: #ffffff;
 }
 
 .tile-points {
 	display: inline-block;
 	padding: 8px;
-	border: 3px solid #ffffff;
+	border: 3px solid #fe724d;
 	border-radius: 10px;
 	margin: 4px 16px;
-	color: #ffffff;
 }
 
 .admin-tile-button {
@@ -264,9 +262,9 @@ h4 {
 #top {
 	display: inline-block;
 	background-color: #ffffff;
-	/* width: 20%; */
-	margin: 24px;
+	margin: 0px 48px;
 	border-radius: 10px;
+	color: #fe724d;
 }
 
 #top:hover {
@@ -299,21 +297,6 @@ h4 {
 .admin-top-button {
 	cursor: pointer;
 }
-
-.passed-text {
-    padding: 8px;
-    margin: 4px 64px;
-    color: #FFFFFF;
-}
-
-.passed-loading {
-  color: #feaf99;
-}
-
-.passed-cards {
-  margin: 0 auto;
-}
-
 @media only screen and (max-width: 800px) {
   .passed-text {
 		margin: 4px 12px;
@@ -325,6 +308,7 @@ h4 {
 	margin: 0px 64px;
   color: #FFFFFF;
 }
+
 .top-three-cards {
 	display: grid;
   align-items: center;
@@ -335,20 +319,6 @@ h4 {
   .top-three-title {
 		margin: 0px 12px;
   }
-}
-
-.under-text {
-  padding: 8px;
-  margin: 4px 64px;
-  color: #FFFFFF;
-}
-
-.under-loading {
-  color: #feaf99;
-}
-
-.under-cards {
-  margin: 0 auto;
 }
 
 @media only screen and (max-width: 800px) {

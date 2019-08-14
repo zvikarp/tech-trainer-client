@@ -1,5 +1,6 @@
 import React from "react";
 
+import { OCard, OLoading } from "../core";
 import { Tile } from "./";
 
 const Under = (props) => {
@@ -7,9 +8,9 @@ const Under = (props) => {
 	const renderTiles = () => {
 		const tiles = props.under;
 		if (!props.loaded) {
-			return <div className="under-text under-loading">Loading...</div>;
+			return <OLoading />;
 		} else if (tiles.length === 0) {
-			return <div className="passed-text passed-loading">Humm... This section is currently empty</div>;
+			return <div>Humm... This section is currently empty</div>;
 		}
 		var tilesObjects = [];
 		for (var i = 0; i < tiles.length; i++) {
@@ -20,15 +21,15 @@ const Under = (props) => {
 
 	// TODO: can do better then this for the string, at least make it in a const
 	return (
-		<div id="under">
-			<div className="under-text">
+		<OCard wide>
+			<h2>
 				{" "}
 				<span role="img" aria-label="emoji">😔</span>
 				{" "}
 				Users that have less then 50 points
-        </div>
-			<div className="under-cards">{renderTiles()}</div>
-		</div>
+        </h2>
+			<div>{renderTiles()}</div>
+		</OCard>
 	);
 }
 
