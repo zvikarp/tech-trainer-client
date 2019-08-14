@@ -3,7 +3,7 @@ import { ToastsStore } from 'react-toasts';
 
 import messages from "../../consts/messages";
 import { AccountCard } from "./";
-import { OButton, OCard } from "../core";
+import { OButton, OCard, OLoading } from "../core";
 import { getAccounts, putAccounts } from "../../sheard/apis/accounts";
 import { resMessageParser } from "../../utils/resParser";
 
@@ -90,7 +90,7 @@ const AllAccounts = () => {
 	const renderAccountCards = () => {
 		const length = Object.keys(accounts).length;
 		if (length < 1) {
-			return (<div className="all-accounts-loading">Loading...</div>)
+			return (<OCard><OLoading /></OCard>)
 		}
 		var accountsCards = [];
 		Object.keys(accounts).forEach(accountId => {

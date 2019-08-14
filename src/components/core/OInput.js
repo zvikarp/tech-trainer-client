@@ -1,11 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+// TODO: make sure if there is a tooltip there is a label
+
 const OInput = (props) => {
 
 	const hasLabel = props.label !== undefined;
 	const hasTooltip = props.tooltip !== undefined;
-	const labledStyle = (hasLabel || hasTooltip) ? "labeld-input" : "";
+	const labledStyle = (hasLabel) ? "oinput labeld" : "oinput";
 
 	return (
 		<div className={labledStyle}>
@@ -18,7 +20,7 @@ const OInput = (props) => {
 				name={props.name}
 				disabled={props.disabled}
 			/>
-			{hasTooltip ? <i data-tip={props.tooltip} className="fas fa-info-circle tooltip-button"></i> : null}
+			{hasTooltip ? <i data-tip={props.tooltip} className="fas fa-info-circle tooltip"></i> : null}
 		</div>
 	);
 }

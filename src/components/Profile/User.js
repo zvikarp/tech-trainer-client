@@ -1,4 +1,5 @@
 import React from 'react';
+import { OCard } from '../core';
 
 const User = (props) => {
 
@@ -16,7 +17,7 @@ const User = (props) => {
 	}
 
 		return (
-			<div id="user">
+			<OCard wide >
 				<h2 className="user-name"> {props.user.name} </h2>
 					<div>Email: {props.user.email}</div>
 					<div>Points: {props.user.points}</div>
@@ -24,7 +25,7 @@ const User = (props) => {
 					<div>Role: {props.user.role}</div>
 					<br />
 					<div>Accounts: {accountsList()}</div>
-			</div>
+			</OCard>
 		);
 }
 

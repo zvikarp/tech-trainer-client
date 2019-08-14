@@ -1,12 +1,14 @@
 import React from "react";
 import Line from "react-apexcharts";
 
+import { OCard } from "../core";
+
 const History = props => {
 	const chartOptions = {
 		chart: {
 			type: "line",
 			fontFamily: "Raleway, sans-serif",
-			foreColor: "#ffffff",
+			foreColor: "#000000",
 			toolbar: {
 				show: false
 			}
@@ -23,8 +25,8 @@ const History = props => {
 		markers: {
 			size: 4,
 			opacity: 0.9,
-			colors: ["#FFFFFF"],
-			strokeColor: "FFFFFF",
+			colors: ["#FE724D"],
+			strokeColor: "000000",
 			strokeWidth: 2,
 
 			hover: {
@@ -43,14 +45,14 @@ const History = props => {
 	// TODO: do something  with points and all point...
 
 	return (
-		<div id="history">
+		<OCard wide>
 			<Line
 				options={chartOptions}
 				series={chartSeries}
 				type="line"
 				className="history-chart"
 			/>
-		</div>
+		</OCard>
 	);
 };
 

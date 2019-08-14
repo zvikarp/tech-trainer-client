@@ -8,6 +8,7 @@ import { getAccounts } from "../sheard/apis/accounts";
 import { getHistory } from "../sheard/apis/history";
 import { getUser } from "../sheard/apis/user";
 import { resMessageParser } from "../utils/resParser";
+import { OCard, OLoading } from "../components/core";
 
 const Profile = (props) => {
 
@@ -86,7 +87,7 @@ const Profile = (props) => {
 	}
 
 	const renderLoading = () => {
-		return (<div className="profile-loading">Loading...</div>);
+		return (<OCard wide><OLoading /></OCard>);
 	}
 
 	const renderUser = () => {

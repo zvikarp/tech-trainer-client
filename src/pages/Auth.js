@@ -32,7 +32,7 @@ const Auth = () => {
 
 	return (
 		<div id="auth">
-			<h1 className="auth-message">Connect to Orange <span role="img" aria-label="emoji">🧡</span></h1>
+			<h1>Connect to Orange <span role="img" aria-label="emoji">🧡</span></h1>
 			{renderForm()}
 		</div>
 	)

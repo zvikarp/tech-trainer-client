@@ -1,7 +1,18 @@
 import React from "react";
+import PropTypes from 'prop-types';
 
 const OCard = props => {
-	return <div className="ocard">{props.children}</div>;
+	const styles = "ocard " + (props.wide && "wide");
+
+	return <div className={styles} >{props.children}</div>;
 };
+
+OCard.defaultProps = {
+	wide: false,
+}
+
+OCard.propTypes = {
+	wide: PropTypes.bool,
+}
 
 export default OCard;
