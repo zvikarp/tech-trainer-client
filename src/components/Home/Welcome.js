@@ -1,17 +1,10 @@
-import React from 'react';
+import React from "react";
 
-export default function Welcome(props) {
+const Welcome = ({ userName }) => {
+	const isAuthed = userName !== undefined;
+	const message = (isAuthed ? "Hi " + userName : "Welcome to Orange") + " 👋";
 
-	const isAuthed = props.userName !== undefined;
-	const message = isAuthed ? ("Hi " + props.userName) : "Welcome to Orange";
-	
-	return (
-		// TODO: can look better
-		<div>
-			<h1>
-				{message}
-				<span role="img" aria-label="emoji">👋</span>
-			</h1>
-		</div>
-	);
-}
+	return <h1>{message}</h1>;
+};
+
+export default Welcome;

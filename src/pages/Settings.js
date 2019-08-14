@@ -6,7 +6,7 @@ import { General, Accounts } from '../components/Settings';
 
 
 
-// TODO: get userid here.
+// TODO: get userid for history data here.
 
 const Settings = (props) => {
 	

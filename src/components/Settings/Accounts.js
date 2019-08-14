@@ -11,7 +11,7 @@ import { resMessageParser } from "../../utils/resParser";
 
 const Accounts = (props) => {
 
-	// TODO: on waiting for page to load "loading" sign
+	// TODO: on waiting for page to load add a "loading" sign
 
 	const [accounts, setAccounts] = useState({});
 	const [accountsFields, setAccountsFields] = useState({});

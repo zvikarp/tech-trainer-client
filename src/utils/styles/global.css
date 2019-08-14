@@ -21,7 +21,7 @@ h1 {
 	font-size: 28px;
 	font-weight: 900px;
 	margin: 0px;
-	padding: 140px 64px 64px 64px;
+	padding: 64px;
 	text-align: center;
 	color: #ffffff;
 }
@@ -32,6 +32,12 @@ h2 {
 	font-size: 24px;
 	font-weight: 900px;
 	text-align: center;
+}
+
+h4 {
+	text-align: center;
+	padding: 24px;
+	color: #ffffff;
 }
 
 /* layout */
@@ -214,17 +220,6 @@ h2 {
 
 /* vzkjkl;zsdk;lvfps */
 
-.last-updated {
-	padding: 16px;
-	color: #ffffff;
-	text-align: center;
-}
-
-.last-updated-loading {
-	color: #feaf99;
-}
-
-
 .delete-button {
 	margin: 0px 0px 16px 32px;
 }
@@ -361,10 +356,5 @@ h2 {
 		margin: 4px 12px;
   }
 }
-.link-to-signin {
-	text-align: center;
-	padding: 24px;
-	color: #ffffff;
-}
 
-/* TODO: reduce the file to max 300 lines... */
+/* TODO: reduce the file to max 300 lines... already did  140, left with only 60!!! */

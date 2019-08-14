@@ -1,13 +1,13 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
-// TODO: make sure if there is a tooltip there is a label
-
-const OInput = (props) => {
+const OInput = props => {
+	
+	// NOTE: the input can have a tooltip only if it has a label.
 
 	const hasLabel = props.label !== undefined;
-	const hasTooltip = props.tooltip !== undefined;
-	const labledStyle = (hasLabel) ? "oinput labeld" : "oinput";
+	const hasTooltip = props.tooltip !== undefined && hasLabel;
+	const labledStyle = hasLabel ? "oinput labeld" : "oinput";
 
 	return (
 		<div className={labledStyle}>
@@ -20,18 +20,20 @@ const OInput = (props) => {
 				name={props.name}
 				disabled={props.disabled}
 			/>
-			{hasTooltip ? <i data-tip={props.tooltip} className="fas fa-info-circle tooltip"></i> : null}
+			{hasTooltip && (
+				<i data-tip={props.tooltip} className="fas fa-info-circle tooltip" />
+			)}
 		</div>
 	);
-}
+};
 
 OInput.defaultProps = {
 	type: "text",
-	value:"",
+	value: "",
 	disabled: false,
 	name: "",
-	onChange: () => { },
-}
+	onChange: () => {}
+};
 
 OInput.propTypes = {
 	label: PropTypes.string,
@@ -41,7 +43,7 @@ OInput.propTypes = {
 	type: PropTypes.string,
 	name: PropTypes.string,
 	tooltip: PropTypes.string,
-	disabled: PropTypes.bool,
-}
+	disabled: PropTypes.bool
+};
 
 export default OInput;
