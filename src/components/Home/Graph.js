@@ -1,9 +1,13 @@
 import React from "react";
 
+import { OCard } from "../core";
+
 const Graph = () => {
 
 		return (
-			<div></div>
+			<OCard wide>
+				
+			</OCard>
 		)
 }
 

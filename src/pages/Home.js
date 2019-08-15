@@ -3,7 +3,7 @@ import { ToastsStore } from "react-toasts";
 
 import useGloble from "../store";
 import messages from "../consts/messages";
-import { Welcome, Table } from "../components/Home";
+import { Welcome, TopThree, Passed, Under, Graph } from "../components/Home";
 import { getChart } from "../sheard/apis/chart";
 import { resMessageParser } from "../utils/resParser";
 
@@ -29,7 +29,10 @@ const Home = () => {
 	return (
 		<div>
 			<Welcome userName={globalState.userName} />
-			<Table isAdmin={globalState.isAdmin} {...chartData} />
+			<TopThree isAdmin={globalState.isAdmin} {...chartData} />
+			<Graph />
+			<Passed isAdmin={globalState.isAdmin} {...chartData} />
+			<Under isAdmin={globalState.isAdmin} {...chartData} />
 		</div>
 	);
 };
