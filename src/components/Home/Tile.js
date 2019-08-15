@@ -21,7 +21,7 @@ const Tile = (props) => {
 
 	if (props.isAdmin) {
 		return (
-			<div className="admin-tile-button" onClick={() => onAdminClick()}>
+			<div className="admin-button" onClick={() => onAdminClick()}>
 				{renderTile()}
 			</div>
 		);

@@ -19,15 +19,10 @@ const Under = (props) => {
 		return tilesObjects;
 	}
 
-	// TODO: can do better then this for the string, at least make it in a const
+	const title = "😔 Users that have less then 50 points";
 	return (
 		<OCard wide>
-			<h2>
-				{" "}
-				<span role="img" aria-label="emoji">😔</span>
-				{" "}
-				Users that have less then 50 points
-        </h2>
+			<h2>{title}</h2>
 			<div className="tiles-list">{renderTiles()}</div>
 		</OCard>
 	);

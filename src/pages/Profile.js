@@ -15,7 +15,8 @@ const Profile = (props) => {
 	const [history, setHistory] = useState({});
 	const [globalState,] = useGlobal();
 
-	const userId = globalState.userId;
+	const userId = props.location.data ? props.location.data.userId : globalState.userId;
+	console.log(props.location.data);
 	const [accounts, setAccounts] = useState({});
 	const [user, setUser] = useState({ id: userId });
 	// TODO: if admin, change the user to the user he selected.

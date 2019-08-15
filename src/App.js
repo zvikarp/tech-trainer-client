@@ -46,7 +46,7 @@ const App = () => {
 		localStorage.removeItem("jwtToken");
 		SetAuthToken(false);
 		globalAction.signoutUser();
-		// TODO: navigate to home page
+		window.location.href = '../';
 	};
 
 	const adminButtons = globalState.isAdmin ? [navButtons.ADMIN] : [];
