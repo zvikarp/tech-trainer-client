@@ -29,7 +29,7 @@ const Passed = (props) => {
 				{" "}
 				Users that have more then 50 points
         </h2>
-			<div>{renderTiles()}</div>
+			<div className="tiles-list">{renderTiles()}</div>
 		</OCard>
 	);
 }

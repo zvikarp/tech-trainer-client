@@ -27,7 +27,7 @@ h1 {
 
 h2 {
 	margin: 0px;
-	padding: 16px;
+	padding-bottom: 24px;
 	font-size: 24px;
 	font-weight: 900px;
 	text-align: center;
@@ -197,7 +197,7 @@ h4 {
 	width: 40%;
 	margin: 64px auto;
 	border-radius: 10px;
-	padding: 32px;
+	padding: 24px 32px;
 }
 
 .ocard.wide {
@@ -227,10 +227,18 @@ h4 {
 	padding: 24px;
 }
 
+.tiles-list {
+	display: grid;
+  align-items: center;
+	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+	column-gap: 24px;
+	row-gap: 24px;
+}
+
 #tile {
-	margin: 12px 64px;
 	border-radius: 10px;
-	color: #fe724d;
+	border: 3px solid #fe724d;
+	/* color: #fe724d; */
 }
 
 #tile:hover {
@@ -244,7 +252,7 @@ h4 {
 .tile-points {
 	display: inline-block;
 	padding: 8px;
-	border: 3px solid #fe724d;
+	
 	border-radius: 10px;
 	margin: 4px 16px;
 }
@@ -253,45 +261,52 @@ h4 {
 	cursor: pointer;
 }
 
-@media only screen and (max-width: 800px) {
-	#tile {
-		margin: 12px 12px;
-	}
-}
-
 #top {
 	display: inline-block;
 	background-color: #ffffff;
-	margin: 0px 48px;
+	margin: 0px 36px;
 	border-radius: 10px;
-	color: #fe724d;
+	align-self: flex-end;
+	padding: 24px 0;
 }
 
 #top:hover {
 	background-color: #f9e1dc;
 }
 
-.top-username {
-	vertical-align: top;
-}
-
 .top-icon {
 	width: 30%;
 	text-align: center;
-	margin: auto;
-	font-size: 36px;
-	vertical-align: top;
-	padding: 28px 0px;
+	margin: -50px auto 0 auto;
+	font-size: 48px;
 }
 
 .top-child {
-	display: inline-block;
+	text-align: center;
+	display: flex;
+	height: 100%;
+	margin: auto 0;
+	align-items: center;
 }
 
-.top-loading {
-	padding: 16px 0px;
+.top-child div{
+	padding-bottom: 48px;
+	width: 100%;
 	text-align: center;
-	color: #feaf99;
+}
+
+/* TODO: make this dynamic and responsive */
+
+#top .top1 {
+	height: 250px;
+}
+
+#top .top2 {
+	height: 180px;
+}
+
+#top .top3 {
+	height: 120px;
 }
 
 .admin-top-button {
@@ -303,28 +318,11 @@ h4 {
   }
 }
 
-.top-three-title {
-	padding: 8px;
-	margin: 0px 64px;
-  color: #FFFFFF;
-}
-
 .top-three-cards {
 	display: grid;
   align-items: center;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+	
 }
 
-@media only screen and (max-width: 800px) {
-  .top-three-title {
-		margin: 0px 12px;
-  }
-}
-
-@media only screen and (max-width: 800px) {
-  .under-text {
-		margin: 4px 12px;
-  }
-}
-
-/* TODO: reduce the file to max 300 lines... already did  140, left with only 60!!! */
+/* TODO: reduce the file to max 300 lines... already did  170, left with only 30!!! */

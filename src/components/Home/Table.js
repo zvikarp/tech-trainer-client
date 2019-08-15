@@ -2,7 +2,7 @@ import React from "react";
 
 import { TopThree, Passed, Under } from "./";
  // TODO: not to do this...
-export default function Table(props) {
+const Table = (props) => {
 	return (
 		<div>
 			<TopThree {...props} />
@@ -11,3 +11,5 @@ export default function Table(props) {
 		</div>
 	);
 }
+
+export default Table;

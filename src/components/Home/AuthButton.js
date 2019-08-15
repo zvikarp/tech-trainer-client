@@ -2,7 +2,7 @@ import React from 'react';
 
 import { OButton } from '../core'
 
-export default function AuthButton(props) {
+const AuthButton = (props) => {
 
 	const signinButton = {
 		text: "SIGN IN",
@@ -22,3 +22,5 @@ export default function AuthButton(props) {
 		</div>
 	);
 }
+
+export default AuthButton;
