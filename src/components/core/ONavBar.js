@@ -4,7 +4,7 @@ import { withRouter } from "react-router-dom";
 import { OLink } from "../core";
 
 const ONavBar = props => {
-	const firstSelected = props.history.location.pathname;
+	const firstSelected = "/" + props.history.location.pathname.split("/")[1];
 	const [selected, setSelected] = useState(firstSelected);
 	const rightSide = props.rightSide || [];
 	const leftSide = props.leftSide || [];
@@ -14,7 +14,8 @@ const ONavBar = props => {
 			selected={link.route === selected}
 		/>
 	);
-	const updateSelected = () => {setSelected(firstSelected)};
+	const updateSelected = () => {
+		setSelected(firstSelected)};
 
 	useEffect(() => {
 		updateSelected();

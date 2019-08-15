@@ -254,7 +254,7 @@ h4 {
 	margin: 4px 16px;
 }
 
-.admin-button {
+.admin {
 	cursor: pointer;
 }
 
@@ -309,6 +309,12 @@ h4 {
 .top-three-cards {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.link-to-settings {
+	color: #fe724d;
+	text-decoration: underline;
+	cursor: pointer;
 }
 
 /* TODO: reduce the file to max 300 lines... already did  185, left with only 15!!! */

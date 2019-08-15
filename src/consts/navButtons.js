@@ -4,11 +4,6 @@ const buttons = {
 		route: "/",
 		key: "BACK",
 	},
-	SETTINGS: {
-		text: "Settings",
-		route: "/settings",
-		key: "SETTINGS",
-	},
 	ADMIN: {
 		text: "Admin",
 		route: "/admin",

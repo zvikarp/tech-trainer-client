@@ -5,16 +5,13 @@ import { OLoading } from '../core';
 const Top = (props) => {
 
 	const onAdminClick = (props) => {
-		props.history.push({
-			pathname: '/profile',
-			data: { "userId": props.user.id }
-		});
+		props.history.push('/profile/' + props.user.id);
 	}
 
 	const hasUser = (props) => {
 		if (props.isAdmin) {
 			return (
-				<div id="top" className="admin-button" onClick={() => onAdminClick(props)}>
+				<div id="top" className="admin" onClick={() => onAdminClick(props)}>
 					{topUser(props)}
 				</div>
 			);

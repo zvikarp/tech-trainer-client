@@ -15,12 +15,12 @@ const Profile = (props) => {
 	const [history, setHistory] = useState({});
 	const [globalState,] = useGlobal();
 
-	const userId = props.location.data ? props.location.data.userId : globalState.userId;
-	console.log(props.location.data);
+	const userId = props.match.params.id ? props.match.params.id : globalState.userId;
+	console.log(props.match.params.id);
+	
+	
 	const [accounts, setAccounts] = useState({});
 	const [user, setUser] = useState({ id: userId });
-	// TODO: if admin, change the user to the user he selected.
-
 	// TODO: the setup here is simmerlar to the settings but here we...
 	// TODO: ...get the page content and there we do it in the children. need to decide on something.
 	useEffect(() => {

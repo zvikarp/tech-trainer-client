@@ -50,7 +50,7 @@ const App = () => {
 	};
 
 	const adminButtons = globalState.isAdmin ? [navButtons.ADMIN] : [];
-	const authedNavButtons = [navButtons.HOME, ...adminButtons, navButtons.SETTINGS, navButtons.PROFILE, navButtons.SIGN_OUT(signoutUser)];
+	const authedNavButtons = [navButtons.HOME, ...adminButtons, navButtons.PROFILE, navButtons.SIGN_OUT(signoutUser)];
 	const visitorNavButtons = [navButtons.HOME, navButtons.SIGN_IN];
 
 	return (
@@ -59,9 +59,9 @@ const App = () => {
 				<ONavBar rightSide={globalState.isAuthed ? authedNavButtons : visitorNavButtons} selected="HOME" />
 				<Route exact path="/" component={Home} />
 				<Route exact path="/auth" component={Auth} />
-				<Route exact path="/settings" component={Settings} />
 				<Route exact path="/admin" component={Admin} />
-				<Route exact path="/profile" component={Profile} />
+				<Route exact path={["/settings","/settings/:id"]} component={Settings} />
+				<Route exact path={["/profile","/profile/:id"]} component={Profile} />
 				<ToastsContainer store={ToastsStore} />
 			</div>
 		</Router>

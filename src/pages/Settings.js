@@ -3,12 +3,10 @@ import useGlobal from "../store";
 
 import { General, Accounts } from '../components/Settings';
 
-// TODO: get userid for history data here.
-
 const Settings = (props) => {
 	
 	const [globalState,] = useGlobal();
-	const userId = props.location.data ? props.location.data.userId : globalState.userId;
+	const userId = props.match.params.id ? props.match.params.id : globalState.userId;
 	if (userId) {
 	return (
 		<div>

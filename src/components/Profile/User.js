@@ -1,7 +1,15 @@
 import React from 'react';
+import { withRouter } from "react-router-dom";
+
 import { OCard } from '../core';
 
 const User = (props) => {
+
+	const goToSettings = () => {
+		console.log(props.user._id);
+		
+		props.history.push('/settings/' + props.user._id);
+	}
 
 	const accountsList = () => {
 		const accountsById = props.user.accounts;
@@ -25,8 +33,10 @@ const User = (props) => {
 					<div>Role: {props.user.role}</div>
 					<br />
 					<div>Accounts: {accountsList()}</div>
+					<br />
+					<div>Edit in <span className="link-to-settings" onClick={() => goToSettings()}>Settings</span></div>
 			</OCard>
 		);
 }
 
-export default User;
+export default withRouter(User);

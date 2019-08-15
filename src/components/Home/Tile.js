@@ -4,10 +4,7 @@ import { withRouter } from "react-router-dom";
 const Tile = (props) => {
 
 	const onAdminClick = () => {
-		props.history.push({
-			pathname: '/profile',
-			data: { "userId": props.user.id },
-		});
+		props.history.push('/profile/' + props.user.id);
 	}
 
 	const renderTile = () => {
@@ -21,7 +18,7 @@ const Tile = (props) => {
 
 	if (props.isAdmin) {
 		return (
-			<div className="admin-button" onClick={() => onAdminClick()}>
+			<div className="admin" onClick={() => onAdminClick()}>
 				{renderTile()}
 			</div>
 		);

@@ -1,7 +1,7 @@
 import React from "react";
 
 import { TopThree, Passed, Under } from "./";
- // TODO: not to do this...
+
 const Table = (props) => {
 	return (
 		<div>
