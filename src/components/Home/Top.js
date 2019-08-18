@@ -11,13 +11,13 @@ const Top = (props) => {
 	const hasUser = (props) => {
 		if (props.isAdmin) {
 			return (
-				<div id="top" className="admin" onClick={() => onAdminClick(props)}>
+				<div className={"top admin " + props.top} onClick={() => onAdminClick(props)}>
 					{topUser(props)}
 				</div>
 			);
 		} else {
 			return (
-				<div id="top">
+				<div className={"top" + props.top}>
 					{topUser(props)}
 				</div>
 			);
@@ -26,13 +26,13 @@ const Top = (props) => {
 
 	const topUser = (props) => {
 		return (
-			<div className={props.top}>
+			<div>
 				<div className="top-icon">
 					<span role="img" aria-label="emoji">{props.icon}</span>
 				</div>
 				<div className="top-child">
-					<div><h3> {props.user.name} </h3>
-						<h3> {props.user.points} points</h3></div>
+					<h3> {props.user.name} </h3>
+						<h3> {props.user.points} points</h3>
 				</div>
 			</div>
 		);
