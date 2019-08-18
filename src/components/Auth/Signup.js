@@ -19,12 +19,13 @@ const Signup = (props) => {
 	// TODO: make sure that i actually make the server also sign the user in
 	// TODO: part of this code is repeated in signin and in app.js, need to centrelize it.
 	// TODO: test it :)
-	const signupUser = async () => {
+	const signupUser = async (isAdmin) => { // PROD-NOTE: [1/4] remove the prop 'isAdmin' in production.
 		try {
 			const credentials = {
 				'name': userDetailes.name,
 				'email': userDetailes.email,
-				'password': userDetailes.password
+				'password': userDetailes.password,
+				'admin': isAdmin // PROD-NOTE: [2/4] delete this row in production.
 			};
 			setLoading(true);
 			const res = await authSignup(credentials);
@@ -52,6 +53,11 @@ const Signup = (props) => {
 		signupUser();
 	};
 
+	// PROD-NOTE: [3/4] delete this function in produnction
+	const demoSignupSubmit = (isAdmin) => {
+		signupUser(isAdmin);
+	};
+
 		return (
 			<OCard>
 				<h2> Sign Up </h2>
@@ -77,7 +83,10 @@ const Signup = (props) => {
 						type="password"
 					/>
 					<div className="action-section">
-						<OButton loading={loading} submit center text="SIGN UP" />
+						{/* PROD-NOTE: [4/4] delete the following two row and uncomment the next on in production */}
+						<OButton loading={loading} onClick={() => demoSignupSubmit(true)} center text="SIGN UP AS ADMIN" />
+						<OButton loading={loading} onClick={() => demoSignupSubmit(false)} submit center text="SIGN UP AS USER" />
+						{/* <OButton loading={loading} submit center text="SIGN UP" /> */}
 					</div>
 				</form>
 			</OCard>

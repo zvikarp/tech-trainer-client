@@ -17,7 +17,7 @@ const Top = (props) => {
 			);
 		} else {
 			return (
-				<div className={"top" + props.top}>
+				<div className={"top " + props.top}>
 					{topUser(props)}
 				</div>
 			);

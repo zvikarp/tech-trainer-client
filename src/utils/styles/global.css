@@ -50,6 +50,7 @@ h4 {
 .obutton {
 	font-size: 18px;
 	padding: 8px 16px;
+	margin: 8px;
 	border: none;
 	cursor: pointer;
 	border-radius: 5px;
@@ -66,11 +67,6 @@ h4 {
 
 .obutton:hover {
 	box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-}
-
-.obutton.center {
-	display: table;
-	margin: 0px auto;
 }
 
 .obutton.primary {
@@ -225,6 +221,12 @@ h4 {
 
 .action-section {
 	padding: 24px;
+	display: table;
+	margin: 0px auto;
+}
+
+.action-section * {
+	display: inline-block;
 }
 
 .tiles-list {

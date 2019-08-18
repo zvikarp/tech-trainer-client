@@ -43,7 +43,7 @@ const Home = () => {
 				categories: categories,
 				loaded: true,
 			}
-			await setChartsData({chart});			
+			await setChartsData(chart);			
 		} catch (err) {
 			console.log(err);
 			
@@ -62,7 +62,7 @@ const Home = () => {
 			for (var i = 0; i < chart.length; i++) {
 				if (chart[i].points > 50) passed.push(chart[i]);
 				else under.push(chart[i]);
-			}
+			} // TODO: well, I dodn't do it correctly, oops...
 			setLastChartData({ loaded: true, top3, passed, under });
 		} catch (err) {
 			console.log(err);
@@ -72,8 +72,8 @@ const Home = () => {
 	};
 
 	const renderGraph = () => {
-		if (chartsData.chart.loaded) {
-			return <Graph {...chartsData} />;
+		if (chartsData.loaded) {
+			return <Graph chart={chartsData} />;
 		} else {
 			return <OLoading />;
 		}
