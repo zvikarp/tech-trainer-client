@@ -1,10 +1,21 @@
 import axios from "axios";
 
+// route:  GET api/chart/last
+// access: Public
+// desc:   api return the last chart
+export function getLastChart() {
+	return axios.get(process.env.REACT_APP_API_URL + "/chart/last").then(res => {
+		return res;
+	}).catch(err => {		
+		throw err.response.data;
+	});
+}
+
 // route:  GET api/chart/
 // access: Public
-// desc:   api return the current chart
-export function getChart() {
-	return axios.get(process.env.REACT_APP_API_URL + "/chart/last").then(res => {
+// desc:   api return all charts (last 25)
+export function getCharts() {
+	return axios.get(process.env.REACT_APP_API_URL + "/chart/").then(res => {
 		return res;
 	}).catch(err => {		
 		throw err.response.data;

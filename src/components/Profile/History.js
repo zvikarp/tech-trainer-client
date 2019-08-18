@@ -3,7 +3,7 @@ import Line from "react-apexcharts";
 
 import { OCard } from "../core";
 
-const History = props => {
+const History = (props) => {
 	const chartOptions = {
 		chart: {
 			type: "line",
