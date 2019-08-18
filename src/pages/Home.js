@@ -24,29 +24,40 @@ const Home = () => {
 	}
 
 	const getGraph = async () => {
-		
+
 		try {
 			const graphRes = await getCharts();
-			var series = [];
-			var categories = [];
-			Object.values(graphRes.data).forEach(doc => {
-				categories.push(doc.timestamp);
+			var users = {};
+			var dates = [];
+			Object.values(graphRes).forEach(doc => {
+				dates.push(doc.timestamp);
+				if (!doc.users) return;
 				doc.users.forEach(user => {
-					series.push({
-						name: user.id,
-						data: user.points,
-					});
+					if (!users[user.id]) users[user.id] = {name: user.name, points: []};
+					users[user.id].points.push(user.points);
 				});
 			});
-			const chart = {
+			console.log(users);
+			
+			var series = [];
+			const categories = dates
+			Object.keys(users).forEach(user => {
+				series.push({
+					name: users[user].name,
+					data: users[user].points,
+				});
+			});
+			const charts = {
 				series: series,
 				categories: categories,
 				loaded: true,
 			}
-			await setChartsData(chart);			
+			console.log(charts);
+
+			await setChartsData(charts);
 		} catch (err) {
 			console.log(err);
-			
+
 			ToastsStore.info(resMessageParser(err, messages.ERROR_LOADING_DATA));
 		}
 	}
@@ -80,7 +91,7 @@ const Home = () => {
 	}
 
 	const initalLastCartData = { top3: [], passed: [], under: [], loaded: false };
-	const initalCartsData = { chart:{ categories: [], series: [], loaded: false} };
+	const initalCartsData = { chart: { categories: [], series: [], loaded: false } };
 	const [lastChartData, setLastChartData] = useState(initalLastCartData);
 	const [chartsData, setChartsData] = useState(initalCartsData);
 	const [globalState,] = useGloble();

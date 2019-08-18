@@ -1,5 +1,7 @@
 import axios from "axios";
 
+// TODO: alwayes return res.data (if their is expected data on success)
+
 // route:  GET api/chart/last
 // access: Public
 // desc:   api return the last chart
@@ -16,7 +18,7 @@ export function getLastChart() {
 // desc:   api return all charts (last 25)
 export function getCharts() {
 	return axios.get(process.env.REACT_APP_API_URL + "/chart/").then(res => {
-		return res;
+		return res.data;
 	}).catch(err => {		
 		throw err.response.data;
 	});

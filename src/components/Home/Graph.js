@@ -13,8 +13,9 @@ const Graph = (props) => {
 				fontFamily: "Raleway, sans-serif",
 				foreColor: "#000000",
 				toolbar: {
-					show: false
-				}
+					show: true
+				},
+				
 			},
 			stroke: {
 				width: 5,
