@@ -5,7 +5,7 @@ import ReactTooltip from "react-tooltip";
 import messages from "../../consts/messages";
 import { OButton, OInput, OCard } from "../core";
 import { getAccounts } from "../../sheard/apis/accounts";
-import { updateUserCronjob } from "../../sheard/apis/cronjob";
+import { putChart } from "../../sheard/apis/chart";
 import { getUserAccounts, putUserAccounts } from "../../sheard/apis/user";
 import { resMessageParser } from "../../utils/resParser";
 
@@ -57,10 +57,10 @@ const Accounts = (props) => {
 			await putUserAccounts(userId, accountsFields);
 			ToastsStore.info(messages.SUCCESS_SAVING_CHANGES);
 			ToastsStore.info(messages.UPDATING_CHART);
-			await updateUserCronjob(userId);
+			await putChart(userId);
 			ToastsStore.info(messages.SUCCESS_UPDATING_CHART);
 		} catch (err) {
-			// TODO: updateUserCronjob return a useful error message
+			// TODO: putChart return a useful error message
 			ToastsStore.info(
 				messages.KNOWN_ERROR_PREFIX + resMessageParser(err, messages.ERROR_SAVING_CHANGES)
 			);
