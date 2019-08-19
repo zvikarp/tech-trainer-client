@@ -4,7 +4,10 @@ import useGlobalHook from "use-global-hook";
 import * as actions from "./actions";
 
 const initialState = {
-  userId: ""
+	userId: "",
+	userName: "",
+	isAdmin: false,
+	isAuthed: false,
 };
 
 const useGlobal = useGlobalHook(React, initialState, actions);
