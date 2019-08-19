@@ -1,24 +1,19 @@
 import React, { useState } from "react";
 import jwt_decode from "jwt-decode";
 import { ToastsStore } from "react-toasts";
-import useGlobal from "../../store";
 import { withRouter } from "react-router-dom";
 
+import useGlobal from "../../globalHook/store";
 import setAuthToken from "../../utils/auth/setAuthToken";
 import { OButton, OInput, OCard } from "../core";
 import messages from "../../consts/messages"
 import { authSignin } from "../../sheard/apis/auth";
 import { resMessageParser } from "../../utils/resParser";
-// function signinWithHook() {
-// 	return function WrappedComponent(props) {
-// 		return <SigninWithHook {...props} globalState={globalState} globalActions={globalActions} />;
-// 	}
-// }
 
 const Signin = (props) => {
 
 	const [, globalActions] = useGlobal();
-	const [userDetailes, setUserDetailes] = useState({email:"", password: ""});
+	const [userDetailes, setUserDetailes] = useState({ email: "", password: "" });
 	const [loading, setLoading] = useState(false);
 
 	const signinUser = async () => {
@@ -53,31 +48,31 @@ const Signin = (props) => {
 		signinUser();
 	};
 
-		return (
-			<OCard>
-				<h2> Sign In </h2>
-				<form noValidate onSubmit={onSubmit}>
-					<OInput
-						label="Email:"
-						onChange={onChange}
-						value={userDetailes.email}
-						id="email"
-						type="email"
-					/>
-					<OInput
-						label="Password:"
-						onChange={onChange}
-						value={userDetailes.password}
-						id="password"
-						type="password"
-					/>
-					<div className="action-section">
-						<OButton loading={loading} submit center text="SIGN IN" />
-						{/* <OButton loading={store.getState().auth.loading} submit center text="SIGN IN" /> */}
-					</div>
-				</form>
-			</OCard>
-		);
+	return (
+		<OCard>
+			<h2> Sign In </h2>
+			<form noValidate onSubmit={onSubmit}>
+				<OInput
+					label="Email:"
+					onChange={onChange}
+					value={userDetailes.email}
+					id="email"
+					type="email"
+				/>
+				<OInput
+					label="Password:"
+					onChange={onChange}
+					value={userDetailes.password}
+					id="password"
+					type="password"
+				/>
+				<div className="action-section">
+					<OButton loading={loading} submit center text="SIGN IN" />
+					{/* <OButton loading={store.getState().auth.loading} submit center text="SIGN IN" /> */}
+				</div>
+			</form>
+		</OCard>
+	);
 }
 
 export default withRouter(Signin);

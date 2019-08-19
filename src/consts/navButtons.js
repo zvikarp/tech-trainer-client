@@ -1,9 +1,4 @@
 const buttons = {
-	BACK: {
-		text: "Back",
-		route: "/",
-		key: "BACK",
-	},
 	ADMIN: {
 		text: "Admin",
 		route: "/admin",

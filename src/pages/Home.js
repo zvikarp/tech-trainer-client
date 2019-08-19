@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { ToastsStore } from "react-toasts";
 
-import useGloble from "../store";
+import useGloble from "../globalHook/store";
 import messages from "../consts/messages";
 import { Welcome, TopThree, Passed, Under, Graph } from "../components/Home";
 import { getLastChart, getCharts } from "../sheard/apis/chart";

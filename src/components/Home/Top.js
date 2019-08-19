@@ -1,5 +1,6 @@
 import React from 'react';
 import { withRouter } from "react-router-dom";
+
 import { OLoading } from '../core';
 
 const Top = (props) => {
@@ -32,7 +33,7 @@ const Top = (props) => {
 				</div>
 				<div className="top-child">
 					<h3> {props.user.name} </h3>
-						<h3> {props.user.points} points</h3>
+					<h3> {props.user.points} points</h3>
 				</div>
 			</div>
 		);

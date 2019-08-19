@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import jwt_decode from "jwt-decode";
 import { ToastsStore } from "react-toasts";
-import useGlobal from "../../store";
 import { withRouter } from "react-router-dom";
 
+import useGlobal from "../../globalHook/store";
 import setAuthToken from "../../utils/auth/setAuthToken";
 import { OButton, OInput, OCard } from "../core";
 import messages from "../../consts/messages"

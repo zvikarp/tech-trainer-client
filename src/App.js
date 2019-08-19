@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { ToastsContainer, ToastsStore } from 'react-toasts';
 import JwtDecode from "jwt-decode";
 
-import useGloble from "./store";
+import useGloble from "./globalHook/store";
 import { Auth, Home, Settings, Admin, Profile } from './pages/index.js';
 import SetAuthToken from "./utils/auth/setAuthToken";
 import { ONavBar } from "./components/core";

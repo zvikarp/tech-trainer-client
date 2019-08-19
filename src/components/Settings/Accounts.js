@@ -44,7 +44,7 @@ const Accounts = (props) => {
 		var accountsFieldsTemp = Object.assign({}, accountsFields);
 		accountsFieldsTemp[e.target.id] = e.target.value;
 		setAccountsFields(accountsFieldsTemp);
-		
+
 	};
 
 	const onSubmit = async (e) => {

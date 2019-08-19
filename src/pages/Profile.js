@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { ToastsStore } from 'react-toasts';
 
 import messages from "../consts/messages";
-import useGlobal from "../store";
+import useGlobal from "../globalHook/store";
 import { User, History } from '../components/Profile';
 import { getAccounts } from "../sheard/apis/accounts";
 import { getHistory } from "../sheard/apis/history";

@@ -22,7 +22,7 @@ const Passed = (props) => {
 
 	const title = "🤙 Users that have more then 50 points";
 	return (
-		<OCard wide> 
+		<OCard wide>
 			<h2>{title}</h2>
 			<div className="tiles-list">{renderTiles()}</div>
 		</OCard>

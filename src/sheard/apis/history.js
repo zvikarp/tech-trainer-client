@@ -6,7 +6,7 @@ import axios from "axios";
 export function getHistory(userId) {
 	return axios.get(process.env.REACT_APP_API_URL + "/history/" + userId).then(res => {
 		return res.data;
-	}).catch(err => {		
+	}).catch(err => {
 		throw err.response.data;
 	});
 }

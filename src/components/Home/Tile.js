@@ -32,5 +32,4 @@ const Tile = (props) => {
 	}
 }
 
-
 export default withRouter(Tile);
