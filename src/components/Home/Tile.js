@@ -9,7 +9,7 @@ const Tile = (props) => {
 
 	const renderTile = () => {
 		return (
-			<div id="tile">
+			<div className="tile">
 				<h3 className="tile-points"> {props.user.points} </h3>
 				<h3 className="tile-username"> {props.user.name} </h3>
 			</div>
@@ -27,10 +27,9 @@ const Tile = (props) => {
 		return (renderTile());
 	} else {
 		return (
-			<div id="tile">Loading...</div>
+			<div className="tile">Loading...</div>
 		);
 	}
 }
-
 
 export default withRouter(Tile);

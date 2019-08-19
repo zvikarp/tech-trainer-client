@@ -6,7 +6,7 @@ import axios from "axios";
 export function getUser(userId) {
 	return axios.get(process.env.REACT_APP_API_URL + "/user/" + userId).then(res => {
 		return res.data;
-	}).catch(err => {		
+	}).catch(err => {
 		throw err.response.data;
 	});
 }
@@ -17,7 +17,7 @@ export function getUser(userId) {
 export function getUserAccounts(userId) {
 	return axios.get(process.env.REACT_APP_API_URL + "/user/accounts/" + userId).then(res => {
 		return res.data;
-	}).catch(err => {		
+	}).catch(err => {
 		throw err.response.data;
 	});
 }
@@ -50,7 +50,7 @@ export function putUserSettings(userId, name, email, bonusPoints) {
 export function checkIfAdmin(userId) {
 	return axios.get(process.env.REACT_APP_API_URL + "/user/admin/" + userId).then(res => {
 		return res;
-	}).catch(err => {		
+	}).catch(err => {
 		throw err.response.data;
 	});
 }

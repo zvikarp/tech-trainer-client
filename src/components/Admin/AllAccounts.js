@@ -36,7 +36,7 @@ const AllAccounts = () => {
 			await putAccounts(accountsToBeUpdated);
 			ToastsStore.info(messages.SUCCESS_SAVING_CHANGES);
 		} catch (err) {
-			ToastsStore.info(resMessageParser(err ,messages.ERROR_SAVING_CHANGES));
+			ToastsStore.info(resMessageParser(err, messages.ERROR_SAVING_CHANGES));
 		} finally {
 			setLoading(false);
 		}
@@ -62,7 +62,7 @@ const AllAccounts = () => {
 	}
 
 	const handleOnAccountChange = (accountId, field, value) => {
-		
+
 		var updatedAccounts = Object.assign({}, accounts);
 		updatedAccounts[accountId][field] = value;
 		const lastAction = updatedAccounts[accountId].action;

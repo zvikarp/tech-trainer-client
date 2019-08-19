@@ -1,11 +1,12 @@
 import React from 'react';
 
-import { AllAccounts } from "../components/Admin";
+import { AllAccounts, AdminSettings } from "../components/Admin";
 
 const Admin = () => {
 
 	return (
 		<div>
+			<AdminSettings />
 			<AllAccounts />
 		</div>
 	);

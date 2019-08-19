@@ -3,7 +3,7 @@ import Line from "react-apexcharts";
 
 import { OCard } from "../core";
 
-const History = props => {
+const History = (props) => {
 	const chartOptions = {
 		chart: {
 			type: "line",
@@ -41,8 +41,6 @@ const History = props => {
 		}
 	};
 	const chartSeries = props.history.series;
-
-	// TODO: do something  with points and all point...
 
 	return (
 		<OCard wide>

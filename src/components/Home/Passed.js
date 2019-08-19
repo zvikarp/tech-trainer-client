@@ -20,9 +20,9 @@ const Passed = (props) => {
 		return tilesObjects;
 	}
 
-	const title = "🤙 Users that have more then 50 points";
+	const title = "🤙 Users that have more then " + props.passing + " points";
 	return (
-		<OCard wide> 
+		<OCard wide>
 			<h2>{title}</h2>
 			<div className="tiles-list">{renderTiles()}</div>
 		</OCard>

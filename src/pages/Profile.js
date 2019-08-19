@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { ToastsStore } from 'react-toasts';
 
 import messages from "../consts/messages";
-import useGlobal from "../store";
+import useGlobal from "../globalHook/store";
 import { User, History } from '../components/Profile';
 import { getAccounts } from "../sheard/apis/accounts";
 import { getHistory } from "../sheard/apis/history";
@@ -14,15 +14,11 @@ const Profile = (props) => {
 
 	const [history, setHistory] = useState({});
 	const [globalState,] = useGlobal();
-
 	const userId = props.match.params.id ? props.match.params.id : globalState.userId;
-	console.log(props.match.params.id);
-	
-	
 	const [accounts, setAccounts] = useState({});
 	const [user, setUser] = useState({ id: userId });
-	// TODO: the setup here is simmerlar to the settings but here we...
-	// TODO: ...get the page content and there we do it in the children. need to decide on something.
+	const isAdmin = props.match.params.id && true;
+
 	useEffect(() => {
 		loadData();
 		// eslint-disable-next-line
@@ -81,6 +77,8 @@ const Profile = (props) => {
 				series: series,
 				categories: categories,
 			}
+			console.log(history);
+
 			setHistory(history);
 		} catch (err) {
 			ToastsStore.info(resMessageParser(err, messages.ERROR_LOADING_DATA));
@@ -93,7 +91,7 @@ const Profile = (props) => {
 
 	const renderUser = () => {
 		if ((user.name) && (Object.keys(accounts).length > 0)) {
-			return (<User user={user} accounts={accounts} />);
+			return (<User user={user} accounts={accounts} isAdmin={isAdmin} />);
 		} else {
 			return (renderLoading());
 		}

@@ -2,7 +2,7 @@
     primary color: #FE724D
     background color: #F9E1DC
     input color: #feaf99
-*/  
+*/
 
 @import url("https://fonts.googleapis.com/css?family=Raleway:400,700,900&display=swap");
 * {
@@ -50,6 +50,7 @@ h4 {
 .obutton {
 	font-size: 18px;
 	padding: 8px 16px;
+	margin: 8px;
 	border: none;
 	cursor: pointer;
 	border-radius: 5px;
@@ -66,11 +67,6 @@ h4 {
 
 .obutton:hover {
 	box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-}
-
-.obutton.center {
-	display: table;
-	margin: 0px auto;
 }
 
 .obutton.primary {
@@ -201,7 +197,8 @@ h4 {
 }
 
 .ocard.wide {
-	width: 90%;
+	width: auto;
+	margin: 24px 36px;
 }
 
 @media only screen and (max-width: 800px) {
@@ -225,6 +222,12 @@ h4 {
 
 .action-section {
 	padding: 24px;
+	display: table;
+	margin: 0px auto;
+}
+
+.action-section * {
+	display: inline-block;
 }
 
 .tiles-list {
@@ -234,13 +237,13 @@ h4 {
 	row-gap: 24px;
 }
 
-#tile {
+.tile {
 	border-radius: 10px;
 	border: 3px solid #f9e1dc;
 }
 
-#tile:hover {
-	background-color: #F9E1DC;
+.tile:hover {
+	background-color: #f9e1dc;
 }
 
 .tile-username {
@@ -258,16 +261,16 @@ h4 {
 	cursor: pointer;
 }
 
-#top {
+.top {
 	display: inline-block;
 	background-color: #ffffff;
-	margin: 0px 36px;
+	margin: 24px 36px;
 	border-radius: 10px;
 	align-self: flex-end;
 	padding: 24px 0;
 }
 
-#top:hover {
+.top:hover {
 	background-color: #f9e1dc;
 }
 
@@ -279,31 +282,45 @@ h4 {
 }
 
 .top-child {
-	text-align: center;
-	display: flex;
-	height: 100%;
-	margin: auto 0;
 	align-items: center;
-}
-
-.top-child div{
 	padding-bottom: 48px;
 	width: 100%;
 	text-align: center;
 }
 
-/* TODO: make this dynamic and responsive */
-
-#top .top1 {
+.top.top1 {
 	height: 250px;
 }
 
-#top .top2 {
+.top.top2 {
 	height: 180px;
 }
 
-#top .top3 {
+.top.top3 {
 	height: 120px;
+}
+
+@media only screen and (max-width: 800px) {
+	.top-three-cards {
+		flex-flow: column;
+		grid-template-columns: none !important;
+	}
+
+	.top {
+		height: 120px !important;
+	}
+
+	.top.top1 {
+		order: 1;
+	}
+
+	.top.top2 {
+		order: 2;
+	}
+
+	.top.top3 {
+		order: 3;
+	}
 }
 
 .top-three-cards {
@@ -316,5 +333,3 @@ h4 {
 	text-decoration: underline;
 	cursor: pointer;
 }
-
-/* TODO: reduce the file to max 300 lines... already did  185, left with only 15!!! */
