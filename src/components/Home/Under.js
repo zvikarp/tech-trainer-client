@@ -19,7 +19,7 @@ const Under = (props) => {
 		return tilesObjects;
 	}
 
-	const title = "😔 Users that have less then 50 points";
+	const title = "😔 Users that have less then " + props.passing + " points";
 	return (
 		<OCard wide>
 			<h2>{title}</h2>

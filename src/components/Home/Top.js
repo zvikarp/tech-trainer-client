@@ -39,9 +39,9 @@ const Top = (props) => {
 		);
 	}
 
-	const isLoading = () => <div id="top"><OLoading /></div>;
+	const isLoading = () => <div className="top"><OLoading /></div>;
 	const doesntHaveUserText = "Don't have a solid top 3 yet! 😱";
-	const doesntHaveUser = () => <div id="top">{doesntHaveUserText}</div>;
+	const doesntHaveUser = () => <div className="top"><div className="top-child">{doesntHaveUserText}</div></div>;
 	const user = props.user ? hasUser(props) : doesntHaveUser();
 	const content = props.loaded ? user : isLoading();
 
