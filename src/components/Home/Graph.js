@@ -5,47 +5,45 @@ import { OCard } from "../core";
 
 const Graph = (props) => {
 
-	console.log(props);
+	const chartOptions = {
+		chart: {
+			type: "line",
+			fontFamily: "Raleway, sans-serif",
+			foreColor: "#000000",
+			toolbar: {
+				show: true
+			},
 
-		const chartOptions = {
-			chart: {
-				type: "line",
-				fontFamily: "Raleway, sans-serif",
-				foreColor: "#000000",
-				toolbar: {
-					show: true
-				},
-				
-			},
-			stroke: {
-				width: 5,
-				curve: "smooth"
-			},
-	
-			xaxis: {
-				type: "datetime",
-				categories: props.chart.categories
-			},
-			markers: {
-				size: 4,
-				opacity: 0.9,
-				colors: ["#FE724D"],
-				strokeColor: "000000",
-				strokeWidth: 2,
-	
-				hover: {
-					size: 5
-				}
-			},
-			yaxis: {
-				min: 0,
-				title: {
-					text: "points"
-				}
+		},
+		stroke: {
+			width: 5,
+			curve: "smooth"
+		},
+
+		xaxis: {
+			type: "datetime",
+			categories: props.chart.categories
+		},
+		markers: {
+			size: 4,
+			opacity: 0.9,
+			colors: ["#FE724D"],
+			strokeColor: "000000",
+			strokeWidth: 2,
+
+			hover: {
+				size: 5
 			}
-		};
-		const chartSeries = props.chart.series;
-	
+		},
+		yaxis: {
+			min: 0,
+			title: {
+				text: "points"
+			}
+		}
+	};
+	const chartSeries = props.chart.series;
+
 	return (
 		<OCard wide>
 			<Line

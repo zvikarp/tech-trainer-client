@@ -8,6 +8,7 @@ import { Auth, Home, Settings, Admin, Profile } from './pages/index.js';
 import SetAuthToken from "./utils/auth/setAuthToken";
 import { ONavBar } from "./components/core";
 import navButtons from "./consts/navButtons";
+import AuthenticatedRoute from "./utils/auth/AuthenticatedRoute";
 import "./utils/styles/global.css";
 
 // this needs to run BEFORE we render the app
@@ -18,12 +19,7 @@ if (localStorage.jwtToken) {
 
 const App = () => {
 
-	const [globalState, globalAction] = useGloble({
-		userId: undefined,
-		userName: undefined,
-		isAdmin: undefined,
-		isAuthed: false,
-	});
+	const [globalState, globalAction] = useGloble();
 
 	useEffect(() => {
 		signinUser();
@@ -39,6 +35,8 @@ const App = () => {
 			if (user.exp < currentTime) {
 				globalAction.signoutUser();
 			}
+		} else {
+			globalAction.signoutUser();
 		}
 	}
 
@@ -53,19 +51,24 @@ const App = () => {
 	const authedNavButtons = [navButtons.HOME, ...adminButtons, navButtons.PROFILE, navButtons.SIGN_OUT(signoutUser)];
 	const visitorNavButtons = [navButtons.HOME, navButtons.SIGN_IN];
 
-	return (
-		<Router>
-			<div className="App">
-				<ONavBar rightSide={globalState.isAuthed ? authedNavButtons : visitorNavButtons} selected="HOME" />
-				<Route exact path="/" component={Home} />
-				<Route exact path="/auth" component={Auth} />
-				<Route exact path="/admin" component={Admin} />
-				<Route exact path={["/settings","/settings/:id"]} component={Settings} />
-				<Route exact path={["/profile","/profile/:id"]} component={Profile} />
-				<ToastsContainer store={ToastsStore} />
-			</div>
-		</Router>
-	);
+	if (globalState.userId === "none") return (<div />);
+	else {
+		return (
+			<Router>
+				<div className="App">
+					<ONavBar rightSide={globalState.isAuthed ? authedNavButtons : visitorNavButtons} selected="HOME" />
+					<Route exact path="/" component={Home} />
+					<Route exact path="/auth" component={Auth} />
+					<AuthenticatedRoute exact path="/admin" component={Admin} isAuthenticated={globalState.isAdmin} />
+					<AuthenticatedRoute exact path="/settings/:id" component={Settings} isAuthenticated={globalState.isAdmin} />
+					<AuthenticatedRoute exact path="/profile/:id" component={Profile} isAuthenticated={globalState.isAdmin} />
+					<AuthenticatedRoute exact path="/settings" component={Settings} isAuthenticated={globalState.isAuthed} />
+					<AuthenticatedRoute exact path="/profile" component={Profile} isAuthenticated={globalState.isAuthed} />
+					<ToastsContainer store={ToastsStore} />
+				</div>
+			</Router>
+		);
+	}
 }
 
 export default App;

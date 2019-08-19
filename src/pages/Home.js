@@ -32,8 +32,6 @@ const Home = () => {
 						users[user.id].points.push(user.points);
 					});
 				});
-				console.log(users);
-
 				var series = [];
 				const categories = dates
 				Object.keys(users).forEach(user => {
@@ -47,12 +45,8 @@ const Home = () => {
 					categories: categories,
 					loaded: true,
 				}
-				console.log(charts);
-
 				await setChartsData(charts);
 			} catch (err) {
-				console.log(err);
-
 				ToastsStore.info(resMessageParser(err, messages.ERROR_LOADING_DATA));
 			}
 		}

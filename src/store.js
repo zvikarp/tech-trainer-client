@@ -4,7 +4,7 @@ import useGlobalHook from "use-global-hook";
 import * as actions from "./actions";
 
 const initialState = {
-	userId: "",
+	userId: "none",
 	userName: "",
 	isAdmin: false,
 	isAuthed: false,

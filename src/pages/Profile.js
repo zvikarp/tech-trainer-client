@@ -17,6 +17,7 @@ const Profile = (props) => {
 	const userId = props.match.params.id ? props.match.params.id : globalState.userId;
 	const [accounts, setAccounts] = useState({});
 	const [user, setUser] = useState({ id: userId });
+	const isAdmin = props.match.params.id && true;
 
 	useEffect(() => {
 		loadData();
@@ -90,7 +91,7 @@ const Profile = (props) => {
 
 	const renderUser = () => {
 		if ((user.name) && (Object.keys(accounts).length > 0)) {
-			return (<User user={user} accounts={accounts} />);
+			return (<User user={user} accounts={accounts} isAdmin={isAdmin} />);
 		} else {
 			return (renderLoading());
 		}

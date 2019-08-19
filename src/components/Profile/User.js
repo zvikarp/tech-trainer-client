@@ -6,9 +6,9 @@ import { OCard } from '../core';
 const User = (props) => {
 
 	const goToSettings = () => {
-		console.log(props.user._id);
+		const suffix = props.isAdmin ? ('/' + props.user._id) : "";
 		
-		props.history.push('/settings/' + props.user._id);
+		props.history.push('/settings' + suffix);
 	}
 
 	const accountsList = () => {
