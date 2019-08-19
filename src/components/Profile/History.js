@@ -42,8 +42,6 @@ const History = (props) => {
 	};
 	const chartSeries = props.history.series;
 
-	// TODO: do something  with points and all point...
-
 	return (
 		<OCard wide>
 			<Line

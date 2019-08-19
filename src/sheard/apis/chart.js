@@ -1,14 +1,12 @@
 import axios from "axios";
 
-// TODO: alwayes return res.data (if their is expected data on success)
-
 // route:  GET api/chart/last
 // access: Public
 // desc:   api return the last chart
 export function getLastChart() {
 	return axios.get(process.env.REACT_APP_API_URL + "/chart/last").then(res => {
-		return res;
-	}).catch(err => {		
+		return res.data;
+	}).catch(err => {
 		throw err.response.data;
 	});
 }
@@ -19,7 +17,7 @@ export function getLastChart() {
 export function getCharts() {
 	return axios.get(process.env.REACT_APP_API_URL + "/chart/").then(res => {
 		return res.data;
-	}).catch(err => {		
+	}).catch(err => {
 		throw err.response.data;
 	});
 }
@@ -30,7 +28,7 @@ export function getCharts() {
 export function putChart(userId) {
 	return axios.put(process.env.REACT_APP_API_URL + "/chart/last/" + userId).then(res => {
 		return res;
-	}).catch(err => {		
+	}).catch(err => {
 		throw err.response.data;
 	});
 }

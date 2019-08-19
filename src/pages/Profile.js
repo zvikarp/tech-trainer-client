@@ -14,15 +14,10 @@ const Profile = (props) => {
 
 	const [history, setHistory] = useState({});
 	const [globalState,] = useGlobal();
-
 	const userId = props.match.params.id ? props.match.params.id : globalState.userId;
-	console.log(props.match.params.id);
-	
-	
 	const [accounts, setAccounts] = useState({});
 	const [user, setUser] = useState({ id: userId });
-	// TODO: the setup here is simmerlar to the settings but here we...
-	// TODO: ...get the page content and there we do it in the children. need to decide on something.
+
 	useEffect(() => {
 		loadData();
 		// eslint-disable-next-line
@@ -82,7 +77,7 @@ const Profile = (props) => {
 				categories: categories,
 			}
 			console.log(history);
-			
+
 			setHistory(history);
 		} catch (err) {
 			ToastsStore.info(resMessageParser(err, messages.ERROR_LOADING_DATA));

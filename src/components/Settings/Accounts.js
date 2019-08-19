@@ -11,8 +11,6 @@ import { resMessageParser } from "../../utils/resParser";
 
 const Accounts = (props) => {
 
-	// TODO: on waiting for page to load add a "loading" sign
-
 	const [accounts, setAccounts] = useState({});
 	const [accountsFields, setAccountsFields] = useState({});
 	const [loading, setLoading] = useState(false);
@@ -60,7 +58,6 @@ const Accounts = (props) => {
 			await putChart(userId);
 			ToastsStore.info(messages.SUCCESS_UPDATING_CHART);
 		} catch (err) {
-			// TODO: putChart return a useful error message
 			ToastsStore.info(
 				messages.KNOWN_ERROR_PREFIX + resMessageParser(err, messages.ERROR_SAVING_CHANGES)
 			);
