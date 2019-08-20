@@ -44,7 +44,7 @@ const Home = () => {
 	}
 
 	const getGraph = async () => {
-
+		if (!globalState.isAdmin) return;
 		try {
 			const graphRes = await getCharts();
 			var users = {};
@@ -95,11 +95,12 @@ const Home = () => {
 	};
 
 	const renderGraph = () => {
-		if (chartsData.loaded) {
+		if (chartsData.loaded)
 			return <Graph chart={chartsData} />;
-		} else {
+		else if (globalState.isAdmin)
 			return <OLoading />;
-		}
+		else 
+			return < div />;
 	}
 
 
