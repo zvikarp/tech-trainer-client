@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { OButton, OInput } from "../core";
+import { OButton, OInput, ODropdown } from "../core";
 
 const AccountCard = (props) => {
 
@@ -12,12 +12,42 @@ const AccountCard = (props) => {
 		props.onAccountDelete(props.accountId);
 	}
 
+	const renderAPIFields = () => {
+		return (
+			<div>
+				<OInput
+					label="Website Prefix:"
+					onChange={onInputChange}
+					value={props.account.name}
+					name="name"
+					id={props.accountId + "name"}
+				/>
+
+				<OInput
+					label="Website Suffix:"
+					onChange={onInputChange}
+					value={props.account.points}
+					name="points"
+					disabled={props.account.type !== "website"}
+					id={props.accountId + "points"}
+				/>
+
+				<OInput
+					label="Json Path:"
+					onChange={onInputChange}
+					value={props.account.instructions}
+					name="instructions"
+					id={props.accountId + "instructions"}
+				/>
+			</div>
+		);
+	}
+
 	return (
 		<div key={props.accountId}>
 
 			<OInput
 				label="Name:"
-				disabled={props.account.type === "website"}
 				onChange={onInputChange}
 				value={props.account.name}
 				name="name"
@@ -29,7 +59,6 @@ const AccountCard = (props) => {
 				onChange={onInputChange}
 				value={props.account.points}
 				name="points"
-				disabled={props.account.type !== "website"}
 				id={props.accountId + "points"}
 			/>
 
@@ -43,20 +72,23 @@ const AccountCard = (props) => {
 
 			<OInput
 				label="Type:"
-				disabled
 				value={props.account.type}
 				name="type"
 				id={props.accountId + "type"}
 				type="text"
 			/>
 
+			<ODropdown />
+
+			{renderAPIFields()}
+
 			<OButton
-				disabled={props.account.type === "website"}
 				onClick={onDelete}
 				customStyle="delete-button"
 				secondary
 				text="DELETE"
 			/>
+
 		</div>
 	);
 }
