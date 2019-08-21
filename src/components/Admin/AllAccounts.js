@@ -49,7 +49,10 @@ const AllAccounts = () => {
 			'name': "new",
 			'points': '0',
 			'instructions': "new",
-			'type': "field",
+			'type': "string",
+			'prefix': "",
+			'suffix': "",
+			'path': "",
 			'action': "new",
 		}
 		setAccounts(updatedAccounts);

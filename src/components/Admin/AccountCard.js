@@ -1,6 +1,8 @@
 import React from 'react';
+import ReactTooltip from "react-tooltip";
 
 import { OButton, OInput, ODropdown } from "../core";
+import consts from "../../consts/consts";
 
 const AccountCard = (props) => {
 
@@ -13,34 +15,41 @@ const AccountCard = (props) => {
 	}
 
 	const renderAPIFields = () => {
-		return (
-			<div>
-				<OInput
-					label="Website Prefix:"
-					onChange={onInputChange}
-					value={props.account.name}
-					name="name"
-					id={props.accountId + "name"}
-				/>
+		if (props.account.type === "api") {
+			return (
+				<div>
+					<OInput
+						label="Website Prefix:"
+						tooltip="e.g. 'https://api.github.com/users/'"
+						onChange={onInputChange}
+						value={props.account.perfix}
+						name="perfix"
+						id={props.accountId + "perfix"}
+					/>
 
-				<OInput
-					label="Website Suffix:"
-					onChange={onInputChange}
-					value={props.account.points}
-					name="points"
-					disabled={props.account.type !== "website"}
-					id={props.accountId + "points"}
-				/>
+					<OInput
+						label="Website Suffix:"
+						tooltip="e.g. '/repos'"
+						onChange={onInputChange}
+						value={props.account.suffix}
+						name="suffix"
+						id={props.accountId + "suffix"}
+					/>
 
-				<OInput
-					label="Json Path:"
-					onChange={onInputChange}
-					value={props.account.instructions}
-					name="instructions"
-					id={props.accountId + "instructions"}
-				/>
-			</div>
-		);
+					<OInput
+						label="Json Path:"
+						tooltip="e.g. '.items.length'"
+						onChange={onInputChange}
+						value={props.account.path}
+						name="path"
+						id={props.accountId + "path"}
+					/>
+						<ReactTooltip />
+				</div>
+			);
+		} else {
+			return (<div />);
+		}
 	}
 
 	return (
@@ -70,15 +79,13 @@ const AccountCard = (props) => {
 				id={props.accountId + "instructions"}
 			/>
 
-			<OInput
+			<ODropdown
 				label="Type:"
-				value={props.account.type}
+				selected={props.account.type}
 				name="type"
-				id={props.accountId + "type"}
-				type="text"
+				options={consts.TYPES_OF_ACCOUNTS}
+				onChange={onInputChange}
 			/>
-
-			<ODropdown />
 
 			{renderAPIFields()}
 

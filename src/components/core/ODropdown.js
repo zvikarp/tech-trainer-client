@@ -1,43 +1,47 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const OButton = (props) => {
+const ODropdown = (props) => {
 
-	const hasIcon = props.icon !== undefined;
-	const center = props.center ? "center " : "";
-	const type = props.secondary ? "secondary " : "primary ";
-	const styles = "obutton " + center + type + props.customStyle;
-	// const text = props.loading ? "WORKING ON IT..." : props.text;
-	const isSubmitButton = props.submit ? "submit" : null;
-	const isDisabled = props.disabled || props.loading;
+	const hasLabel = props.label !== undefined;
+	const hasTooltip = props.tooltip !== undefined && hasLabel;
+	const labledStyle = hasLabel ? "oinput labeld" : "oinput";
 
 	return (
-		<select className="odropdown">
-			<option value="volvo">Volvo</option>
-			<option value="saab">Saab</option>
-			<option value="mercedes">Mercedes</option>
-			<option value="audi">Audi</option>
-		</select>
+		<div className={labledStyle}>
+			{hasLabel ? <label>{props.label}</label> : null}
+			<select
+				disabled={props.disabled}
+				name={props.name}
+				className="odropdown"
+				value={props.selected}
+				onChange={props.onChange}
+			>
+				{props.options.map((option) => <option value={option} key={option} >{option}</option>)}
+			</select>
+			{hasTooltip && (
+				<i data-tip={props.tooltip} className="fas fa-info-circle tooltip" />
+			)}
+		</div>
 	);
 }
 
-OButton.defaultProps = {
-	secondary: false,
+ODropdown.defaultProps = {
 	disabled: false,
-	submit: false,
-	loading: false,
-	center: false,
+	options: [],
+	selected: "",
+	name: "",
+	onChange: () => { }
 }
 
-OButton.propTypes = {
-	onClick: PropTypes.func,
-	// text: PropTypes.string.isRequired,
-	icon: PropTypes.string,
-	secondary: PropTypes.bool,
+ODropdown.propTypes = {
+	onchange: PropTypes.func,
+	name: PropTypes.string,
 	disabled: PropTypes.bool,
-	submit: PropTypes.bool,
-	loading: PropTypes.bool,
-	center: PropTypes.bool,
+	options: PropTypes.arrayOf(PropTypes.string),
+	selected: PropTypes.string,
+	label: PropTypes.string,
+	tooltip: PropTypes.string,
 }
 
-export default OButton;
+export default ODropdown;
