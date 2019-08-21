@@ -22,9 +22,9 @@ const AccountCard = (props) => {
 						label="Website Prefix:"
 						tooltip="e.g. 'https://api.github.com/users/'"
 						onChange={onInputChange}
-						value={props.account.perfix}
-						name="perfix"
-						id={props.accountId + "perfix"}
+						value={props.account.prefix}
+						name="prefix"
+						id={props.accountId + "prefix"}
 					/>
 
 					<OInput
@@ -66,6 +66,7 @@ const AccountCard = (props) => {
 			<OInput
 				label="Points:"
 				onChange={onInputChange}
+				type="number"
 				value={props.account.points}
 				name="points"
 				id={props.accountId + "points"}

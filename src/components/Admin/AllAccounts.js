@@ -112,7 +112,7 @@ const AllAccounts = () => {
 				<OButton
 					onClick={handleOnAddAccount}
 					customStyle="align-horizontally"
-					text="ADD FIELD"
+					text="ADD ACCOUNT"
 				/>
 
 				<OButton
