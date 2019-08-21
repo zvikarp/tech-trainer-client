@@ -14,7 +14,8 @@ const User = (props) => {
 		if (accountsById) {
 			var userAccounts = [];
 			Object.keys(accountsById).forEach(key => {
-				userAccounts.push(<div key={key}> {props.accounts[key].name}: {accountsById[key]} </div>);
+				if (props.accounts[key])
+					userAccounts.push(<div key={key}> {props.accounts[key].name}: {accountsById[key]} </div>);
 			});
 			return userAccounts;
 		} else {
