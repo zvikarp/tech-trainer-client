@@ -34,7 +34,7 @@ const Profile = (props) => {
 
 	const loadAccounts = async () => {
 		try {
-			const accounts = await getAccounts(userId);
+			const accounts = await getAccounts(userId);		
 			setAccounts(accounts);
 		} catch (err) {
 			ToastsStore.info(resMessageParser(err, messages.ERROR_LOADING_DATA));
@@ -55,6 +55,7 @@ const Profile = (props) => {
 			const historyRes = await getHistory(userId);
 			var accounts = {};
 			var dates = [];
+			
 			Object.values(historyRes).forEach(doc => {
 				dates.push(doc.timestamp);
 				if (!accounts['all points']) accounts['all points'] = [];
@@ -88,7 +89,7 @@ const Profile = (props) => {
 	}
 
 	const renderUser = () => {
-		if ((user.name) && (Object.keys(accounts).length > 0)) {
+		if ((user.name) && (Object.keys(accounts).length > 0) ) {
 			return (<User user={user} accounts={accounts} isAdmin={isAdmin} />);
 		} else {
 			return (renderLoading());

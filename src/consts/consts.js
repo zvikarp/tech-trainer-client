@@ -4,6 +4,6 @@ module.exports = {
 	AUTH_HEADER: "authorization",
 
 	// types of accounts/fields
-	TYPES_OF_ACCOUNTS: ["api", "string", "number", "none", "custom"],
+	TYPES_OF_ACCOUNTS: ["api", "list", "string", "number", "none", "custom"],
 
 };
