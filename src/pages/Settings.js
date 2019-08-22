@@ -7,10 +7,11 @@ const Settings = (props) => {
 
 	const [globalState,] = useGlobal();
 	const userId = props.match.params.id ? props.match.params.id : globalState.userId;
+	const isAdmin = props.match.params.id && true;
 	if (userId) {
 		return (
 			<div>
-				<General userId={userId} />
+				<General userId={userId} isAdmin={isAdmin} />
 				<Accounts userId={userId} />
 			</div>
 		);

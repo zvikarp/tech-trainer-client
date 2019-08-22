@@ -77,8 +77,6 @@ const Profile = (props) => {
 				series: series,
 				categories: categories,
 			}
-			console.log(history);
-
 			setHistory(history);
 		} catch (err) {
 			ToastsStore.info(resMessageParser(err, messages.ERROR_LOADING_DATA));

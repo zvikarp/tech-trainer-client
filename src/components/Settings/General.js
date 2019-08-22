@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { ToastsStore } from 'react-toasts';
+import { ToastsStore } from "react-toasts";
 
 import messages from "../../consts/messages";
 import { getUser, putUserSettings } from "../../sheard/apis/user";
 import { OButton, OInput, OCard } from "../core";
 import { resMessageParser } from "../../utils/resParser";
 
-const General = (props) => {
-
+const General = props => {
 	const [accounts, setAccounts] = useState({});
 	const [loading, setLoading] = useState(false);
 	const userId = props.userId;
@@ -15,13 +14,13 @@ const General = (props) => {
 	useEffect(() => {
 		loadData();
 		// eslint-disable-next-line
-	}, [userId])
+	}, [userId]);
 
 	const loadData = () => {
 		if (userId) {
 			getAccountDetailes();
 		}
-	}
+	};
 
 	const getAccountDetailes = async () => {
 		try {
@@ -30,37 +29,59 @@ const General = (props) => {
 				name: user.name,
 				email: user.email,
 				points: user.points,
-				bonusPoints: user.bonusPoints,
+				password: "",
+				bonusPoints: user.bonusPoints || 0,
 			});
 		} catch (err) {
 			ToastsStore.info(resMessageParser(err, messages.UNKNOWN_ERROR));
 		}
-	}
+	};
 
-	const onChange = (e) => {
+	const onChange = e => {
 		var updatedAccounts = Object.assign({}, accounts);
 		updatedAccounts[e.target.id] = e.target.value;
 		setAccounts(updatedAccounts);
 	};
 
-	const onSubmit = async (e) => {
+	const onSubmit = async e => {
 		e.preventDefault();
 		setLoading(true);
 		try {
-			await putUserSettings(userId, accounts.name, accounts.email, accounts.bonusPoints);
+			await putUserSettings(
+				userId,
+				accounts.name,
+				accounts.email,
+				accounts.password,
+				accounts.bonusPoints,
+			);
 			ToastsStore.info(messages.SUCCESS_SAVING_CHANGES);
 		} catch (err) {
 			ToastsStore.info(resMessageParser(err, messages.ERROR_SAVING_CHANGES));
 		} finally {
 			setLoading(false);
 		}
-	}
+	};
+
+	const renderAdminOptions = () => {
+		if (props.isAdmin) {
+			return (
+				<OInput
+					label="Bonus Points:"
+					onChange={onChange}
+					value={accounts.bonusPoints}
+					id="bonusPoints"
+					type="number"
+ 				/>
+			);
+		} else {
+			return <div />;
+		}
+	};
 
 	return (
 		<OCard>
 			<h2>General Settings</h2>
 			<form noValidate onSubmit={onSubmit}>
-
 				<OInput
 					label="Name:"
 					onChange={onChange}
@@ -77,18 +98,14 @@ const General = (props) => {
 				/>
 
 				<OInput
-					label="Points:"
-					value={accounts.points}
-					id="points"
-					disabled
+					label="New Password:"
+					onChange={onChange}
+					value={accounts.password}
+					id="password"
+					type="password"
 				/>
 
-				<OInput
-					label="Bonus Points:"
-					value={accounts.bonusPoints}
-					id="bonusPoints"
-					disabled={!userId}
-				/>
+				{renderAdminOptions()}
 
 				<div className="action-section">
 					<OButton loading={loading} submit center text="SAVE CHANGES" />
@@ -96,6 +113,6 @@ const General = (props) => {
 			</form>
 		</OCard>
 	);
-}
+};
 
 export default General;

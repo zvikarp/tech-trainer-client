@@ -36,8 +36,8 @@ export function putUserAccounts(userId, accounts) {
 // route:  PUT api/user/settings/:id
 // access: User/Admin
 // desc:   api updates the users settings.
-export function putUserSettings(userId, name, email, bonusPoints) {
-	return axios.put(process.env.REACT_APP_API_URL + "/user/settings/" + userId, { name, email, bonusPoints }).then(res => {
+export function putUserSettings(userId, name, email, password, bonusPoints) {
+	return axios.put(process.env.REACT_APP_API_URL + "/user/settings/" + userId, { name, email, password, bonusPoints }).then(res => {
 		return res;
 	}).catch(err => {
 		throw err.response.data;

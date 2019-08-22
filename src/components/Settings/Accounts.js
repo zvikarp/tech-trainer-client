@@ -9,6 +9,9 @@ import { putChart } from "../../sheard/apis/chart";
 import { getUserAccounts, putUserAccounts } from "../../sheard/apis/user";
 import { resMessageParser } from "../../utils/resParser";
 
+
+// TODO: show loading screen
+
 const Accounts = (props) => {
 
 	const [accounts, setAccounts] = useState({});
