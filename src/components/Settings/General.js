@@ -3,7 +3,7 @@ import { ToastsStore } from "react-toasts";
 
 import messages from "../../consts/messages";
 import { getUser, putUserSettings } from "../../sheard/apis/user";
-import { OButton, OInput, OCard } from "../core";
+import { OButton, OInput, OCard, OLoading } from "../core";
 import { resMessageParser } from "../../utils/resParser";
 
 const General = props => {
@@ -30,7 +30,7 @@ const General = props => {
 				email: user.email,
 				points: user.points,
 				password: "",
-				bonusPoints: user.bonusPoints || 0,
+				bonusPoints: user.bonusPoints || 0
 			});
 		} catch (err) {
 			ToastsStore.info(resMessageParser(err, messages.UNKNOWN_ERROR));
@@ -52,7 +52,7 @@ const General = props => {
 				accounts.name,
 				accounts.email,
 				accounts.password,
-				accounts.bonusPoints,
+				accounts.bonusPoints
 			);
 			ToastsStore.info(messages.SUCCESS_SAVING_CHANGES);
 		} catch (err) {
@@ -71,16 +71,15 @@ const General = props => {
 					value={accounts.bonusPoints}
 					id="bonusPoints"
 					type="number"
- 				/>
+				/>
 			);
 		} else {
 			return <div />;
 		}
 	};
 
-	return (
-		<OCard>
-			<h2>General Settings</h2>
+	const renderFields = () => {
+		return (
 			<form noValidate onSubmit={onSubmit}>
 				<OInput
 					label="Name:"
@@ -111,6 +110,18 @@ const General = props => {
 					<OButton loading={loading} submit center text="SAVE CHANGES" />
 				</div>
 			</form>
+		);
+	};
+
+	const renderForm = () => {
+		if (accounts.name) return renderFields();
+		else return <OLoading />;
+	};
+
+	return (
+		<OCard>
+			<h2>General Settings</h2>
+			{renderForm()}
 		</OCard>
 	);
 };

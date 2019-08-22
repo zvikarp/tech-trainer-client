@@ -7,7 +7,7 @@ import { Welcome, TopThree, Passed, Under, Graph } from "../components/Home";
 import { getLastChart, getCharts } from "../sheard/apis/chart";
 import { getSettingsPassing } from "../sheard/apis/accounts";
 import { resMessageParser } from "../utils/resParser";
-import { OLoading } from "../components/core";
+import { OLoading, OCard } from "../components/core";
 
 const Home = () => {
 
@@ -98,7 +98,7 @@ const Home = () => {
 		if (chartsData.loaded)
 			return <Graph chart={chartsData} />;
 		else if (globalState.isAdmin)
-			return <OLoading />;
+			return <OCard wide><OLoading /></OCard>;
 		else 
 			return < div />;
 	}

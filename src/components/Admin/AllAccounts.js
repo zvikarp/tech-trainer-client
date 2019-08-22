@@ -93,7 +93,7 @@ const AllAccounts = () => {
 	const renderAccountCards = () => {
 		const length = Object.keys(accounts).length;
 		if (length < 1) {
-			return (<OCard><OLoading /></OCard>)
+			return (<OLoading />)
 		}
 		var accountsCards = [];
 		Object.keys(accounts).forEach(accountId => {
