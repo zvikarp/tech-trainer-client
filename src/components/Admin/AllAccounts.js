@@ -49,7 +49,10 @@ const AllAccounts = () => {
 			'name': "new",
 			'points': '0',
 			'instructions': "new",
-			'type': "field",
+			'type': "string",
+			'prefix': "",
+			'suffix': "",
+			'path': "",
 			'action': "new",
 		}
 		setAccounts(updatedAccounts);
@@ -90,7 +93,7 @@ const AllAccounts = () => {
 	const renderAccountCards = () => {
 		const length = Object.keys(accounts).length;
 		if (length < 1) {
-			return (<OCard><OLoading /></OCard>)
+			return (<OLoading />)
 		}
 		var accountsCards = [];
 		Object.keys(accounts).forEach(accountId => {
@@ -109,7 +112,7 @@ const AllAccounts = () => {
 				<OButton
 					onClick={handleOnAddAccount}
 					customStyle="align-horizontally"
-					text="ADD FIELD"
+					text="ADD ACCOUNT"
 				/>
 
 				<OButton

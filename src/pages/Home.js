@@ -7,7 +7,7 @@ import { Welcome, TopThree, Passed, Under, Graph } from "../components/Home";
 import { getLastChart, getCharts } from "../sheard/apis/chart";
 import { getSettingsPassing } from "../sheard/apis/accounts";
 import { resMessageParser } from "../utils/resParser";
-import { OLoading } from "../components/core";
+import { OLoading, OCard } from "../components/core";
 
 const Home = () => {
 
@@ -44,7 +44,7 @@ const Home = () => {
 	}
 
 	const getGraph = async () => {
-
+		if (!globalState.isAdmin) return;
 		try {
 			const graphRes = await getCharts();
 			var users = {};
@@ -95,11 +95,12 @@ const Home = () => {
 	};
 
 	const renderGraph = () => {
-		if (chartsData.loaded) {
+		if (chartsData.loaded)
 			return <Graph chart={chartsData} />;
-		} else {
-			return <OLoading />;
-		}
+		else if (globalState.isAdmin)
+			return <OCard wide><OLoading /></OCard>;
+		else 
+			return < div />;
 	}
 
 

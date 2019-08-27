@@ -119,17 +119,17 @@ h4 {
 	width: 45%;
 }
 
-.oinput.labeld {
+.labeld {
 	margin: 24px 36px;
 }
 
-.oinput.labeld label {
+.labeld label {
 	padding: 0px 12px 0px 0px;
 	width: 30%;
 	display: inline-block;
 }
 
-.oinput .tooltip {
+.tooltip {
 	color: #feaf99;
 	cursor: pointer;
 	width: 5%;
@@ -137,12 +137,12 @@ h4 {
 	display: inline-block;
 }
 
-.oinput .tooltip:hover {
+.tooltip:hover {
 	color: #fe724d;
 }
 
 @media only screen and (max-width: 800px) {
-	.oinput.labeld {
+	.labeld {
 		margin: 12px;
 	}
 }
@@ -267,7 +267,7 @@ h4 {
 	margin: 24px 36px;
 	border-radius: 10px;
 	align-self: flex-end;
-	padding: 24px 0;
+	padding: 24px;
 }
 
 .top:hover {
@@ -331,5 +331,18 @@ h4 {
 .link-to-settings {
 	color: #fe724d;
 	text-decoration: underline;
+	cursor: pointer;
+}
+
+/* ODropdown */
+
+.odropdown {
+	outline: 0;
+	padding: 8px 12px;
+	background-color: #f9e1dc;
+	border-radius: 5px;
+	border: none;
+	width: 49%;
+	height: 100%;
 	cursor: pointer;
 }

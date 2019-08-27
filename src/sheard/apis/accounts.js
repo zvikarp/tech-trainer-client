@@ -17,9 +17,7 @@ export function getAccounts() {
 export function getSettingsPassing() {
 	return axios.get(process.env.REACT_APP_API_URL + "/accounts/passing").then(res => {
 		return res.data;
-	}).catch(err => {
-		console.log(err.response);
-		
+	}).catch(err => {		
 		throw err.response.data;
 	});
 }

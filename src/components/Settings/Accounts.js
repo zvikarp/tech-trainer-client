@@ -3,11 +3,14 @@ import { ToastsStore } from "react-toasts";
 import ReactTooltip from "react-tooltip";
 
 import messages from "../../consts/messages";
-import { OButton, OInput, OCard } from "../core";
+import { OButton, OInput, OCard, OLoading } from "../core";
 import { getAccounts } from "../../sheard/apis/accounts";
 import { putChart } from "../../sheard/apis/chart";
 import { getUserAccounts, putUserAccounts } from "../../sheard/apis/user";
 import { resMessageParser } from "../../utils/resParser";
+
+
+// TODO: show loading screen
 
 const Accounts = (props) => {
 
@@ -81,6 +84,13 @@ const Accounts = (props) => {
 		);
 	};
 
+	const renderAccounts = () => {
+		if (Object.keys(accounts).length < 1)
+			return <OLoading />
+		else
+			return renderAccountFields();
+	}
+
 	const renderAccountFields = () => {
 		var renderAccountsFields = [];
 		Object.keys(accounts).forEach(key => {
@@ -95,7 +105,7 @@ const Accounts = (props) => {
 		<OCard>
 			<h2>Connected Accounts Settings</h2>
 			<form noValidate onSubmit={onSubmit}>
-				{renderAccountFields()}
+				{renderAccounts()}
 				<div className="action-section">
 					<OButton
 						loading={loading}
